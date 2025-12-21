@@ -1,0 +1,723 @@
+<header>
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBmRXhpZgAATU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAAExAAIAAAAQAAAATgAAAAAAAABgAAAAAQAAAGAAAAABcGFpbnQubmV0IDUuMC4xMwAA/9sAQwABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB/8AACwgAZABkAQERAP/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMAAgICAgICAwICAwQDAwMEBQQEBAQFBwUFBQUFBwgHBwcHBwcICAgICAgICAoKCgoKCgsLCwsLDQ0NDQ0NDQ0NDf/bAEMBAgICAwMDBgMDBg0JBwkNDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDf/dAAQAB//aAAwDAQACEQMRAD8A/fyiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoo<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support My Journey - Tech Professional Facing Homelessness</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            color: #00ff00;
+            background: #000000;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #001a00 0%, #003300 100%);
+            color: #00ff00;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,255,0,0.3);
+            border-bottom: 2px solid #00ff00;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .profile-section {
+            background: #0a0a0a;
+            padding: 2.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0,255,0,0.2);
+            border: 1px solid #00ff00;
+        }
+        
+        .profile-section h2 {
+            color: #00ff00;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #00ff00;
+            padding-bottom: 0.5rem;
+        }
+        
+        .profile-section p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #00cc00;
+        }
+        
+        .work-history {
+            background: #001a00;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border: 1px solid #00ff00;
+        }
+        
+        .work-item {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            border-left: 3px solid #00ff00;
+        }
+        
+        .work-item h4 {
+            color: #00ff00;
+            margin-bottom: 0.3rem;
+        }
+        
+        .work-item p {
+            color: #00cc00;
+            font-size: 0.95rem;
+        }
+        
+        .needs-section {
+            background: #0a0a0a;
+            padding: 2.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0,255,0,0.2);
+            border: 1px solid #00ff00;
+        }
+        
+        .needs-section h2 {
+            color: #00ff00;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .needs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .need-card {
+            background: linear-gradient(135deg, #001a00 0%, #002200 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #00ff00;
+        }
+        
+        .need-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,255,0,0.4);
+            border-color: #00ff00;
+            background: linear-gradient(135deg, #002200 0%, #003300 100%);
+        }
+        
+        .need-card.selected {
+            border-color: #00ff00;
+            background: #003300;
+            box-shadow: 0 0 20px rgba(0,255,0,0.5);
+        }
+        
+        .need-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .need-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ff00;
+            margin: 0.5rem 0;
+            text-shadow: 0 0 10px rgba(0,255,0,0.5);
+        }
+        
+        .need-title {
+            font-weight: bold;
+            color: #00ff00;
+            margin: 0.5rem 0;
+        }
+        
+        .need-description {
+            font-size: 0.9rem;
+            color: #00cc00;
+            margin-top: 0.5rem;
+        }
+        
+        .custom-section {
+            background: #0a0a0a;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2rem 0;
+            border: 1px solid #00ff00;
+        }
+        
+        .custom-section h3 {
+            color: #00ff00;
+            margin-bottom: 1rem;
+        }
+        
+        .amount-input {
+            padding: 1rem;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            width: 200px;
+            text-align: center;
+            margin: 1rem;
+            background: #000000;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .amount-input:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0,255,0,0.5);
+        }
+        
+        #paypal-button-container {
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+        
+        .alert-box {
+            background: #1a1a00;
+            border-left: 4px solid #ffff00;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            color: #ffff00;
+        }
+        
+        .alert-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ffff00;
+        }
+        
+        .success-message {
+            background: #001a00;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            display: none;
+            text-align: center;
+        }
+        
+        .success-message h3 {
+            margin-bottom: 0.5rem;
+            color: #00ff00;
+        }
+        
+        .info-section {
+            background: #001a1a;
+            border-left: 4px solid #00ffff;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+            color: #00cc00;
+        }
+        
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: #00cc00;
+        }
+        
+        footer {
+            background: #001a00;
+            color: #00ff00;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 2px solid #00ff00;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .needs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank" style="display: inline-block; transition: transform 0.3s ease;">
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQG_n_7JLIQ4yg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1732139782308?e=1740009600&v=beta&t=oqQbXu-5yN2QnKMF0aWXnJPf-3QlKzKx8Yxy5qbRBNY" alt="Jarod Mowry" style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 12px rgba(0,0,0,0.3); cursor: pointer;">
+            </a>
+            <div class="profile-section">
+            <h2>Network Tools</h2>
+            <p style="color: #00cc00; margin-bottom: 1.5rem;">Professional IT tools for network diagnostics and lookups</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                <!-- IP Lookup Tool -->
+                <div style="background: #001a00; border: 2px solid #00ff00; border-radius: 8px; padding: 1.5rem;">
+                    <h3 style="color: #00ff00; margin-bottom: 1rem;">🌐 IP Address Lookup</h3>
+                    <input type="text" id="ipInput" placeholder="Enter IP Address" style="width: 100%; padding: 0.75rem; background: #000; border: 1px solid #00ff00; color: #00ff00; border-radius: 4px; font-family: 'Courier New', Courier, monospace; margin-bottom: 1rem;">
+                    <button id="ipLookupBtn" style="width: 100%; padding: 0.75rem; background: #003300; color: #00ff00; border: 2px solid #00ff00; border-radius: 4px; cursor: pointer; font-family: 'Courier New', Courier, monospace; font-weight: bold;">LOOKUP IP</button>
+                    <div id="ipResult" style="margin-top: 1rem; padding: 1rem; background: #000; border: 1px solid #00ff00; border-radius: 4px; min-height: 50px; color: #00cc00; display: none;"></div>
+                </div>
+                
+                <!-- MAC Address Lookup Tool -->
+                <div style="background: #001a00; border: 2px solid #00ff00; border-radius: 8px; padding: 1.5rem;">
+                    <h3 style="color: #00ff00; margin-bottom: 1rem;">🔍 MAC Address Lookup</h3>
+                    <input type="text" id="macInput" placeholder="Enter MAC Address" style="width: 100%; padding: 0.75rem; background: #000; border: 1px solid #00ff00; color: #00ff00; border-radius: 4px; font-family: 'Courier New', Courier, monospace; margin-bottom: 1rem;">
+                    <button id="macLookupBtn" style="width: 100%; padding: 0.75rem; background: #003300; color: #00ff00; border: 2px solid #00ff00; border-radius: 4px; cursor: pointer; font-family: 'Courier New', Courier, monospace; font-weight: bold;">LOOKUP MAC</button>
+                    <div id="macResult" style="margin-top: 1rem; padding: 1rem; background: #000; border: 1px solid #00ff00; border-radius: 4px; min-height: 50px; color: #00cc00; display: none;"></div>
+                </div>
+                
+                <!-- Port Scanner Info -->
+                <div style="background: #001a00; border: 2px solid #00ff00; border-radius: 8px; padding: 1.5rem;">
+                    <h3 style="color: #00ff00; margin-bottom: 1rem;">⚡ My IP Info</h3>
+                    <button id="myIpBtn" style="width: 100%; padding: 0.75rem; background: #003300; color: #00ff00; border: 2px solid #00ff00; border-radius: 4px; cursor: pointer; font-family: 'Courier New', Courier, monospace; font-weight: bold; margin-bottom: 1rem;">GET MY IP INFO</button>
+                    <div id="myipResult" style="margin-top: 1rem; padding: 1rem; background: #000; border: 1px solid #00ff00; border-radius: 4px; min-height: 50px; color: #00cc00; display: none;"></div>
+                </div>
+                
+                <!-- DNS Lookup Tool -->
+                <div style="background: #001a00; border: 2px solid #00ff00; border-radius: 8px; padding: 1.5rem;">
+                    <h3 style="color: #00ff00; margin-bottom: 1rem;">🌍 Domain Lookup</h3>
+                    <input type="text" id="domainInput" placeholder="Enter Domain (e.g., google.com)" style="width: 100%; padding: 0.75rem; background: #000; border: 1px solid #00ff00; color: #00ff00; border-radius: 4px; font-family: 'Courier New', Courier, monospace; margin-bottom: 1rem;">
+                    <button id="domainLookupBtn" style="width: 100%; padding: 0.75rem; background: #003300; color: #00ff00; border: 2px solid #00ff00; border-radius: 4px; cursor: pointer; font-family: 'Courier New', Courier, monospace; font-weight: bold;">LOOKUP DOMAIN</button>
+                    <div id="domainResult" style="margin-top: 1rem; padding: 1rem; background: #000; border: 1px solid #00ff00; border-radius: 4px; min-height: 50px; color: #00cc00; display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-section">
+            <h2>Connect With Me</h2>
+            <p style="text-align: center;">
+                <a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank" style="display: inline-block; background: #0077b5; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; transition: background 0.3s ease;">
+                    🔗 Connect on LinkedIn
+                </a>
+            </p>
+            <p style="text-align: center; color: #00cc00; margin-top: 1rem;">
+                Feel free to connect with me professionally or reach out with opportunities, advice, or support.
+            </p>
+        </div>
+    </div>
+        <h1>Hi, I'm Jarod Mowry - Tech Professional Facing Homelessness</h1>
+        <p>Your support helps me cover basic needs while I navigate disability challenges</p>
+        <p style="margin-top: 0.5rem; font-size: 0.95rem;">
+            <a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank" style="color: white; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.5); padding-bottom: 2px;">
+                🔗 View my LinkedIn Profile
+            </a>
+        </p>
+    </header>
+    
+    <div class="container">
+        <div class="profile-section">
+            <h2>My Story</h2>
+            <p>
+                My name is Jarod Mowry, and I'm reaching out during one of the most challenging times of my life. 
+                I'm currently experiencing homelessness while dealing with pending disability applications, and I'm 
+                asking for help with essential needs that many of us take for granted.
+            </p>
+            <p>
+                I'm not someone who expected to be in this situation. I've built a career in technology and have 
+                always been self-sufficient. But life threw me a curveball, and I'm working hard to get back on 
+                my feet while managing health challenges.
+            </p>
+            
+            <div class="work-history">
+                <h3 style="color: #00cc00; margin-bottom: 1rem;">My Professional Background</h3>
+                <div class="work-item">
+                    <h4>🖥️ IT Support Analyst</h4>
+                    <p>South East Health - Provided technical support and system maintenance in healthcare environment</p>
+                </div>
+                <div class="work-item">
+                    <h4>🔧 Technician</h4>
+                    <p>Internet Service Provider (ISP) - Handled technical installations, troubleshooting, and customer support</p>
+                </div>
+                <div class="work-item">
+                    <h4>⚙️ Technical Specialist</h4>
+                    <p>Various Technical Companies - Worked as technician across multiple technology sectors</p>
+                </div>
+            </div>
+            
+            <p>
+                Despite my technical skills and work experience, I'm currently unable to work due to my disability. 
+                I'm attending regular medical appointments and therapy sessions as part of my disability process, 
+                and I'm doing everything I can to improve my situation.
+            </p>
+        </div>
+        
+        <div class="needs-section">
+            <h2>How You Can Help</h2>
+            <p style="text-align: center; color: #00cc00; margin-bottom: 2rem;">
+                I'm not asking for large amounts. Every bit helps me maintain the essentials while I work toward stability.
+            </p>
+            
+            <div class="needs-grid">
+                <div class="need-card" onclick="selectAmount(35)">
+                    <div class="need-icon">📱</div>
+                    <div class="need-amount">$35</div>
+                    <div class="need-title">Monthly Phone Bill</div>
+                    <div class="need-description">Keeps me connected for appointments, disability case updates, and job searches</div>
+                </div>
+                
+                <div class="need-card" onclick="selectAmount(20)">
+                    <div class="need-icon">🚌</div>
+                    <div class="need-amount">$20</div>
+                    <div class="need-title">Bus Tokens</div>
+                    <div class="need-description">Transportation to medical appointments and therapy sessions</div>
+                </div>
+                
+                <div class="need-card" onclick="selectAmount(50)">
+                    <div class="need-icon">🧥</div>
+                    <div class="need-amount">$50</div>
+                    <div class="need-title">Winter Clothing</div>
+                    <div class="need-description">Warm coat, gloves, or thermal layers for cold weather</div>
+                </div>
+                
+                <div class="need-card" onclick="selectAmount(15)">
+                    <div class="need-icon">🍔</div>
+                    <div class="need-amount">$15</div>
+                    <div class="need-title">Meals</div>
+                    <div class="need-description">Hot meals for a few days</div>
+                </div>
+                
+                <div class="need-card" onclick="selectAmount(25)">
+                    <div class="need-icon">🧴</div>
+                    <div class="need-amount">$25</div>
+                    <div class="need-title">Hygiene Essentials</div>
+                    <div class="need-description">Soap, shampoo, toothpaste, and other basic necessities</div>
+                </div>
+                
+                <div class="need-card" onclick="selectAmount(10)">
+                    <div class="need-icon">💊</div>
+                    <div class="need-amount">$10</div>
+                    <div class="need-title">Medication Co-pays</div>
+                    <div class="need-description">Help with prescription costs</div>
+                </div>
+            </div>
+            
+            <div class="custom-section">
+                <h3>Or Enter Any Amount You Can Give</h3>
+                <p style="color: #00cc00; margin-bottom: 1rem;">Every dollar makes a real difference in my daily life</p>
+                <div>
+                    <span style="font-size: 1.5rem;">$</span>
+                    <input type="number" id="customAmount" class="amount-input" placeholder="0.00" min="1" step="0.01">
+                </div>
+            </div>
+            
+            <div class="alert-box">
+                <strong>⚙️ Setup Instructions:</strong>
+                Replace "YOUR-CLIENT-ID" below in the PayPal script with your actual PayPal Business Client ID.
+                Get your Client ID from: developer.paypal.com → Dashboard → Apps & Credentials
+            </div>
+            
+            <div id="paypal-button-container"></div>
+            
+            <div id="success-message" class="success-message">
+                <h3>🙏 Thank You So Much</h3>
+                <p>Your kindness means the world to me. This support helps me meet my basic needs while I work toward stability. You'll receive a confirmation email from PayPal.</p>
+            </div>
+            
+            <div class="trust-badges">
+                <div>🔒 Secure PayPal</div>
+                <div>✓ Direct to Me</div>
+                <div>💳 Safe Payment</div>
+            </div>
+        </div>
+        
+        <div class="profile-section">
+            <h2>What I'm Doing Now</h2>
+            <p>
+                While I navigate homelessness and wait for my disability application to process, I'm:
+            </p>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li style="margin: 0.5rem 0;">📋 Attending all required medical appointments and therapy sessions</li>
+                <li style="margin: 0.5rem 0;">📄 Working through the disability application process</li>
+                <li style="margin: 0.5rem 0;">🏥 Following treatment plans for my health conditions</li>
+                <li style="margin: 0.5rem 0;">💪 Staying positive and working toward stability</li>
+                <li style="margin: 0.5rem 0;">🤝 Seeking resources and support services when available</li>
+            </ul>
+        </div>
+        
+        <div class="info-section">
+            <h3 style="color: #00ffff; margin-bottom: 1rem;">Why I'm Asking for Help</h3>
+            <p>
+                I never imagined I'd be in this position. As someone who's always worked and been independent, 
+                asking for help is incredibly difficult. But the reality is that disability proceedings take time, 
+                and I need help covering basic necessities while I can't work.
+            </p>
+            <p style="margin-top: 1rem;">
+                Your support - whether it's $5 for a meal, $20 for bus fare, or $35 for my phone bill - 
+                keeps me connected, mobile, and able to attend the appointments I need for my disability case. 
+                Thank you for taking the time to read my story and for any help you can provide.
+            </p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 - Thank you for your compassion and support</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">🙏 Every act of kindness brings hope</p>
+    </footer>
+    
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AShHA7LRHXBp7nwEXq8M4l4LOGXPl2Ht9Ynrm5S_tOvtjTZHBXYrb6qaSNJqj-DuUpuQ1uAwT4syT_TQ&currency=USD">
+    
+    <script>
+        // Network Tools Functions
+        async function lookupIP() {
+            const ip = document.getElementById('ipInput').value.trim();
+            const resultDiv = document.getElementById('ipResult');
+            
+            if (!ip) {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '<span style="color: #ff0000;">Please enter an IP address</span>';
+                return;
+            }
+            
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<span style="color: #ffff00;">⚡ Scanning...</span>';
+            
+            try {
+                const response = await fetch(`https://ipapi.co/${ip}/json/`);
+                const data = await response.json();
+                
+                if (data.error) {
+                    resultDiv.innerHTML = `<span style="color: #ff0000;">Error: ${data.reason}</span>`;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div style="font-family: 'Courier New', Courier, monospace; line-height: 1.8;">
+                            <div><span style="color: #00ff00;">IP:</span> ${data.ip}</div>
+                            <div><span style="color: #00ff00;">City:</span> ${data.city || 'N/A'}</div>
+                            <div><span style="color: #00ff00;">Region:</span> ${data.region || 'N/A'}</div>
+                            <div><span style="color: #00ff00;">Country:</span> ${data.country_name || 'N/A'}</div>
+                            <div><span style="color: #00ff00;">ISP:</span> ${data.org || 'N/A'}</div>
+                            <div><span style="color: #00ff00;">Timezone:</span> ${data.timezone || 'N/A'}</div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<span style="color: #ff0000;">Error: Failed to lookup IP</span>';
+            }
+        }
+        
+        async function lookupMAC() {
+            const mac = document.getElementById('macInput').value.trim();
+            const resultDiv = document.getElementById('macResult');
+            
+            if (!mac) {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '<span style="color: #ff0000;">Please enter a MAC address</span>';
+                return;
+            }
+            
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<span style="color: #ffff00;">⚡ Scanning...</span>';
+            
+            try {
+                const cleanMac = mac.replace(/[:-]/g, '').substring(0, 6);
+                const response = await fetch(`https://api.macvendors.com/${mac}`);
+                const vendor = await response.text();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div style="font-family: 'Courier New', Courier, monospace; line-height: 1.8;">
+                            <div><span style="color: #00ff00;">MAC:</span> ${mac}</div>
+                            <div><span style="color: #00ff00;">Vendor:</span> ${vendor}</div>
+                            <div><span style="color: #00ff00;">OUI:</span> ${cleanMac.toUpperCase()}</div>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = '<span style="color: #ff0000;">Vendor not found or invalid MAC address</span>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<span style="color: #ff0000;">Error: Failed to lookup MAC address</span>';
+            }
+        }
+        
+        async function getMyIP() {
+            const resultDiv = document.getElementById('myipResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<span style="color: #ffff00;">⚡ Fetching your IP info...</span>';
+            
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <div style="font-family: 'Courier New', Courier, monospace; line-height: 1.8;">
+                        <div><span style="color: #00ff00;">Your IP:</span> ${data.ip}</div>
+                        <div><span style="color: #00ff00;">City:</span> ${data.city || 'N/A'}</div>
+                        <div><span style="color: #00ff00;">Region:</span> ${data.region || 'N/A'}</div>
+                        <div><span style="color: #00ff00;">Country:</span> ${data.country_name || 'N/A'}</div>
+                        <div><span style="color: #00ff00;">ISP:</span> ${data.org || 'N/A'}</div>
+                        <div><span style="color: #00ff00;">Timezone:</span> ${data.timezone || 'N/A'}</div>
+                        <div><span style="color: #00ff00;">Postal:</span> ${data.postal || 'N/A'}</div>
+                    </div>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = '<span style="color: #ff0000;">Error: Failed to fetch IP info</span>';
+            }
+        }
+        
+        async function lookupDomain() {
+            const domain = document.getElementById('domainInput').value.trim();
+            const resultDiv = document.getElementById('domainResult');
+            
+            if (!domain) {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '<span style="color: #ff0000;">Please enter a domain name</span>';
+                return;
+            }
+            
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<span style="color: #ffff00;">⚡ Resolving...</span>';
+            
+            try {
+                const response = await fetch(`https://dns.google/resolve?name=${domain}&type=A`);
+                const data = await response.json();
+                
+                if (data.Answer && data.Answer.length > 0) {
+                    const ips = data.Answer.filter(a => a.type === 1).map(a => a.data).join(', ');
+                    resultDiv.innerHTML = `
+                        <div style="font-family: 'Courier New', Courier, monospace; line-height: 1.8;">
+                            <div><span style="color: #00ff00;">Domain:</span> ${domain}</div>
+                            <div><span style="color: #00ff00;">IP Address(es):</span> ${ips || 'N/A'}</div>
+                            <div><span style="color: #00ff00;">Records Found:</span> ${data.Answer.length}</div>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = '<span style="color: #ff0000;">No DNS records found</span>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<span style="color: #ff0000;">Error: Failed to resolve domain</span>';
+            }
+        }
+        
+        // PayPal Integration Functions
+        let selectedAmount = 0;
+        
+        function selectAmount(amount) {
+            selectedAmount = amount;
+            
+            // Remove selection from all cards
+            document.querySelectorAll('.need-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selection to clicked card
+            event.currentTarget.classList.add('selected');
+            
+            // Clear custom amount
+            document.getElementById('customAmount').value = '';
+            
+            // Re-render PayPal button with new amount
+            renderPayPalButton();
+        }
+        
+        // Listen for custom amount changes
+        document.getElementById('customAmount').addEventListener('input', function(e) {
+            selectedAmount = parseFloat(e.target.value) || 0;
+            
+            // Remove selection from preset cards
+            document.querySelectorAll('.need-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            if (selectedAmount > 0) {
+                renderPayPalButton();
+            }
+        });
+        
+        function renderPayPalButton() {
+            // Clear existing button
+            document.getElementById('paypal-button-container').innerHTML = '';
+            
+            if (selectedAmount <= 0) {
+                return;
+            }
+            
+            // Render PayPal button
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: selectedAmount.toFixed(2)
+                            },
+                            description: 'Support for essential needs'
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        // Show success message
+                        document.getElementById('success-message').style.display = 'block';
+                        
+                        // Scroll to success message
+                        document.getElementById('success-message').scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        
+                        // Reset form after a delay
+                        setTimeout(function() {
+                            selectedAmount = 0;
+                            document.getElementById('customAmount').value = '';
+                            document.querySelectorAll('.need-card').forEach(card => {
+                                card.classList.remove('selected');
+                            });
+                            document.getElementById('paypal-button-container').innerHTML = '';
+                        }, 3000);
+                    });
+                },
+                onError: function(err) {
+                    alert('An error occurred with the payment. Please try again.');
+                    console.error(err);
+                }
+            }).render('#paypal-button-container');
+        }
+        
+        // Initial render message
+        document.getElementById('paypal-button-container').innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">Select an amount above to see payment options</p>';
+        
+        // Add event listeners for tool buttons
+        document.getElementById('ipLookupBtn').addEventListener('click', lookupIP);
+        document.getElementById('macLookupBtn').addEventListener('click', lookupMAC);
+        document.getElementById('myIpBtn').addEventListener('click', getMyIP);
+        document.getElementById('domainLookupBtn').addEventListener('click', lookupDomain);
+        
+        // Load PayPal SDK after tools are defined
+        const script = document.createElement('script');
+        script.src = 'https://www.paypal.com/sdk/js?client-id=AShHA7LRHXBp7nwEXq8M4l4LOGXPl2Ht9Ynrm5S_tOvtjTZHBXYrb6qaSNJqj-DuUpuQ1uAwT4syT_TQ&currency=USD';
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>
