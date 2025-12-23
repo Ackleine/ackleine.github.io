@@ -6,53 +6,66 @@
     <title>Support Jarod Mowry - Tech Professional</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Courier New', monospace; background: #000; color: #0f0; line-height: 1.6; }
-        header { background: linear-gradient(135deg, #001a00, #003300); padding: 3rem 2rem; text-align: center; border-bottom: 2px solid #0f0; }
-        header img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid #000; box-shadow: 0 0 20px rgba(0,255,0,0.5); margin-bottom: 1rem; }
-        header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-        header a { color: #0f0; text-decoration: none; border-bottom: 1px solid #0f0; }
+        body { font-family: 'Courier New', monospace; background: #000; color: #00ffff; line-height: 1.6; }
+        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
+        #terminal-text { font-size: 2rem; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0, 255, 255, 0.8); color: #00ffff; }
+        .loading-cursor { display: inline-block; width: 15px; height: 25px; background: #00ffff; margin-left: 5px; animation: blink 0.7s infinite; box-shadow: 0 0 15px rgba(0, 255, 255, 1); }
+        @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+        .hidden { display: none; }
+        header { background: linear-gradient(135deg, #001a1a, #003333); padding: 3rem 2rem; text-align: center; border-bottom: 3px solid #00ffff; box-shadow: 0 0 30px rgba(0,255,255,0.5); }
+        header img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid #00ffff; box-shadow: 0 0 30px rgba(0,255,255,0.8); margin-bottom: 1rem; }
+        header h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #00ffff; text-shadow: 0 0 15px rgba(0,255,255,0.8); }
+        header a { color: #00ffff; text-decoration: none; border-bottom: 2px solid #00ffff; }
+        .cursor { display: inline-block; width: 10px; height: 18px; background: #00ffff; margin-left: 5px; animation: blink 1s infinite; box-shadow: 0 0 10px rgba(0, 255, 255, 0.8); }
         .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
-        .section { background: #0a0a0a; padding: 2rem; margin: 2rem 0; border: 1px solid #0f0; border-radius: 8px; }
-        .section h2 { color: #0f0; border-bottom: 2px solid #0f0; padding-bottom: 0.5rem; margin-bottom: 1rem; }
-        .section p { color: #0c0; margin-bottom: 1rem; }
-        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
-        .tool-box { background: #001a00; border: 2px solid #0f0; padding: 1.5rem; border-radius: 8px; }
-        .tool-box h3 { color: #0f0; margin-bottom: 1rem; font-size: 1.1rem; }
-        .tool-input { width: 100%; padding: 0.7rem; background: #000; border: 1px solid #0f0; color: #0f0; border-radius: 4px; font-family: 'Courier New', monospace; margin-bottom: 0.7rem; }
-        .tool-btn { width: 100%; padding: 0.7rem; background: #003300; color: #0f0; border: 2px solid #0f0; border-radius: 4px; cursor: pointer; font-family: 'Courier New', monospace; font-weight: bold; transition: all 0.3s; }
-        .tool-btn:hover { background: #004400; box-shadow: 0 0 10px rgba(0,255,0,0.5); }
-        .tool-result { margin-top: 1rem; padding: 1rem; background: #000; border: 1px solid #0f0; border-radius: 4px; color: #0c0; display: none; min-height: 50px; }
+        .section { background: rgba(0, 26, 26, 0.8); padding: 2rem; margin: 2rem 0; border: 2px solid #00ffff; border-radius: 10px; box-shadow: 0 0 30px rgba(0,255,255,0.4), inset 0 0 30px rgba(0,255,255,0.1); backdrop-filter: blur(10px); }
+        .section h2 { color: #00ffff; border-bottom: 3px solid #00ffff; padding-bottom: 0.5rem; margin-bottom: 1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); }
+        .section p { color: #00cccc; margin-bottom: 1rem; }
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+        .tool-box { background: rgba(0, 38, 38, 0.9); border: 3px solid #00ffff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 25px rgba(0,255,255,0.5), inset 0 0 20px rgba(0,255,255,0.1); transition: all 0.3s; }
+        .tool-box:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(0,255,255,0.8), inset 0 0 30px rgba(0,255,255,0.2); }
+        .tool-box h3 { color: #00ffff; margin-bottom: 1rem; font-size: 1.1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); }
+        .tool-input { width: 100%; padding: 0.7rem; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ffff; color: #00ffff; border-radius: 4px; font-family: 'Courier New', monospace; margin-bottom: 0.7rem; transition: all 0.3s; }
+        .tool-input:focus { outline: none; border-color: #00ffff; box-shadow: 0 0 15px rgba(0,255,255,0.6); background: rgba(0, 38, 38, 0.5); }
+        .tool-btn { width: 100%; padding: 0.7rem; background: linear-gradient(135deg, #003333, #004444); color: #00ffff; border: 2px solid #00ffff; border-radius: 4px; cursor: pointer; font-family: 'Courier New', monospace; font-weight: bold; transition: all 0.3s; text-shadow: 0 0 5px rgba(0,255,255,0.8); }
+        .tool-btn:hover { background: linear-gradient(135deg, #004444, #006666); box-shadow: 0 0 20px rgba(0,255,255,0.8); transform: scale(1.02); }
+        .tool-result { margin-top: 1rem; padding: 1.5rem; background: rgba(0, 38, 38, 0.95); border: 3px solid #00ffff; border-radius: 8px; color: #00ffff; display: none; min-height: 50px; backdrop-filter: blur(15px); box-shadow: 0 0 30px rgba(0, 255, 255, 0.6), inset 0 0 30px rgba(0, 255, 255, 0.2); animation: glow 2s ease-in-out infinite alternate; }
+        @keyframes glow { from { box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), inset 0 0 20px rgba(0, 255, 255, 0.1); } to { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8), inset 0 0 40px rgba(0, 255, 255, 0.3); } }
         .needs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
-        .need-card { background: linear-gradient(135deg, #001a00, #002200); padding: 1.5rem; border: 2px solid #0f0; border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.3s; }
-        .need-card:hover { transform: translateY(-3px); box-shadow: 0 0 20px rgba(0,255,0,0.4); }
-        .need-card.selected { background: #003300; box-shadow: 0 0 30px rgba(0,255,0,0.6); }
+        .need-card { background: linear-gradient(135deg, rgba(0, 38, 38, 0.9), rgba(0, 51, 51, 0.9)); padding: 1.5rem; border: 3px solid #00ffff; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: 0 0 20px rgba(0,255,255,0.3); }
+        .need-card:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(0,255,255,0.8); border-color: #00ffff; }
+        .need-card.selected { background: linear-gradient(135deg, rgba(0, 51, 51, 0.95), rgba(0, 77, 77, 0.95)); box-shadow: 0 0 50px rgba(0,255,255,1); border-width: 4px; }
         .need-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .need-amount { font-size: 1.8rem; font-weight: bold; color: #0f0; text-shadow: 0 0 10px rgba(0,255,0,0.5); }
-        .need-title { font-weight: bold; color: #0f0; margin: 0.5rem 0; }
-        .need-desc { font-size: 0.85rem; color: #0c0; }
-        .custom-amount { text-align: center; margin: 2rem 0; padding: 1.5rem; background: #0a0a0a; border: 1px solid #0f0; border-radius: 8px; }
-        .custom-amount input { padding: 0.8rem; border: 2px solid #0f0; border-radius: 4px; font-size: 1.2rem; width: 180px; text-align: center; background: #000; color: #0f0; font-family: 'Courier New', monospace; }
+        .need-amount { font-size: 1.8rem; font-weight: bold; color: #00ffff; text-shadow: 0 0 15px rgba(0,255,255,1); }
+        .need-title { font-weight: bold; color: #00ffff; margin: 0.5rem 0; }
+        .need-desc { font-size: 0.85rem; color: #00cccc; }
+        .custom-amount { text-align: center; margin: 2rem 0; padding: 1.5rem; background: rgba(0, 38, 38, 0.8); border: 2px solid #00ffff; border-radius: 10px; box-shadow: 0 0 25px rgba(0,255,255,0.4); }
+        .custom-amount h3 { color: #00ffff; margin-bottom: 1rem; }
+        .custom-amount input { padding: 0.8rem; border: 2px solid #00ffff; border-radius: 4px; font-size: 1.2rem; width: 180px; text-align: center; background: rgba(0, 0, 0, 0.8); color: #00ffff; font-family: 'Courier New', monospace; box-shadow: 0 0 10px rgba(0,255,255,0.3); }
+        .custom-amount input:focus { outline: none; box-shadow: 0 0 20px rgba(0,255,255,0.8); }
         #paypal-container { max-width: 500px; margin: 2rem auto; min-height: 100px; }
-        .success { background: #001a00; border: 2px solid #0f0; color: #0f0; padding: 2rem; margin: 2rem 0; border-radius: 8px; display: none; text-align: center; }
-        .work-history { background: #001a00; padding: 1.5rem; border: 1px solid #0f0; border-radius: 8px; margin: 1rem 0; }
-        .work-item { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #0f0; }
-        .work-item h4 { color: #0f0; margin-bottom: 0.3rem; }
-        .work-item p { color: #0c0; font-size: 0.9rem; }
-        footer { background: #001a00; color: #0f0; text-align: center; padding: 2rem; margin-top: 3rem; border-top: 2px solid #0f0; }
-        ul { color: #0c0; margin-left: 2rem; margin-top: 1rem; }
+        .success { background: #001a00; border: 2px solid #00ff00; color: #00ff00; padding: 2rem; margin: 2rem 0; border-radius: 8px; display: none; text-align: center; }
+        .work-history { background: rgba(0, 38, 38, 0.7); padding: 1.5rem; border: 2px solid #00ffff; border-radius: 8px; margin: 1rem 0; box-shadow: 0 0 20px rgba(0,255,255,0.3); }
+        .work-item { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #00ffff; }
+        .work-item h4 { color: #00ffff; margin-bottom: 0.3rem; }
+        .work-item p { color: #00cccc; font-size: 0.9rem; }
+        footer { background: rgba(0, 26, 26, 0.9); color: #00ffff; text-align: center; padding: 2rem; margin-top: 3rem; border-top: 3px solid #00ffff; }
+        ul { color: #00cccc; margin-left: 2rem; margin-top: 1rem; }
         li { margin: 0.5rem 0; }
-        @media (max-width: 768px) {
-            header h1 { font-size: 1.5rem; }
-            .tool-grid, .needs-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 768px) { header h1 { font-size: 1.5rem; } .tool-grid, .needs-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
+    <div id="loading-screen">
+        <div id="terminal-text"><span class="loading-cursor"></span></div>
+    </div>
+
+    <div id="main-content" class="hidden">
     <header>
         <a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank">
             <img src="https://media.licdn.com/dms/image/v2/D5603AQG_n_7JLIQ4yg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1732139782308?e=1740009600&v=beta&t=oqQbXu-5yN2QnKMF0aWXnJPf-3QlKzKx8Yxy5qbRBNY" alt="Jarod Mowry">
         </a>
-        <h1>Jarod Mowry - Tech Professional Facing Homelessness</h1>
+        <h1>Jarod Mowry - Tech Professional Facing Homelessness<span class="cursor"></span></h1>
         <p>Your support helps me cover basic needs while I navigate disability challenges</p>
         <p style="margin-top: 0.5rem;"><a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank">🔗 View LinkedIn Profile</a></p>
     </header>
@@ -64,13 +77,13 @@
             <div class="tool-grid">
                 <div class="tool-box">
                     <h3>🌐 IP Lookup</h3>
-                    <input type="text" id="ipInput" placeholder="e.g., 8.8.8.8" class="tool-input">
+                    <input type="text" id="ipInput" placeholder="e.g., 8.8.8.8" class="tool-input" onkeypress="if(event.key==='Enter')lookupIP()">
                     <button class="tool-btn" onclick="lookupIP()">LOOKUP IP</button>
                     <div id="ipResult" class="tool-result"></div>
                 </div>
                 <div class="tool-box">
                     <h3>🔍 MAC Lookup</h3>
-                    <input type="text" id="macInput" placeholder="e.g., 00:1A:2B:3C:4D:5E" class="tool-input">
+                    <input type="text" id="macInput" placeholder="e.g., 00:1A:2B:3C:4D:5E" class="tool-input" onkeypress="if(event.key==='Enter')lookupMAC()">
                     <button class="tool-btn" onclick="lookupMAC()">LOOKUP MAC</button>
                     <div id="macResult" class="tool-result"></div>
                 </div>
@@ -81,7 +94,7 @@
                 </div>
                 <div class="tool-box">
                     <h3>🌍 Domain Lookup</h3>
-                    <input type="text" id="domainInput" placeholder="e.g., google.com" class="tool-input">
+                    <input type="text" id="domainInput" placeholder="e.g., google.com" class="tool-input" onkeypress="if(event.key==='Enter')lookupDomain()">
                     <button class="tool-btn" onclick="lookupDomain()">LOOKUP DOMAIN</button>
                     <div id="domainResult" class="tool-result"></div>
                 </div>
@@ -93,7 +106,7 @@
             <p>My name is Jarod Mowry, and I'm reaching out during one of the most challenging times of my life. I'm currently experiencing homelessness while dealing with pending disability applications, and I'm asking for help with essential needs.</p>
             <p>I've built a career in technology and have always been self-sufficient. But life threw me a curveball, and I'm working hard to get back on my feet while managing health challenges.</p>
             <div class="work-history">
-                <h3 style="color: #0c0; margin-bottom: 1rem;">Professional Background</h3>
+                <h3 style="color: #00cccc; margin-bottom: 1rem;">Professional Background</h3>
                 <div class="work-item">
                     <h4>🖥️ IT Support Analyst - South East Health</h4>
                     <p>Technical support and system maintenance in healthcare environment</p>
@@ -153,7 +166,7 @@
             </div>
             
             <div class="custom-amount">
-                <h3 style="color: #0f0; margin-bottom: 1rem;">Or Enter Custom Amount</h3>
+                <h3>Or Enter Custom Amount</h3>
                 <span style="font-size: 1.5rem;">$</span>
                 <input type="number" id="customAmount" placeholder="0.00" min="1" step="0.01" oninput="handleCustomAmount()">
             </div>
@@ -163,7 +176,7 @@
                 <h3>🙏 Thank You!</h3>
                 <p>Your kindness means the world to me. You'll receive a confirmation email from PayPal.</p>
             </div>
-            <p style="text-align: center; color: #0c0; margin-top: 1rem;">🔒 Secure PayPal  |  ✓ Direct Support  |  💳 Safe Payment</p>
+            <p style="text-align: center; color: #00cccc; margin-top: 1rem;">🔒 Secure PayPal  |  ✓ Direct Support  |  💳 Safe Payment</p>
         </div>
 
         <div class="section">
@@ -180,7 +193,7 @@
         <div class="section">
             <h2>🔗 Connect With Me</h2>
             <p style="text-align: center;">
-                <a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank" style="display: inline-block; background: #003300; color: #0f0; padding: 1rem 2rem; border: 2px solid #0f0; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                <a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank" style="display: inline-block; background: #003333; color: #00ffff; padding: 1rem 2rem; border: 2px solid #00ffff; border-radius: 8px; text-decoration: none; font-weight: bold;">
                     Connect on LinkedIn
                 </a>
             </p>
@@ -192,194 +205,11 @@
         <p>&copy; 2024 Jarod Mowry - Thank you for your support</p>
         <p style="margin-top: 0.5rem;">🙏 Every act of kindness brings hope</p>
     </footer>
+    </div>
 
     <script src="https://www.paypal.com/sdk/js?client-id=AShHA7LRHXBp7nwEXq8M4l4LOGXPl2Ht9Ynrm5S_tOvtjTZHBXYrb6qaSNJqj-DuUpuQ1uAwT4syT_TQ&currency=USD"></script>
     <script>
-        let selectedAmount = 0;
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof paypal !== 'undefined') {
-                document.getElementById('paypal-container').innerHTML = '<p style="text-align:center;color:#0c0;padding:2rem">💚 Select an amount above to continue</p>';
-            } else {
-                document.getElementById('paypal-container').innerHTML = '<p style="text-align:center;color:#f00;padding:2rem">⚠️ PayPal SDK failed to load. Please refresh the page.</p>';
-            }
-        });
-
-        async function lookupIP() {
-            const ip = document.getElementById('ipInput').value.trim();
-            const result = document.getElementById('ipResult');
-            if (!ip) {
-                result.style.display = 'block';
-                result.innerHTML = '<span style="color:#f00">Please enter an IP address</span>';
-                return;
-            }
-            result.style.display = 'block';
-            result.innerHTML = '<span style="color:#ff0">⚡ Scanning...</span>';
-            try {
-                const res = await fetch(`https://ipapi.co/${ip}/json/`);
-                const data = await res.json();
-                if (data.error) {
-                    result.innerHTML = `<span style="color:#f00">Error: ${data.reason}</span>`;
-                } else {
-                    result.innerHTML = `<div style="line-height:1.8"><span style="color:#0f0">IP:</span> ${data.ip}<br>
-                    <span style="color:#0f0">City:</span> ${data.city||'N/A'}<br>
-                    <span style="color:#0f0">Region:</span> ${data.region||'N/A'}<br>
-                    <span style="color:#0f0">Country:</span> ${data.country_name||'N/A'}<br>
-                    <span style="color:#0f0">ISP:</span> ${data.org||'N/A'}<br>
-                    <span style="color:#0f0">Timezone:</span> ${data.timezone||'N/A'}</div>`;
-                }
-            } catch(e) {
-                result.innerHTML = '<span style="color:#f00">Error: Unable to fetch data. Please try again.</span>';
-                console.error('IP Lookup error:', e);
-            }
-        }
-
-        async function lookupMAC() {
-            const mac = document.getElementById('macInput').value.trim();
-            const result = document.getElementById('macResult');
-            if (!mac) {
-                result.style.display = 'block';
-                result.innerHTML = '<span style="color:#f00">Please enter a MAC address</span>';
-                return;
-            }
-            result.style.display = 'block';
-            result.innerHTML = '<span style="color:#ff0">⚡ Scanning...</span>';
-            try {
-                const res = await fetch(`https://api.macvendors.com/${mac}`);
-                if (res.ok) {
-                    const vendor = await res.text();
-                    const oui = mac.replace(/[:-]/g, '').substring(0, 6).toUpperCase();
-                    result.innerHTML = `<div style="line-height:1.8"><span style="color:#0f0">MAC:</span> ${mac}<br>
-                    <span style="color:#0f0">Vendor:</span> ${vendor}<br>
-                    <span style="color:#0f0">OUI:</span> ${oui}</div>`;
-                } else {
-                    result.innerHTML = '<span style="color:#f00">Vendor not found or invalid MAC address</span>';
-                }
-            } catch(e) {
-                result.innerHTML = '<span style="color:#f00">Error: Unable to fetch data. Please try again.</span>';
-                console.error('MAC Lookup error:', e);
-            }
-        }
-
-        async function getMyIP() {
-            const result = document.getElementById('myipResult');
-            result.style.display = 'block';
-            result.innerHTML = '<span style="color:#ff0">⚡ Fetching your IP info...</span>';
-            try {
-                const res = await fetch('https://ipapi.co/json/');
-                const data = await res.json();
-                result.innerHTML = `<div style="line-height:1.8"><span style="color:#0f0">Your IP:</span> ${data.ip}<br>
-                <span style="color:#0f0">City:</span> ${data.city||'N/A'}<br>
-                <span style="color:#0f0">Region:</span> ${data.region||'N/A'}<br>
-                <span style="color:#0f0">Country:</span> ${data.country_name||'N/A'}<br>
-                <span style="color:#0f0">ISP:</span> ${data.org||'N/A'}<br>
-                <span style="color:#0f0">Timezone:</span> ${data.timezone||'N/A'}<br>
-                <span style="color:#0f0">Postal:</span> ${data.postal||'N/A'}</div>`;
-            } catch(e) {
-                result.innerHTML = '<span style="color:#f00">Error: Unable to fetch data. Please try again.</span>';
-                console.error('MyIP error:', e);
-            }
-        }
-
-        async function lookupDomain() {
-            const domain = document.getElementById('domainInput').value.trim();
-            const result = document.getElementById('domainResult');
-            if (!domain) {
-                result.style.display = 'block';
-                result.innerHTML = '<span style="color:#f00">Please enter a domain name</span>';
-                return;
-            }
-            result.style.display = 'block';
-            result.innerHTML = '<span style="color:#ff0">⚡ Resolving...</span>';
-            try {
-                const res = await fetch(`https://dns.google/resolve?name=${domain}&type=A`);
-                const data = await res.json();
-                if (data.Answer && data.Answer.length > 0) {
-                    const ips = data.Answer.filter(a => a.type === 1).map(a => a.data).join(', ');
-                    result.innerHTML = `<div style="line-height:1.8"><span style="color:#0f0">Domain:</span> ${domain}<br>
-                    <span style="color:#0f0">IP Address(es):</span> ${ips||'N/A'}<br>
-                    <span style="color:#0f0">Records Found:</span> ${data.Answer.length}</div>`;
-                } else {
-                    result.innerHTML = '<span style="color:#f00">No DNS records found</span>';
-                }
-            } catch(e) {
-                result.innerHTML = '<span style="color:#f00">Error: Unable to fetch data. Please try again.</span>';
-                console.error('Domain Lookup error:', e);
-            }
-        }
-
-        function selectAmount(amount) {
-            if (typeof paypal === 'undefined') {
-                alert('PayPal is still loading, please wait a moment and try again...');
-                return;
-            }
-            selectedAmount = amount;
-            document.querySelectorAll('.need-card').forEach(c => c.classList.remove('selected'));
-            event.target.closest('.need-card').classList.add('selected');
-            document.getElementById('customAmount').value = '';
-            renderPayPal();
-        }
-
-        function handleCustomAmount() {
-            if (typeof paypal === 'undefined') {
-                return;
-            }
-            const val = parseFloat(document.getElementById('customAmount').value) || 0;
-            selectedAmount = val;
-            document.querySelectorAll('.need-card').forEach(c => c.classList.remove('selected'));
-            if (val > 0) renderPayPal();
-        }
-
-        function renderPayPal() {
-            const container = document.getElementById('paypal-container');
-            container.innerHTML = '';
-            
-            if (selectedAmount <= 0) {
-                container.innerHTML = '<p style="text-align:center;color:#0c0;padding:2rem">💚 Select an amount above to continue</p>';
-                return;
-            }
-            
-            if (typeof paypal === 'undefined') {
-                container.innerHTML = '<p style="text-align:center;color:#f00;padding:2rem">⚠️ PayPal SDK failed to load. Please refresh the page.</p>';
-                return;
-            }
-            
-            container.innerHTML = '<p style="text-align:center;color:#ff0;padding:1rem">⏳ Loading PayPal buttons...</p>';
-            
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: { 
-                                value: selectedAmount.toFixed(2),
-                                currency_code: 'USD'
-                            },
-                            description: 'Support for essential needs - Jarod Mowry'
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        document.getElementById('success').style.display = 'block';
-                        document.getElementById('success').scrollIntoView({ behavior: 'smooth' });
-                        setTimeout(function() {
-                            selectedAmount = 0;
-                            document.getElementById('customAmount').value = '';
-                            document.querySelectorAll('.need-card').forEach(c => c.classList.remove('selected'));
-                            container.innerHTML = '<p style="text-align:center;color:#0c0;padding:2rem">💚 Select an amount above to continue</p>';
-                            document.getElementById('success').style.display = 'none';
-                        }, 5000);
-                    });
-                },
-                onError: function(err) {
-                    container.innerHTML = '<p style="text-align:center;color:#f00;padding:2rem">⚠️ Payment error occurred. Please try again or contact support.</p>';
-                    console.error('PayPal error:', err);
-                    setTimeout(function() {
-                        renderPayPal();
-                    }, 3000);
-                }
-            }).render('#paypal-container');
-        }
+var msg="Hello World",idx=0,del=false,sel=0,rdy=false;function typ(){var t=document.getElementById("terminal-text");if(!del&&idx<msg.length){t.innerHTML=msg.substring(0,idx+1)+'<span class="loading-cursor"></span>';idx++;setTimeout(typ,150)}else if(!del&&idx===msg.length){setTimeout(function(){del=true;typ()},1e3)}else if(del&&idx>0){idx--;t.innerHTML=msg.substring(0,idx)+'<span class="loading-cursor"></span>';setTimeout(typ,100)}else{document.getElementById("loading-screen").style.display="none";document.getElementById("main-content").classList.remove("hidden");rdy=true}}window.onload=function(){setTimeout(typ,500)};function lookupIP(){var i=document.getElementById("ipInput").value.trim(),r=document.getElementById("ipResult");if(!i){r.style.display="block";r.innerHTML='<span style="color:#f33;font-weight:bold">⚠ Enter an IP</span>';return}r.style.display="block";r.innerHTML='<span style="color:#ff0;font-weight:bold">⚡ SCANNING...</span>';fetch("https://ipapi.co/"+i+"/json/").then(function(x){return x.json()}).then(function(d){r.innerHTML='<div style="line-height:2;font-weight:bold"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ IP:</span> <span style="color:#fff">'+d.ip+'</span></div><div><span style="color:#0ff">• CITY:</span> '+(d.city||"N/A")+'</div><div><span style="color:#0ff">• COUNTRY:</span> '+(d.country_name||"N/A")+'</div><div><span style="color:#0ff">• ISP:</span> '+(d.org||"N/A")+'</div></div>'})}function lookupMAC(){var m=document.getElementById("macInput").value.trim(),r=document.getElementById("macResult");if(!m){r.style.display="block";r.innerHTML='<span style="color:#f33;font-weight:bold">⚠ Enter MAC</span>';return}r.style.display="block";var c=m.replace(/[:\-\s.]/g,"").toUpperCase();if(c.length<6){r.innerHTML='<span style="color:#f33">⚠ Invalid MAC</span>';return}var o=c.substring(0,6);r.innerHTML='<div style="line-height:2;font-weight:bold"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ MAC:</span> <span style="color:#fff">'+m+'</span></div><div><span style="color:#0ff">• OUI:</span> '+o+'</div><div style="margin-top:1rem"><span style="color:#ff0">ℹ LOOKUP:</span> <a href="https://maclookup.app/search/result?mac='+o+'" target="_blank" style="color:#fff;text-decoration:underline">maclookup.app</a></div></div>'}function getMyIP(){var r=document.getElementById("myipResult");r.style.display="block";r.innerHTML='<span style="color:#ff0;font-weight:bold">⚡ FETCHING...</span>';fetch("https://ipapi.co/json/").then(function(x){return x.json()}).then(function(d){r.innerHTML='<div style="line-height:2;font-weight:bold"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ YOUR IP:</span> <span style="color:#fff">'+d.ip+'</span></div><div><span style="color:#0ff">• CITY:</span> '+(d.city||"N/A")+'</div><div><span style="color:#0ff">• ISP:</span> '+(d.org||"N/A")+'</div></div>'})}function lookupDomain(){var dm=document.getElementById("domainInput").value.trim(),r=document.getElementById("domainResult");if(!dm){r.style.display="block";r.innerHTML='<span style="color:#f33;font-weight:bold">⚠ Enter domain</span>';return}r.style.display="block";r.innerHTML='<span style="color:#ff0;font-weight:bold">⚡ RESOLVING...</span>';fetch("https://dns.google/resolve?name="+dm+"&type=A").then(function(x){return x.json()}).then(function(d){if(d.Answer&&d.Answer.length>0){var ips=d.Answer.filter(function(a){return a.type===1}).map(function(a){return a.data}).join(", ");r.innerHTML='<div style="line-height:2;font-weight:bold"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ DOMAIN:</span> <span style="color:#fff">'+dm+'</span></div><div><span style="color:#0ff">• IPs:</span> '+ips+'</div></div>'}else{r.innerHTML='<span style="color:#f33">⚠ No records</span>'}})}function selectAmount(a){if(!rdy)return;sel=a;var c=document.querySelectorAll(".need-card");for(var i=0;i<c.length;i++)c[i].classList.remove("selected");event.target.closest(".need-card").classList.add("selected");document.getElementById("customAmount").value="";showPP()}function handleCustomAmount(){if(!rdy)return;var v=parseFloat(document.getElementById("customAmount").value)||0;sel=v;var c=document.querySelectorAll(".need-card");for(var i=0;i<c.length;i++)c[i].classList.remove("selected");if(v>0)showPP()}function showPP(){var c=document.getElementById("paypal-container");c.innerHTML="";if(sel<=0){c.innerHTML='<p style="text-align:center;color:#0cc;padding:2rem">Select amount above</p>';return}if(typeof paypal==="undefined"){c.innerHTML='<p style="text-align:center;color:#f33;padding:2rem">PayPal loading...</p>';return}paypal.Buttons({createOrder:function(d,a){return a.order.create({purchase_units:[{amount:{value:sel.toFixed(2)},description:"Support for essential needs"}]})},onApprove:function(d,a){return a.order.capture().then(function(){document.getElementById("success").style.display="block";document.getElementById("success").scrollIntoView({behavior:"smooth"});setTimeout(function(){sel=0;document.getElementById("customAmount").value="";var c=document.querySelectorAll(".need-card");for(var i=0;i<c.length;i++)c[i].classList.remove("selected");document.getElementById("paypal-container").innerHTML='<p style="text-align:center;color:#0cc;padding:2rem">Select amount</p>';document.getElementById("success").style.display="none"},5e3)})},onError:function(e){alert("Payment error. Try again.")}}).render("#paypal-container")}
     </script>
 </body>
 </html>
