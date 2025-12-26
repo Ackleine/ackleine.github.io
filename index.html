@@ -6,69 +6,58 @@
     <title>Support Jarod Mowry - Tech Professional</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Courier New', monospace; background: #000; color: #00ffff; line-height: 1.6; }
+        body { font-family: 'Courier New', monospace; background: #000; color: #00ffff; line-height: 1.6; overflow-x: hidden; }
         #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
         #terminal-text { font-size: 2rem; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0, 255, 255, 0.8); color: #00ffff; }
         .loading-cursor { display: inline-block; width: 15px; height: 25px; background: #00ffff; margin-left: 5px; animation: blink 0.7s infinite; box-shadow: 0 0 15px rgba(0, 255, 255, 1); }
         @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
         .hidden { display: none; }
-        header { background: linear-gradient(135deg, #001a1a, #003333); padding: 3rem 2rem; text-align: center; border-bottom: 3px solid #00ffff; box-shadow: 0 0 30px rgba(0,255,255,0.5); }
+        #three-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; }
+        header { background: linear-gradient(135deg, #001a1a, #003333); padding: 3rem 2rem; text-align: center; border-bottom: 3px solid #00ffff; box-shadow: 0 0 30px rgba(0,255,255,0.5); position: relative; z-index: 1; }
         header img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid #00ffff; box-shadow: 0 0 30px rgba(0,255,255,0.8); margin-bottom: 1rem; }
         header h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #00ffff; text-shadow: 0 0 15px rgba(0,255,255,0.8); }
         header a { color: #00ffff; text-decoration: none; border-bottom: 2px solid #00ffff; }
-        .cursor { display: inline-block; width: 10px; height: 18px; background: #00ffff; margin-left: 5px; animation: blink 1s infinite; box-shadow: 0 0 10px rgba(0, 255, 255, 0.8); }
-        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
-        .section { background: rgba(0, 26, 26, 0.8); padding: 2rem; margin: 2rem 0; border: 2px solid #00ffff; border-radius: 10px; box-shadow: 0 0 30px rgba(0,255,255,0.4), inset 0 0 30px rgba(0,255,255,0.1); backdrop-filter: blur(10px); position: relative; }
-        .section.glitch-border { }
-        .section h2 { color: #00ffff; border-bottom: 3px solid #00ffff; padding-bottom: 0.5rem; margin-bottom: 1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); position: relative; z-index: 1; }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+        .section { background: rgba(0, 26, 26, 0.9); padding: 2rem; margin: 2rem 0; border: 2px solid #00ffff; border-radius: 10px; box-shadow: 0 0 30px rgba(0,255,255,0.4); backdrop-filter: blur(10px); }
+        .section h2 { color: #00ffff; border-bottom: 3px solid #00ffff; padding-bottom: 0.5rem; margin-bottom: 1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); }
         .section p { color: #00cccc; margin-bottom: 1rem; }
         .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
-        .tool-box { background: rgba(0, 38, 38, 0.9); border: 3px solid #00ffff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 25px rgba(0,255,255,0.5), inset 0 0 20px rgba(0,255,255,0.1); transition: all 0.3s; position: relative; }
-        .tool-box:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(0,255,255,0.8), inset 0 0 30px rgba(0,255,255,0.2); }
+        .tool-box { background: rgba(0, 38, 38, 0.9); border: 3px solid #00ffff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 25px rgba(0,255,255,0.5); transition: all 0.3s; }
+        .tool-box:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(0,255,255,0.8); }
         .tool-box h3 { color: #00ffff; margin-bottom: 1rem; font-size: 1.1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); }
-        .tool-input { width: 100%; padding: 0.7rem; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ffff; color: #00ffff; border-radius: 4px; font-family: 'Courier New', monospace; margin-bottom: 0.7rem; transition: all 0.3s; }
-        .tool-input:focus { outline: none; border-color: #00ffff; box-shadow: 0 0 15px rgba(0,255,255,0.6); background: rgba(0, 38, 38, 0.5); }
-        .tool-btn { width: 100%; padding: 0.7rem; background: linear-gradient(135deg, #003333, #004444); color: #00ffff; border: 2px solid #00ffff; border-radius: 4px; cursor: pointer; font-family: 'Courier New', monospace; font-weight: bold; transition: all 0.3s; text-shadow: 0 0 5px rgba(0,255,255,0.8); }
-        .tool-btn:hover { background: linear-gradient(135deg, #004444, #006666); box-shadow: 0 0 20px rgba(0,255,255,0.8); transform: scale(1.02); }
-        .tool-result { margin-top: 1rem; padding: 1.5rem; background: rgba(0, 38, 38, 0.95); border: 3px solid #00ffff; border-radius: 8px; color: #00ffff; display: none; min-height: 50px; backdrop-filter: blur(15px); box-shadow: 0 0 30px rgba(0, 255, 255, 0.6), inset 0 0 30px rgba(0, 255, 255, 0.2); animation: glow 2s ease-in-out infinite alternate; }
-        @keyframes glow { from { box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), inset 0 0 20px rgba(0, 255, 255, 0.1); } to { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8), inset 0 0 40px rgba(0, 255, 255, 0.3); } }
-        @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
-        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
-        .star { position: absolute; width: 2px; height: 2px; background: #00ffff; border-radius: 50%; box-shadow: 0 0 5px #00ffff; animation: twinkle 3s infinite; }
-        .glitch-border { position: relative; }
-        .glitch-border::before { content: ''; position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px; border: 2px solid #00ffff; border-radius: inherit; pointer-events: none; animation: glitch 0.3s infinite; opacity: 0.5; }
-        .glitch-border::after { content: ''; position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px; border: 2px solid #ff00ff; border-radius: inherit; pointer-events: none; animation: glitch 0.4s infinite reverse; opacity: 0.3; }
+        .tool-input { width: 100%; padding: 0.7rem; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ffff; color: #00ffff; border-radius: 4px; font-family: 'Courier New', monospace; margin-bottom: 0.7rem; }
+        .tool-btn { width: 100%; padding: 0.7rem; background: linear-gradient(135deg, #003333, #004444); color: #00ffff; border: 2px solid #00ffff; border-radius: 4px; cursor: pointer; font-family: 'Courier New', monospace; font-weight: bold; transition: all 0.3s; }
+        .tool-btn:hover { background: linear-gradient(135deg, #004444, #006666); box-shadow: 0 0 20px rgba(0,255,255,0.8); }
+        .tool-result { margin-top: 1rem; padding: 1.5rem; background: rgba(0, 38, 38, 0.95); border: 3px solid #00ffff; border-radius: 8px; color: #00ffff; display: none; }
+        .exif-preview { max-width: 100%; max-height: 300px; margin: 1rem 0; display: none; border: 2px solid #00ffff; border-radius: 8px; }
+        .exif-data { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem; font-size: 0.85rem; }
+        .exif-label { color: #00ffff; font-weight: bold; }
+        .exif-value { color: #00cccc; word-break: break-word; }
         .needs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
-        .need-card { background: linear-gradient(135deg, rgba(0, 38, 38, 0.9), rgba(0, 51, 51, 0.9)); padding: 1.5rem; border: 3px solid #00ffff; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: 0 0 20px rgba(0,255,255,0.3); position: relative; }
-        .need-card:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(0,255,255,0.8); border-color: #00ffff; }
+        .need-card { background: linear-gradient(135deg, rgba(0, 38, 38, 0.9), rgba(0, 51, 51, 0.9)); padding: 1.5rem; border: 3px solid #00ffff; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s; }
+        .need-card:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(0,255,255,0.8); }
         .need-card.selected { background: linear-gradient(135deg, rgba(0, 51, 51, 0.95), rgba(0, 77, 77, 0.95)); box-shadow: 0 0 50px rgba(0,255,255,1); border-width: 4px; }
         .need-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
         .need-amount { font-size: 1.8rem; font-weight: bold; color: #00ffff; text-shadow: 0 0 15px rgba(0,255,255,1); }
         .need-title { font-weight: bold; color: #00ffff; margin: 0.5rem 0; }
         .need-desc { font-size: 0.85rem; color: #00cccc; }
-        .custom-amount { text-align: center; margin: 2rem 0; padding: 1.5rem; background: rgba(0, 38, 38, 0.8); border: 2px solid #00ffff; border-radius: 10px; box-shadow: 0 0 25px rgba(0,255,255,0.4); }
+        .custom-amount { text-align: center; margin: 2rem 0; padding: 1.5rem; background: rgba(0, 38, 38, 0.8); border: 2px solid #00ffff; border-radius: 10px; }
         .custom-amount h3 { color: #00ffff; margin-bottom: 1rem; }
-        .custom-amount input { padding: 0.8rem; border: 2px solid #00ffff; border-radius: 4px; font-size: 1.2rem; width: 180px; text-align: center; background: rgba(0, 0, 0, 0.8); color: #00ffff; font-family: 'Courier New', monospace; box-shadow: 0 0 10px rgba(0,255,255,0.3); }
-        .custom-amount input:focus { outline: none; box-shadow: 0 0 20px rgba(0,255,255,0.8); }
+        .custom-amount input { padding: 0.8rem; border: 2px solid #00ffff; border-radius: 4px; font-size: 1.2rem; width: 180px; text-align: center; background: rgba(0, 0, 0, 0.8); color: #00ffff; font-family: 'Courier New', monospace; }
         #paypal-container { max-width: 500px; margin: 2rem auto; min-height: 100px; }
         .success { background: #001a00; border: 2px solid #00ff00; color: #00ff00; padding: 2rem; margin: 2rem 0; border-radius: 8px; display: none; text-align: center; }
-        .work-history { background: rgba(0, 38, 38, 0.7); padding: 1.5rem; border: 2px solid #00ffff; border-radius: 8px; margin: 1rem 0; box-shadow: 0 0 20px rgba(0,255,255,0.3); }
+        .work-history { background: rgba(0, 38, 38, 0.7); padding: 1.5rem; border: 2px solid #00ffff; border-radius: 8px; margin: 1rem 0; }
         .work-item { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #00ffff; }
         .work-item h4 { color: #00ffff; margin-bottom: 0.3rem; }
         .work-item p { color: #00cccc; font-size: 0.9rem; }
-        footer { background: rgba(0, 26, 26, 0.9); color: #00ffff; text-align: center; padding: 2rem; margin-top: 3rem; border-top: 3px solid #00ffff; }
+        footer { background: rgba(0, 26, 26, 0.9); color: #00ffff; text-align: center; padding: 2rem; margin-top: 3rem; border-top: 3px solid #00ffff; position: relative; z-index: 1; }
         ul { color: #00cccc; margin-left: 2rem; margin-top: 1rem; }
         li { margin: 0.5rem 0; }
         @media (max-width: 768px) { header h1 { font-size: 1.5rem; } .tool-grid, .needs-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="stars" id="stars"></div>
-    
-    <audio id="bgMusic" loop>
-        <source src="https://files.catbox.moe/8zux0y.mp3" type="audio/mpeg">
-    </audio>
+    <canvas id="three-bg"></canvas>
     
     <div id="loading-screen">
         <div id="terminal-text"><span class="loading-cursor"></span></div>
@@ -76,28 +65,27 @@
 
     <div id="main-content" class="hidden">
     <header>
-        <a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank">
-            <img src="https://media.licdn.com/dms/image/v2/D5603AQG_n_7JLIQ4yg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1732139782308?e=1740009600&v=beta&t=oqQbXu-5yN2QnKMF0aWXnJPf-3QlKzKx8Yxy5qbRBNY" alt="Jarod Mowry">
-        </a>
-        <h1>Jarod Mowry - Tech Professional Facing Homelessness<span class="cursor"></span></h1>
+        <div id="header-terminal" style="font-size: 2.5rem; margin-bottom: 1rem; min-height: 60px;">
+            <span id="header-text"></span><span class="header-cursor" style="display: inline-block; width: 15px; height: 35px; background: #00ffff; margin-left: 5px; animation: blink 0.7s infinite; box-shadow: 0 0 15px rgba(0, 255, 255, 1);"></span>
+        </div>
         <p>Your support helps me cover basic needs while I navigate disability challenges</p>
-        <p style="margin-top: 0.5rem;"><a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank">🔗 View LinkedIn Profile</a></p>
+        <p style="margin-top: 0.5rem;"><a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank">🔗 LinkedIn Profile</a></p>
     </header>
     
     <div class="container">
-        <div class="section glitch-border">
-            <h2>🔧 Network Tools</h2>
-            <p>Professional IT diagnostic tools</p>
+        <div class="section">
+            <h2>🔧 Network & Image Tools</h2>
+            <p>Professional IT diagnostic and forensic tools</p>
             <div class="tool-grid">
-                <div class="tool-box glitch-border">
+                <div class="tool-box">
                     <h3>🌐 IP Lookup</h3>
-                    <input type="text" id="ipInput" placeholder="e.g., 8.8.8.8" class="tool-input" onkeypress="if(event.key==='Enter')lookupIP()">
+                    <input type="text" id="ipInput" placeholder="e.g., 8.8.8.8" class="tool-input">
                     <button class="tool-btn" onclick="lookupIP()">LOOKUP IP</button>
                     <div id="ipResult" class="tool-result"></div>
                 </div>
                 <div class="tool-box">
                     <h3>🔍 MAC Lookup</h3>
-                    <input type="text" id="macInput" placeholder="e.g., 00:1A:2B:3C:4D:5E" class="tool-input" onkeypress="if(event.key==='Enter')lookupMAC()">
+                    <input type="text" id="macInput" placeholder="e.g., 00:1A:2B:3C:4D:5E" class="tool-input">
                     <button class="tool-btn" onclick="lookupMAC()">LOOKUP MAC</button>
                     <div id="macResult" class="tool-result"></div>
                 </div>
@@ -108,74 +96,52 @@
                 </div>
                 <div class="tool-box">
                     <h3>🌍 Domain Lookup</h3>
-                    <input type="text" id="domainInput" placeholder="e.g., google.com" class="tool-input" onkeypress="if(event.key==='Enter')lookupDomain()">
+                    <input type="text" id="domainInput" placeholder="e.g., google.com" class="tool-input">
                     <button class="tool-btn" onclick="lookupDomain()">LOOKUP DOMAIN</button>
                     <div id="domainResult" class="tool-result"></div>
+                </div>
+                <div class="tool-box">
+                    <h3>📸 EXIF Data Viewer</h3>
+                    <input type="file" id="exifInput" accept="image/*" class="tool-input" onchange="readEXIF()" style="padding: 0.5rem;">
+                    <img id="exifPreview" class="exif-preview">
+                    <div id="exifResult" class="tool-result"></div>
                 </div>
             </div>
         </div>
 
-        <div class="section glitch-border">
+        <div class="section">
             <h2>📖 My Story</h2>
-            <p>My name is Jarod Mowry, and I'm reaching out during one of the most challenging times of my life. I'm currently experiencing homelessness while dealing with pending disability applications, and I'm asking for help with essential needs.</p>
-            <p>I've built a career in technology and have always been self-sufficient. But life threw me a curveball, and I'm working hard to get back on my feet while managing health challenges.</p>
+            <p>My name is Jarod Mowry, and I'm reaching out during one of the most challenging times of my life. I'm currently experiencing homelessness while dealing with pending disability applications.</p>
             <div class="work-history">
                 <h3 style="color: #00cccc; margin-bottom: 1rem;">Professional Background</h3>
                 <div class="work-item">
                     <h4>🖥️ IT Support Analyst - South East Health</h4>
-                    <p>Technical support and system maintenance in healthcare environment</p>
+                    <p>Technical support and system maintenance</p>
                 </div>
                 <div class="work-item">
                     <h4>🔧 ISP Technician</h4>
-                    <p>Technical installations, troubleshooting, and customer support</p>
-                </div>
-                <div class="work-item">
-                    <h4>⚙️ Technical Specialist</h4>
-                    <p>Worked as technician across multiple technology sectors</p>
+                    <p>Technical installations and support</p>
                 </div>
             </div>
-            <p>Despite my technical skills, I'm currently unable to work due to disability. I'm attending medical appointments and therapy sessions as part of my disability process.</p>
         </div>
 
-        <div class="section glitch-border">
+        <div class="section">
             <h2>💚 How You Can Help</h2>
-            <p style="text-align: center;">I'm not asking for large amounts. Every bit helps me maintain the essentials.</p>
             <div class="needs-grid">
-                <div class="need-card glitch-border" onclick="selectAmount(35)">
+                <div class="need-card" onclick="selectAmount(35)">
                     <div class="need-icon">📱</div>
                     <div class="need-amount">$35</div>
                     <div class="need-title">Phone Bill</div>
-                    <div class="need-desc">Stay connected for appointments & disability updates</div>
                 </div>
-                <div class="need-card glitch-border" onclick="selectAmount(20)">
+                <div class="need-card" onclick="selectAmount(20)">
                     <div class="need-icon">🚌</div>
                     <div class="need-amount">$20</div>
                     <div class="need-title">Bus Tokens</div>
-                    <div class="need-desc">Transportation to appointments</div>
                 </div>
-                <div class="need-card glitch-border" onclick="selectAmount(50)">
+                <div class="need-card" onclick="selectAmount(50)">
                     <div class="need-icon">🧥</div>
                     <div class="need-amount">$50</div>
                     <div class="need-title">Winter Clothing</div>
-                    <div class="need-desc">Warm coat & thermal layers</div>
-                </div>
-                <div class="need-card glitch-border" onclick="selectAmount(15)">
-                    <div class="need-icon">🍔</div>
-                    <div class="need-amount">$15</div>
-                    <div class="need-title">Meals</div>
-                    <div class="need-desc">Hot meals for a few days</div>
-                </div>
-                <div class="need-card glitch-border" onclick="selectAmount(25)">
-                    <div class="need-icon">🧴</div>
-                    <div class="need-amount">$25</div>
-                    <div class="need-title">Hygiene</div>
-                    <div class="need-desc">Basic necessities</div>
-                </div>
-                <div class="need-card glitch-border" onclick="selectAmount(10)">
-                    <div class="need-icon">💊</div>
-                    <div class="need-amount">$10</div>
-                    <div class="need-title">Medication</div>
-                    <div class="need-desc">Prescription co-pays</div>
                 </div>
             </div>
             
@@ -188,47 +154,206 @@
             <div id="paypal-container"></div>
             <div id="success" class="success">
                 <h3>🙏 Thank You!</h3>
-                <p>Your kindness means the world to me. You'll receive a confirmation email from PayPal.</p>
             </div>
-            <p style="text-align: center; color: #00cccc; margin-top: 1rem;">🔒 Secure PayPal  |  ✓ Direct Support  |  💳 Safe Payment</p>
-        </div>
-
-        <div class="section glitch-border">
-            <h2>📋 What I'm Doing Now</h2>
-            <ul>
-                <li>Attending medical appointments and therapy sessions</li>
-                <li>Working through disability application process</li>
-                <li>Following treatment plans</li>
-                <li>Staying positive and working toward stability</li>
-                <li>Seeking available resources and support</li>
-            </ul>
-        </div>
-
-        <div class="section glitch-border">
-            <h2>🔗 Connect With Me</h2>
-            <p style="text-align: center;">
-                <a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank" style="display: inline-block; background: #003333; color: #00ffff; padding: 1rem 2rem; border: 2px solid #00ffff; border-radius: 8px; text-decoration: none; font-weight: bold;">
-                    Connect on LinkedIn
-                </a>
-            </p>
-            <p style="text-align: center; margin-top: 1rem;">Feel free to reach out with opportunities, advice, or support.</p>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2024 Jarod Mowry - Thank you for your support</p>
-        <p style="margin-top: 0.5rem;">🙏 Every act of kindness brings hope</p>
+        <p>&copy; 2024 Jarod Mowry</p>
     </footer>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=AShHA7LRHXBp7nwEXq8M4l4LOGXPl2Ht9Ynrm5S_tOvtjTZHBXYrb6qaSNJqj-DuUpuQ1uAwT4syT_TQ&currency=USD"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
     <script>
-var msg="Hello World",idx=0,del=false,sel=0,rdy=false;
-function createStars(){var s=document.getElementById("stars");for(var i=0;i<100;i++){var st=document.createElement("div");st.className="star";st.style.left=Math.random()*100+"%";st.style.top=Math.random()*100+"%";st.style.animationDelay=Math.random()*3+"s";st.style.animationDuration=(2+Math.random()*3)+"s";s.appendChild(st)}}
-function typ(){var t=document.getElementById("terminal-text");if(!del&&idx<msg.length){t.innerHTML=msg.substring(0,idx+1)+'<span class="loading-cursor"></span>';idx++;setTimeout(typ,150)}else if(!del&&idx===msg.length){setTimeout(function(){del=true;typ()},1e3)}else if(del&&idx>0){idx--;t.innerHTML=msg.substring(0,idx)+'<span class="loading-cursor"></span>';setTimeout(typ,100)}else{document.getElementById("loading-screen").style.display="none";document.getElementById("main-content").classList.remove("hidden");rdy=true;var m=document.getElementById("bgMusic");m.play().catch(function(e){console.log("Autoplay blocked - user interaction needed")})}}
-window.onload=function(){createStars();setTimeout(typ,500)};
-document.addEventListener("click",function(){var m=document.getElementById("bgMusic");if(m.paused){m.play().catch(function(){})}},{ once: true });
-function lookupIP(){var i=document.getElementById("ipInput").value.trim(),r=document.getElementById("ipResult");if(!i){r.style.display="block";r.innerHTML='<span style="color:#f33;font-weight:bold">⚠ Enter an IP</span>';return}r.style.display="block";r.innerHTML='<span style="color:#ff0;font-weight:bold">⚡ SCANNING...</span>';fetch("https://ipapi.co/"+i+"/json/").then(function(x){return x.json()}).then(function(d){r.innerHTML='<div style="line-height:2;font-weight:bold"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ IP:</span> <span style="color:#fff">'+d.ip+'</span></div><div><span style="color:#0ff">• CITY:</span> '+(d.city||"N/A")+'</div><div><span style="color:#0ff">• COUNTRY:</span> '+(d.country_name||"N/A")+'</div><div><span style="color:#0ff">• ISP:</span> '+(d.org||"N/A")+'</div></div>'})}function lookupMAC(){var m=document.getElementById("macInput").value.trim(),r=document.getElementById("macResult");if(!m){r.style.display="block";r.innerHTML='<span style="color:#f33;font-weight:bold">⚠ Enter MAC</span>';return}r.style.display="block";var c=m.replace(/[:\-\s.]/g,"").toUpperCase();if(c.length<6){r.innerHTML='<span style="color:#f33">⚠ Invalid MAC</span>';return}var o=c.substring(0,6);r.innerHTML='<div style="line-height:2;font-weight:bold"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ MAC:</span> <span style="color:#fff">'+m+'</span></div><div><span style="color:#0ff">• OUI:</span> '+o+'</div><div style="margin-top:1rem"><span style="color:#ff0">ℹ LOOKUP:</span> <a href="https://maclookup.app/search/result?mac='+o+'" target="_blank" style="color:#fff;text-decoration:underline">maclookup.app</a></div></div>'}function getMyIP(){var r=document.getElementById("myipResult");r.style.display="block";r.innerHTML='<span style="color:#ff0;font-weight:bold">⚡ FETCHING...</span>';fetch("https://ipapi.co/json/").then(function(x){return x.json()}).then(function(d){r.innerHTML='<div style="line-height:2;font-weight:bold"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ YOUR IP:</span> <span style="color:#fff">'+d.ip+'</span></div><div><span style="color:#0ff">• CITY:</span> '+(d.city||"N/A")+'</div><div><span style="color:#0ff">• ISP:</span> '+(d.org||"N/A")+'</div></div>'})}function lookupDomain(){var dm=document.getElementById("domainInput").value.trim(),r=document.getElementById("domainResult");if(!dm){r.style.display="block";r.innerHTML='<span style="color:#f33;font-weight:bold">⚠ Enter domain</span>';return}r.style.display="block";r.innerHTML='<span style="color:#ff0;font-weight:bold">⚡ RESOLVING...</span>';fetch("https://dns.google/resolve?name="+dm+"&type=A").then(function(x){return x.json()}).then(function(d){if(d.Answer&&d.Answer.length>0){var ips=d.Answer.filter(function(a){return a.type===1}).map(function(a){return a.data}).join(", ");r.innerHTML='<div style="line-height:2;font-weight:bold"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ DOMAIN:</span> <span style="color:#fff">'+dm+'</span></div><div><span style="color:#0ff">• IPs:</span> '+ips+'</div></div>'}else{r.innerHTML='<span style="color:#f33">⚠ No records</span>'}})}function selectAmount(a){if(!rdy)return;sel=a;var c=document.querySelectorAll(".need-card");for(var i=0;i<c.length;i++)c[i].classList.remove("selected");event.target.closest(".need-card").classList.add("selected");document.getElementById("customAmount").value="";showPP()}function handleCustomAmount(){if(!rdy)return;var v=parseFloat(document.getElementById("customAmount").value)||0;sel=v;var c=document.querySelectorAll(".need-card");for(var i=0;i<c.length;i++)c[i].classList.remove("selected");if(v>0)showPP()}function showPP(){var c=document.getElementById("paypal-container");c.innerHTML="";if(sel<=0){c.innerHTML='<p style="text-align:center;color:#0cc;padding:2rem">Select amount above</p>';return}if(typeof paypal==="undefined"){c.innerHTML='<p style="text-align:center;color:#f33;padding:2rem">PayPal loading...</p>';return}paypal.Buttons({createOrder:function(d,a){return a.order.create({purchase_units:[{amount:{value:sel.toFixed(2)},description:"Support for essential needs"}]})},onApprove:function(d,a){return a.order.capture().then(function(){document.getElementById("success").style.display="block";document.getElementById("success").scrollIntoView({behavior:"smooth"});setTimeout(function(){sel=0;document.getElementById("customAmount").value="";var c=document.querySelectorAll(".need-card");for(var i=0;i<c.length;i++)c[i].classList.remove("selected");document.getElementById("paypal-container").innerHTML='<p style="text-align:center;color:#0cc;padding:2rem">Select amount</p>';document.getElementById("success").style.display="none"},5e3)})},onError:function(e){alert("Payment error. Try again.")}}).render("#paypal-container")}
+var msg="Hello World",idx=0,del=false,sel=0,rdy=false,scene,camera,renderer,particles=[],grids=[];
+
+function typ(){
+    var t=document.getElementById("terminal-text");
+    if(!del&&idx<msg.length){
+        t.innerHTML=msg.substring(0,idx+1)+'<span class="loading-cursor"></span>';
+        idx++;
+        setTimeout(typ,150);
+    }else if(!del&&idx===msg.length){
+        setTimeout(function(){del=true;typ()},1000);
+    }else if(del&&idx>0){
+        idx--;
+        t.innerHTML=msg.substring(0,idx)+'<span class="loading-cursor"></span>';
+        setTimeout(typ,100);
+    }else{
+        document.getElementById("loading-screen").style.display="none";
+        document.getElementById("main-content").classList.remove("hidden");
+        rdy=true;
+        init3D();
+    }
+}
+
+function init3D(){
+    var c=document.getElementById("three-bg");
+    scene=new THREE.Scene();
+    camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+    renderer=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:true});
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    camera.position.z=30;
+    var pg=new THREE.BufferGeometry(),pc=800,pos=new Float32Array(pc*3);
+    for(var i=0;i<pc*3;i+=3){pos[i]=Math.random()*100-50;pos[i+1]=Math.random()*100-50;pos[i+2]=Math.random()*100-50}
+    pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+    var pm=new THREE.PointsMaterial({color:0x00ffff,size:0.3,transparent:true,opacity:0.8});
+    var ps=new THREE.Points(pg,pm);
+    scene.add(ps);
+    particles.push(ps);
+    for(var i=0;i<8;i++){
+        var g=new THREE.GridHelper(40+i*5,10,0x00ffff,0x003333);
+        g.rotation.x=Math.PI/2;
+        g.position.z=-20-i*5;
+        g.material.transparent=true;
+        g.material.opacity=0.15;
+        scene.add(g);
+        grids.push(g);
+    }
+    for(var i=0;i<20;i++){
+        var geo=new THREE.IcosahedronGeometry(Math.random()*2+0.5,0);
+        var mat=new THREE.MeshBasicMaterial({color:0x00ffff,wireframe:true,transparent:true,opacity:0.3});
+        var m=new THREE.Mesh(geo,mat);
+        m.position.set(Math.random()*60-30,Math.random()*60-30,Math.random()*60-30);
+        scene.add(m);
+        particles.push(m);
+    }
+    animate3D();
+}
+
+function animate3D(){
+    requestAnimationFrame(animate3D);
+    particles.forEach(function(p,i){
+        if(p.geometry&&p.geometry.attributes.position){p.rotation.y+=0.001}
+        else{p.rotation.x+=0.002*((i%2)?1:-1);p.rotation.y+=0.003*((i%2)?-1:1)}
+    });
+    grids.forEach(function(g){g.position.z+=0.05;if(g.position.z>10)g.position.z=-60});
+    camera.rotation.y=Math.sin(Date.now()*0.0001)*0.1;
+    renderer.render(scene,camera);
+}
+
+window.addEventListener('resize',function(){
+    if(renderer){camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)}
+});
+
+window.onload=function(){setTimeout(typ,500)};
+
+var headerMsg="JAROD NEEDS HELP",headerIdx=0,headerDel=false;
+function typeHeader(){
+    var t=document.getElementById("header-text");
+    if(!headerDel&&headerIdx<headerMsg.length){
+        t.textContent=headerMsg.substring(0,headerIdx+1);
+        headerIdx++;
+        setTimeout(typeHeader,150);
+    }else if(!headerDel&&headerIdx===headerMsg.length){
+        setTimeout(function(){headerDel=true;typeHeader()},2000);
+    }else if(headerDel&&headerIdx>0){
+        headerIdx--;
+        t.textContent=headerMsg.substring(0,headerIdx);
+        setTimeout(typeHeader,80);
+    }else{
+        headerDel=false;
+        setTimeout(typeHeader,1000);
+    }
+}
+
+setTimeout(typeHeader,1000);
+
+function lookupIP(){
+    var i=document.getElementById("ipInput").value.trim(),r=document.getElementById("ipResult");
+    if(!i){r.style.display="block";r.innerHTML='<span style="color:#f33">⚠ Enter IP</span>';return}
+    r.style.display="block";r.innerHTML='<span style="color:#ff0">⚡ SCANNING...</span>';
+    fetch("https://ipapi.co/"+i+"/json/").then(function(x){return x.json()}).then(function(d){
+        r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ IP:</span> '+d.ip+'</div><div><span style="color:#0ff">• CITY:</span> '+(d.city||"N/A")+'</div><div><span style="color:#0ff">• COUNTRY:</span> '+(d.country_name||"N/A")+'</div><div><span style="color:#0ff">• ISP:</span> '+(d.org||"N/A")+'</div></div>'
+    });
+}
+
+function lookupMAC(){
+    var m=document.getElementById("macInput").value.trim(),r=document.getElementById("macResult");
+    if(!m){r.style.display="block";r.innerHTML='<span style="color:#f33">⚠ Enter MAC</span>';return}
+    r.style.display="block";
+    var c=m.replace(/[:\-\s.]/g,"").toUpperCase();
+    if(c.length<6){r.innerHTML='<span style="color:#f33">⚠ Invalid MAC</span>';return}
+    var o=c.substring(0,6);
+    r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ MAC:</span> '+m+'</div><div><span style="color:#0ff">• OUI:</span> '+o+'</div><div style="margin-top:1rem"><a href="https://maclookup.app/search/result?mac='+o+'" target="_blank" style="color:#fff;text-decoration:underline">View Full Lookup</a></div></div>';
+}
+
+function getMyIP(){
+    var r=document.getElementById("myipResult");
+    r.style.display="block";r.innerHTML='<span style="color:#ff0">⚡ FETCHING...</span>';
+    fetch("https://ipapi.co/json/").then(function(x){return x.json()}).then(function(d){
+        r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ YOUR IP:</span> '+d.ip+'</div><div><span style="color:#0ff">• CITY:</span> '+(d.city||"N/A")+'</div><div><span style="color:#0ff">• ISP:</span> '+(d.org||"N/A")+'</div></div>'
+    });
+}
+
+function lookupDomain(){
+    var dm=document.getElementById("domainInput").value.trim(),r=document.getElementById("domainResult");
+    if(!dm){r.style.display="block";r.innerHTML='<span style="color:#f33">⚠ Enter domain</span>';return}
+    r.style.display="block";r.innerHTML='<span style="color:#ff0">⚡ RESOLVING...</span>';
+    fetch("https://dns.google/resolve?name="+dm+"&type=A").then(function(x){return x.json()}).then(function(d){
+        if(d.Answer&&d.Answer.length>0){
+            var ips=d.Answer.filter(function(a){return a.type===1}).map(function(a){return a.data}).join(", ");
+            r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ DOMAIN:</span> '+dm+'</div><div><span style="color:#0ff">• IPs:</span> '+ips+'</div></div>'
+        }else{r.innerHTML='<span style="color:#f33">⚠ No records</span>'}
+    });
+}
+
+function readEXIF(){
+    var f=document.getElementById("exifInput").files[0],r=document.getElementById("exifResult"),p=document.getElementById("exifPreview");
+    if(!f)return;
+    var reader=new FileReader();
+    reader.onload=function(e){
+        p.src=e.target.result;p.style.display="block";
+        EXIF.getData(f,function(){
+            var all=EXIF.getAllTags(this),html='<div class="exif-data">',keys=Object.keys(all);
+            if(keys.length===0){html='<div style="color:#ff0;text-align:center">No EXIF data found</div>'}
+            else{
+                var imp=['Make','Model','DateTime','ExposureTime','FNumber','ISO','FocalLength','LensModel'];
+                imp.forEach(function(k){
+                    if(all[k]){
+                        var v=all[k];
+                        if(typeof v==='object'&&v.numerator)v=(v.numerator/v.denominator).toFixed(2);
+                        html+='<div class="exif-label">'+k+':</div><div class="exif-value">'+v+'</div>'
+                    }
+                });
+            }
+            html+='</div>';
+            r.style.display="block";r.innerHTML=html;
+        });
+    };
+    reader.readAsDataURL(f);
+}
+
+function selectAmount(a){
+    sel=a;
+    var c=document.querySelectorAll(".need-card");
+    for(var i=0;i<c.length;i++)c[i].classList.remove("selected");
+    event.target.closest(".need-card").classList.add("selected");
+    document.getElementById("customAmount").value="";
+    showPP();
+}
+
+function handleCustomAmount(){
+    var v=parseFloat(document.getElementById("customAmount").value)||0;
+    sel=v;
+    var c=document.querySelectorAll(".need-card");
+    for(var i=0;i<c.length;i++)c[i].classList.remove("selected");
+    if(v>0)showPP();
+}
+
+function showPP(){
+    var c=document.getElementById("paypal-container");
+    c.innerHTML="";
+    if(sel<=0){c.innerHTML='<p style="text-align:center;color:#0cc;padding:2rem">Select amount above</p>';return}
+    if(typeof paypal==="undefined"){c.innerHTML='<p style="text-align:center;color:#f33">PayPal loading...</p>';return}
+    paypal.Buttons({
+        createOrder:function(d,a){return a.order.create({purchase_units:[{amount:{value:sel.toFixed(2)}}]})},
+        onApprove:function(d,a){return a.order.capture().then(function(){document.getElementById("success").style.display="block"})},
+        onError:function(e){alert("Payment error")}
+    }).render("#paypal-container");
+}
     </script>
 </body>
 </html>
