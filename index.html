@@ -11,21 +11,52 @@
         #terminal-text { font-size: 2rem; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0, 255, 255, 0.8); color: #00ffff; }
         .loading-cursor { display: inline-block; width: 15px; height: 25px; background: #00ffff; margin-left: 5px; animation: blink 0.7s infinite; box-shadow: 0 0 15px rgba(0, 255, 255, 1); }
         @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+        @keyframes glitch {
+            0% { transform: translate(0); text-shadow: 0 0 10px rgba(0,255,255,0.8); }
+            20% { transform: translate(-2px, 2px); text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; }
+            40% { transform: translate(-2px, -2px); text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; }
+            60% { transform: translate(2px, 2px); text-shadow: -2px 2px #ff00ff, 2px -2px #00ffff; }
+            80% { transform: translate(2px, -2px); text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff; }
+            100% { transform: translate(0); text-shadow: 0 0 10px rgba(0,255,255,0.8); }
+        }
+        @keyframes glitchBox {
+            0% { transform: translate(0); box-shadow: 0 0 30px rgba(0,255,255,0.4); }
+            20% { transform: translate(-1px, 1px); box-shadow: -2px 0 10px #ff00ff, 2px 0 10px #00ffff; }
+            40% { transform: translate(1px, -1px); box-shadow: 2px 0 10px #ff00ff, -2px 0 10px #00ffff; }
+            60% { transform: translate(-1px, -1px); box-shadow: -2px -2px 10px #ff00ff, 2px 2px 10px #00ffff; }
+            80% { transform: translate(1px, 1px); box-shadow: 2px 2px 10px #ff00ff, -2px -2px 10px #00ffff; }
+            100% { transform: translate(0); box-shadow: 0 0 30px rgba(0,255,255,0.4); }
+        }
+        .glitch-text { animation: glitch 3s infinite; }
+        .glitch-box { animation: glitchBox 4s infinite; }
         .hidden { display: none; }
         #three-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; }
-        header { background: linear-gradient(135deg, #001a1a, #003333); padding: 3rem 2rem; text-align: center; border-bottom: 3px solid #00ffff; box-shadow: 0 0 30px rgba(0,255,255,0.5); position: relative; z-index: 1; }
-        header img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid #00ffff; box-shadow: 0 0 30px rgba(0,255,255,0.8); margin-bottom: 1rem; }
-        header h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #00ffff; text-shadow: 0 0 15px rgba(0,255,255,0.8); }
-        header a { color: #00ffff; text-decoration: none; border-bottom: 2px solid #00ffff; }
+        .music-player { position: fixed; bottom: 20px; right: 20px; background: rgba(0, 38, 38, 0.95); border: 2px solid #00ffff; padding: 1rem 1.5rem; border-radius: 10px; z-index: 1000; box-shadow: 0 0 30px rgba(0,255,255,0.6); animation: glitchBox 5s infinite; }
+        .music-player .song-title { color: #00ffff; font-weight: bold; margin-bottom: 0.5rem; animation: glitch 4s infinite; }
+        .music-player .song-artist { color: #00cccc; font-size: 0.9rem; }
+        .music-controls { margin-top: 0.5rem; }
+        .music-controls button { background: linear-gradient(135deg, #003333, #004444); color: #00ffff; border: 2px solid #00ffff; padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer; margin-right: 0.5rem; font-family: 'Courier New', monospace; }
+        .music-controls button:hover { box-shadow: 0 0 15px rgba(0,255,255,0.8); }
+        header { background: linear-gradient(135deg, #001a1a, #003333); padding: 3rem 2rem; text-align: center; border-bottom: 3px solid #00ffff; box-shadow: 0 0 30px rgba(0,255,255,0.5); position: relative; z-index: 1; animation: glitchBox 6s infinite; }
+        #header-terminal { font-size: 2.5rem; margin-bottom: 1rem; min-height: 60px; animation: glitch 3s infinite; }
+        .header-cursor { display: inline-block; width: 15px; height: 35px; background: #00ffff; margin-left: 5px; animation: blink 0.7s infinite; box-shadow: 0 0 15px rgba(0, 255, 255, 1); vertical-align: middle; }
+        header p { color: #00cccc; }
+        header a { color: #00ffff; text-decoration: none; border-bottom: 2px solid #00ffff; transition: all 0.3s; }
+        header a:hover { text-shadow: 0 0 10px rgba(0,255,255,0.8); }
+        nav { background: rgba(0, 38, 38, 0.9); padding: 1rem; text-align: center; border-bottom: 2px solid #00ffff; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); animation: glitchBox 5s infinite; }
+        nav a { color: #00ffff; text-decoration: none; margin: 0 1.5rem; padding: 0.5rem 1rem; border: 2px solid transparent; transition: all 0.3s; display: inline-block; animation: glitch 4s infinite; }
+        nav a:hover, nav a.active { border: 2px solid #00ffff; background: rgba(0, 51, 51, 0.5); box-shadow: 0 0 15px rgba(0,255,255,0.5); }
         .container { max-width: 900px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
-        .section { background: rgba(0, 26, 26, 0.9); padding: 2rem; margin: 2rem 0; border: 2px solid #00ffff; border-radius: 10px; box-shadow: 0 0 30px rgba(0,255,255,0.4); backdrop-filter: blur(10px); }
-        .section h2 { color: #00ffff; border-bottom: 3px solid #00ffff; padding-bottom: 0.5rem; margin-bottom: 1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); }
-        .section p { color: #00cccc; margin-bottom: 1rem; }
+        .page { display: none; }
+        .page.active { display: block; }
+        .section { background: rgba(0, 26, 26, 0.9); padding: 2rem; margin: 2rem 0; border: 2px solid #00ffff; border-radius: 10px; box-shadow: 0 0 30px rgba(0,255,255,0.4); backdrop-filter: blur(10px); animation: glitchBox 7s infinite; }
+        .section h2 { color: #00ffff; border-bottom: 3px solid #00ffff; padding-bottom: 0.5rem; margin-bottom: 1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); animation: glitch 3.5s infinite; }
+        .section p { color: #00cccc; margin-bottom: 1rem; animation: glitch 5s infinite; }
         .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
-        .tool-box { background: rgba(0, 38, 38, 0.9); border: 3px solid #00ffff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 25px rgba(0,255,255,0.5); transition: all 0.3s; }
+        .tool-box { background: rgba(0, 38, 38, 0.9); border: 3px solid #00ffff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 25px rgba(0,255,255,0.5); transition: all 0.3s; animation: glitchBox 6s infinite; }
         .tool-box:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(0,255,255,0.8); }
-        .tool-box h3 { color: #00ffff; margin-bottom: 1rem; font-size: 1.1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); }
-        .tool-input { width: 100%; padding: 0.7rem; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ffff; color: #00ffff; border-radius: 4px; font-family: 'Courier New', monospace; margin-bottom: 0.7rem; }
+        .tool-box h3 { color: #00ffff; margin-bottom: 1rem; font-size: 1.1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); animation: glitch 4s infinite; }
+        .tool-input { width: 100%; padding: 0.7rem; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ffff; color: #00ffff; border-radius: 4px; font-family: 'Courier New', monospace; margin-bottom: 0.7rem; animation: glitchBox 5s infinite; }
         .tool-btn { width: 100%; padding: 0.7rem; background: linear-gradient(135deg, #003333, #004444); color: #00ffff; border: 2px solid #00ffff; border-radius: 4px; cursor: pointer; font-family: 'Courier New', monospace; font-weight: bold; transition: all 0.3s; }
         .tool-btn:hover { background: linear-gradient(135deg, #004444, #006666); box-shadow: 0 0 20px rgba(0,255,255,0.8); }
         .tool-result { margin-top: 1rem; padding: 1.5rem; background: rgba(0, 38, 38, 0.95); border: 3px solid #00ffff; border-radius: 8px; color: #00ffff; display: none; }
@@ -46,120 +77,244 @@
         .custom-amount input { padding: 0.8rem; border: 2px solid #00ffff; border-radius: 4px; font-size: 1.2rem; width: 180px; text-align: center; background: rgba(0, 0, 0, 0.8); color: #00ffff; font-family: 'Courier New', monospace; }
         #paypal-container { max-width: 500px; margin: 2rem auto; min-height: 100px; }
         .success { background: #001a00; border: 2px solid #00ff00; color: #00ff00; padding: 2rem; margin: 2rem 0; border-radius: 8px; display: none; text-align: center; }
+        .paypal-security { text-align: center; margin: 2rem 0; padding: 2rem; background: rgba(0, 38, 38, 0.7); border: 2px solid #00ffff; border-radius: 10px; }
+        .paypal-security img { max-width: 150px; margin: 0.5rem 1rem; opacity: 0.9; filter: brightness(1.2); }
+        .security-badges { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 2rem; margin: 1rem 0; }
+        .security-text { color: #00cccc; font-size: 0.9rem; margin-top: 1rem; }
         .work-history { background: rgba(0, 38, 38, 0.7); padding: 1.5rem; border: 2px solid #00ffff; border-radius: 8px; margin: 1rem 0; }
         .work-item { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #00ffff; }
         .work-item h4 { color: #00ffff; margin-bottom: 0.3rem; }
         .work-item p { color: #00cccc; font-size: 0.9rem; }
+        .highlight-box { background: rgba(255, 100, 100, 0.1); border: 2px solid #ff6666; padding: 1.5rem; border-radius: 10px; margin: 1.5rem 0; }
+        .highlight-box h3 { color: #ff6666; margin-bottom: 1rem; }
         footer { background: rgba(0, 26, 26, 0.9); color: #00ffff; text-align: center; padding: 2rem; margin-top: 3rem; border-top: 3px solid #00ffff; position: relative; z-index: 1; }
         ul { color: #00cccc; margin-left: 2rem; margin-top: 1rem; }
         li { margin: 0.5rem 0; }
-        @media (max-width: 768px) { header h1 { font-size: 1.5rem; } .tool-grid, .needs-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { 
+            #header-terminal { font-size: 1.8rem; }
+            .tool-grid, .needs-grid { grid-template-columns: 1fr; }
+            nav a { display: block; margin: 0.5rem 0; }
+        }
     </style>
 </head>
 <body>
     <canvas id="three-bg"></canvas>
     
+    <audio id="bgMusic" loop autoplay>
+        <source src="https://files.catbox.moe/y6kbmo.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="music-player">
+        <div class="song-title">♪ Now Playing</div>
+        <div class="song-artist">Joji - Glimpse of Us</div>
+        <div class="music-controls">
+            <button onclick="toggleMusic()">⏸ Pause</button>
+            <button onclick="restartMusic()">↻ Restart</button>
+        </div>
+    </div>
+    
     <div id="loading-screen">
         <div id="terminal-text"><span class="loading-cursor"></span></div>
+        <div style="margin-top: 2rem; color: #00cccc; animation: glitch 3s infinite;">♪ Joji - Glimpse of Us</div>
     </div>
 
     <div id="main-content" class="hidden">
     <header>
-        <div id="header-terminal" style="font-size: 2.5rem; margin-bottom: 1rem; min-height: 60px;">
-            <span id="header-text"></span><span class="header-cursor" style="display: inline-block; width: 15px; height: 35px; background: #00ffff; margin-left: 5px; animation: blink 0.7s infinite; box-shadow: 0 0 15px rgba(0, 255, 255, 1);"></span>
+        <div id="header-terminal">
+            <span id="header-text"></span><span class="header-cursor"></span>
         </div>
-        <p>Your support helps me cover basic needs while I navigate disability challenges</p>
+        <p>Native American foster kid destroyed by disabilities - 14 years in foster care with no help</p>
+        <p style="margin-top: 0.5rem;">Abusive foster homes • Family who barely cares • Fighting to survive</p>
         <p style="margin-top: 0.5rem;"><a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank">🔗 LinkedIn Profile</a></p>
     </header>
+
+    <nav>
+        <a href="#" class="nav-link active" onclick="showPage('home')">🏠 Home</a>
+        <a href="#" class="nav-link" onclick="showPage('tools')">🔧 Network Tools</a>
+        <a href="#" class="nav-link" onclick="showPage('upload')">📤 Photo Upload</a>
+    </nav>
     
     <div class="container">
-        <div class="section">
-            <h2>🔧 Network & Image Tools</h2>
-            <p>Professional IT diagnostic and forensic tools</p>
-            <div class="tool-grid">
-                <div class="tool-box">
-                    <h3>🌐 IP Lookup</h3>
-                    <input type="text" id="ipInput" placeholder="e.g., 8.8.8.8" class="tool-input">
-                    <button class="tool-btn" onclick="lookupIP()">LOOKUP IP</button>
-                    <div id="ipResult" class="tool-result"></div>
+        <div id="home-page" class="page active">
+            <div class="section">
+                <h2>📖 My Story</h2>
+                <div class="highlight-box">
+                    <h3>⚠️ The Reality</h3>
+                    <p><strong>Native American foster kid</strong> who spent <strong>14 years in the foster care system</strong> with absolutely no support. I endured abusive foster homes, was failed by a system that was supposed to protect me, and have a biological family who barely cares if I'm alive or dead.</p>
+                    <p style="margin-top: 1rem;">Now I'm facing homelessness while navigating disability challenges, trying to survive in a world that turned its back on me long ago.</p>
                 </div>
-                <div class="tool-box">
-                    <h3>🔍 MAC Lookup</h3>
-                    <input type="text" id="macInput" placeholder="e.g., 00:1A:2B:3C:4D:5E" class="tool-input">
-                    <button class="tool-btn" onclick="lookupMAC()">LOOKUP MAC</button>
-                    <div id="macResult" class="tool-result"></div>
+                <p>My name is Jarod Mowry, and I'm reaching out during one of the most challenging times of my life. Despite building a career in technology and always being self-sufficient, life threw me a curveball I couldn't prepare for.</p>
+                <p>I was placed in foster care as a child and spent 14 years bouncing between homes - many of them abusive. The system failed me. My biological family failed me. I learned early that I could only count on myself.</p>
+                <p>I pushed through, got into IT, and built a career despite everything. But now, disabilities have caught up with me, and I'm unable to work while waiting for disability approval. I'm currently experiencing homelessness, attending medical appointments and therapy sessions, trying to survive one day at a time.</p>
+                
+                <div class="work-history">
+                    <h3 style="color: #00cccc; margin-bottom: 1rem;">Professional Background</h3>
+                    <div class="work-item">
+                        <h4>🖥️ IT Support Analyst - South East Health</h4>
+                        <p>Technical support and system maintenance in healthcare environment</p>
+                    </div>
+                    <div class="work-item">
+                        <h4>🔧 ISP Technician</h4>
+                        <p>Technical installations, troubleshooting, and customer support</p>
+                    </div>
+                    <div class="work-item">
+                        <h4>⚙️ Technical Specialist</h4>
+                        <p>Worked as technician across multiple technology sectors</p>
+                    </div>
                 </div>
-                <div class="tool-box">
-                    <h3>⚡ My IP Info</h3>
-                    <button class="tool-btn" onclick="getMyIP()">GET MY IP</button>
-                    <div id="myipResult" class="tool-result"></div>
+            </div>
+
+            <div class="section">
+                <h2>💚 How You Can Help</h2>
+                <p style="text-align: center;">I'm not asking for large amounts. Every bit helps me maintain the essentials and survive.</p>
+                <div class="needs-grid">
+                    <div class="need-card" onclick="selectAmount(35)">
+                        <div class="need-icon">📱</div>
+                        <div class="need-amount">$35</div>
+                        <div class="need-title">Phone Bill</div>
+                        <div class="need-desc">Stay connected for appointments & disability updates</div>
+                    </div>
+                    <div class="need-card" onclick="selectAmount(20)">
+                        <div class="need-icon">🚌</div>
+                        <div class="need-amount">$20</div>
+                        <div class="need-title">Bus Tokens</div>
+                        <div class="need-desc">Transportation to appointments</div>
+                    </div>
+                    <div class="need-card" onclick="selectAmount(50)">
+                        <div class="need-icon">🧥</div>
+                        <div class="need-amount">$50</div>
+                        <div class="need-title">Winter Clothing</div>
+                        <div class="need-desc">Warm coat & thermal layers</div>
+                    </div>
+                    <div class="need-card" onclick="selectAmount(15)">
+                        <div class="need-icon">🍔</div>
+                        <div class="need-amount">$15</div>
+                        <div class="need-title">Meals</div>
+                        <div class="need-desc">Hot meals for a few days</div>
+                    </div>
+                    <div class="need-card" onclick="selectAmount(25)">
+                        <div class="need-icon">🧴</div>
+                        <div class="need-amount">$25</div>
+                        <div class="need-title">Hygiene</div>
+                        <div class="need-desc">Basic necessities</div>
+                    </div>
+                    <div class="need-card" onclick="selectAmount(10)">
+                        <div class="need-icon">💊</div>
+                        <div class="need-amount">$10</div>
+                        <div class="need-title">Medication</div>
+                        <div class="need-desc">Prescription co-pays</div>
+                    </div>
                 </div>
-                <div class="tool-box">
-                    <h3>🌍 Domain Lookup</h3>
-                    <input type="text" id="domainInput" placeholder="e.g., google.com" class="tool-input">
-                    <button class="tool-btn" onclick="lookupDomain()">LOOKUP DOMAIN</button>
-                    <div id="domainResult" class="tool-result"></div>
+                
+                <div class="custom-amount">
+                    <h3>Or Enter Custom Amount</h3>
+                    <span style="font-size: 1.5rem;">$</span>
+                    <input type="number" id="customAmount" placeholder="0.00" min="1" step="0.01" oninput="handleCustomAmount()">
                 </div>
-                <div class="tool-box">
-                    <h3>📸 EXIF Data Viewer</h3>
-                    <input type="file" id="exifInput" accept="image/*" class="tool-input" onchange="readEXIF()" style="padding: 0.5rem;">
-                    <img id="exifPreview" class="exif-preview">
-                    <div id="exifResult" class="tool-result"></div>
+
+                <div id="paypal-container"></div>
+                <div id="success" class="success">
+                    <h3>🙏 Thank You!</h3>
+                    <p>Your kindness means everything to me.</p>
+                </div>
+
+                <div class="paypal-security">
+                    <h3 style="color: #00ffff; margin-bottom: 1rem;">🔒 Secure Payment</h3>
+                    <div class="security-badges">
+                        <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal">
+                        <div style="color: #00ffff; font-size: 2rem;">🔐</div>
+                        <div style="color: #00ffff; font-size: 2rem;">✓</div>
+                    </div>
+                    <div class="security-text">
+                        <p>✓ Powered by PayPal - Your payment information is encrypted and secure</p>
+                        <p>✓ No account required - Pay with credit/debit card or PayPal balance</p>
+                        <p>✓ 100% secure checkout - PayPal Purchase Protection</p>
+                        <p>✓ Direct support - Every dollar goes directly to helping me survive</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📋 What I'm Doing Now</h2>
+                <ul>
+                    <li>Attending medical appointments and therapy sessions</li>
+                    <li>Working through disability application process</li>
+                    <li>Following treatment plans</li>
+                    <li>Trying to find safe shelter each night</li>
+                    <li>Staying positive despite overwhelming challenges</li>
+                    <li>Seeking available resources and support</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>🔗 Connect With Me</h2>
+                <p style="text-align: center;">
+                    <a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank" style="display: inline-block; background: #003333; color: #00ffff; padding: 1rem 2rem; border: 2px solid #00ffff; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                        Connect on LinkedIn
+                    </a>
+                </p>
+                <p style="text-align: center; margin-top: 1rem; color: #00cccc;">Feel free to reach out with opportunities, advice, or support.</p>
+            </div>
+        </div>
+
+        <div id="tools-page" class="page">
+            <div class="section">
+                <h2>🔧 Network & Image Tools</h2>
+                <p>Professional IT diagnostic and forensic tools I've used throughout my career</p>
+                <div class="tool-grid">
+                    <div class="tool-box">
+                        <h3>🌐 IP Lookup</h3>
+                        <input type="text" id="ipInput" placeholder="e.g., 8.8.8.8" class="tool-input">
+                        <button class="tool-btn" onclick="lookupIP()">LOOKUP IP</button>
+                        <div id="ipResult" class="tool-result"></div>
+                    </div>
+                    <div class="tool-box">
+                        <h3>🔍 MAC Lookup</h3>
+                        <input type="text" id="macInput" placeholder="e.g., 00:1A:2B:3C:4D:5E" class="tool-input">
+                        <button class="tool-btn" onclick="lookupMAC()">LOOKUP MAC</button>
+                        <div id="macResult" class="tool-result"></div>
+                    </div>
+                    <div class="tool-box">
+                        <h3>⚡ My IP Info</h3>
+                        <button class="tool-btn" onclick="getMyIP()">GET MY IP</button>
+                        <div id="myipResult" class="tool-result"></div>
+                    </div>
+                    <div class="tool-box">
+                        <h3>🌍 Domain Lookup</h3>
+                        <input type="text" id="domainInput" placeholder="e.g., google.com" class="tool-input">
+                        <button class="tool-btn" onclick="lookupDomain()">LOOKUP DOMAIN</button>
+                        <div id="domainResult" class="tool-result"></div>
+                    </div>
+                    <div class="tool-box">
+                        <h3>📸 EXIF Data Viewer</h3>
+                        <input type="file" id="exifInput" accept="image/*" class="tool-input" onchange="readEXIF()" style="padding: 0.5rem;">
+                        <img id="exifPreview" class="exif-preview">
+                        <div id="exifResult" class="tool-result"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="section">
-            <h2>📖 My Story</h2>
-            <p>My name is Jarod Mowry, and I'm reaching out during one of the most challenging times of my life. I'm currently experiencing homelessness while dealing with pending disability applications.</p>
-            <div class="work-history">
-                <h3 style="color: #00cccc; margin-bottom: 1rem;">Professional Background</h3>
-                <div class="work-item">
-                    <h4>🖥️ IT Support Analyst - South East Health</h4>
-                    <p>Technical support and system maintenance</p>
+        <div id="upload-page" class="page">
+            <div class="section">
+                <h2>📤 Photo Upload</h2>
+                <p>Upload and share your photos using Imgur API</p>
+                <div class="tool-box" style="max-width: 600px; margin: 2rem auto;">
+                    <h3>📷 Upload Image</h3>
+                    <input type="file" id="uploadInput" accept="image/*" class="tool-input" style="padding: 0.5rem;">
+                    <button class="tool-btn" onclick="uploadImage()">UPLOAD TO IMGUR</button>
+                    <div id="uploadPreview" style="margin-top: 1rem; text-align: center;">
+                        <img id="previewImg" style="max-width: 100%; max-height: 300px; display: none; border: 2px solid #00ffff; border-radius: 8px; margin: 1rem 0;">
+                    </div>
+                    <div id="uploadResult" class="tool-result"></div>
                 </div>
-                <div class="work-item">
-                    <h4>🔧 ISP Technician</h4>
-                    <p>Technical installations and support</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>💚 How You Can Help</h2>
-            <div class="needs-grid">
-                <div class="need-card" onclick="selectAmount(35)">
-                    <div class="need-icon">📱</div>
-                    <div class="need-amount">$35</div>
-                    <div class="need-title">Phone Bill</div>
-                </div>
-                <div class="need-card" onclick="selectAmount(20)">
-                    <div class="need-icon">🚌</div>
-                    <div class="need-amount">$20</div>
-                    <div class="need-title">Bus Tokens</div>
-                </div>
-                <div class="need-card" onclick="selectAmount(50)">
-                    <div class="need-icon">🧥</div>
-                    <div class="need-amount">$50</div>
-                    <div class="need-title">Winter Clothing</div>
-                </div>
-            </div>
-            
-            <div class="custom-amount">
-                <h3>Or Enter Custom Amount</h3>
-                <span style="font-size: 1.5rem;">$</span>
-                <input type="number" id="customAmount" placeholder="0.00" min="1" step="0.01" oninput="handleCustomAmount()">
-            </div>
-
-            <div id="paypal-container"></div>
-            <div id="success" class="success">
-                <h3>🙏 Thank You!</h3>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2024 Jarod Mowry</p>
+        <p>&copy; 2024 Jarod Mowry - Thank you for your support</p>
+        <p style="margin-top: 0.5rem;">🙏 Every act of kindness brings hope</p>
     </footer>
     </div>
 
@@ -187,6 +342,33 @@ function typ(){
         rdy=true;
         init3D();
     }
+}
+
+var headerMsg="JAROD NEEDS HELP",headerIdx=0,headerDel=false;
+function typeHeader(){
+    var t=document.getElementById("header-text");
+    if(!headerDel&&headerIdx<headerMsg.length){
+        t.textContent=headerMsg.substring(0,headerIdx+1);
+        headerIdx++;
+        setTimeout(typeHeader,150);
+    }else if(!headerDel&&headerIdx===headerMsg.length){
+        setTimeout(function(){headerDel=true;typeHeader()},2000);
+    }else if(headerDel&&headerIdx>0){
+        headerIdx--;
+        t.textContent=headerMsg.substring(0,headerIdx);
+        setTimeout(typeHeader,80);
+    }else{
+        headerDel=false;
+        setTimeout(typeHeader,1000);
+    }
+}
+
+function showPage(page){
+    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+    document.querySelectorAll('.nav-link').forEach(function(l){l.classList.remove('active')});
+    document.getElementById(page+'-page').classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo(0,0);
 }
 
 function init3D(){
@@ -238,28 +420,41 @@ window.addEventListener('resize',function(){
     if(renderer){camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)}
 });
 
-window.onload=function(){setTimeout(typ,500)};
+window.onload=function(){setTimeout(typ,500);playMusic()};
+setTimeout(typeHeader,1000);
 
-var headerMsg="JAROD NEEDS HELP",headerIdx=0,headerDel=false;
-function typeHeader(){
-    var t=document.getElementById("header-text");
-    if(!headerDel&&headerIdx<headerMsg.length){
-        t.textContent=headerMsg.substring(0,headerIdx+1);
-        headerIdx++;
-        setTimeout(typeHeader,150);
-    }else if(!headerDel&&headerIdx===headerMsg.length){
-        setTimeout(function(){headerDel=true;typeHeader()},2000);
-    }else if(headerDel&&headerIdx>0){
-        headerIdx--;
-        t.textContent=headerMsg.substring(0,headerIdx);
-        setTimeout(typeHeader,80);
+var musicPlaying=true;
+function playMusic(){
+    var m=document.getElementById("bgMusic");
+    m.play().catch(function(e){console.log("Autoplay blocked - click to play")});
+}
+
+function toggleMusic(){
+    var m=document.getElementById("bgMusic");
+    var btn=event.target;
+    if(musicPlaying){
+        m.pause();
+        btn.textContent="▶ Play";
+        musicPlaying=false;
     }else{
-        headerDel=false;
-        setTimeout(typeHeader,1000);
+        m.play();
+        btn.textContent="⏸ Pause";
+        musicPlaying=true;
     }
 }
 
-setTimeout(typeHeader,1000);
+function restartMusic(){
+    var m=document.getElementById("bgMusic");
+    m.currentTime=0;
+    m.play();
+    musicPlaying=true;
+    document.querySelector(".music-controls button").textContent="⏸ Pause";
+}
+
+document.addEventListener("click",function(){
+    var m=document.getElementById("bgMusic");
+    if(m.paused)m.play().catch(function(){})
+},{once:true});
 
 function lookupIP(){
     var i=document.getElementById("ipInput").value.trim(),r=document.getElementById("ipResult");
@@ -303,27 +498,104 @@ function lookupDomain(){
 function readEXIF(){
     var f=document.getElementById("exifInput").files[0],r=document.getElementById("exifResult"),p=document.getElementById("exifPreview");
     if(!f)return;
+    p.style.display="none";
+    r.style.display="block";
+    r.innerHTML='<span style="color:#ff0">⚡ Reading EXIF data...</span>';
+    
     var reader=new FileReader();
     reader.onload=function(e){
-        p.src=e.target.result;p.style.display="block";
-        EXIF.getData(f,function(){
-            var all=EXIF.getAllTags(this),html='<div class="exif-data">',keys=Object.keys(all);
-            if(keys.length===0){html='<div style="color:#ff0;text-align:center">No EXIF data found</div>'}
-            else{
-                var imp=['Make','Model','DateTime','ExposureTime','FNumber','ISO','FocalLength','LensModel'];
-                imp.forEach(function(k){
-                    if(all[k]){
-                        var v=all[k];
-                        if(typeof v==='object'&&v.numerator)v=(v.numerator/v.denominator).toFixed(2);
-                        html+='<div class="exif-label">'+k+':</div><div class="exif-value">'+v+'</div>'
+        p.src=e.target.result;
+        p.style.display="block";
+        
+        var img=new Image();
+        img.onload=function(){
+            EXIF.getData(img,function(){
+                var all=EXIF.getAllTags(this);
+                var keys=Object.keys(all);
+                var html='<div class="exif-data">';
+                
+                if(keys.length===0){
+                    html='<div style="color:#ff0;text-align:center;padding:1rem">⚠ No EXIF data found in this image</div>';
+                }else{
+                    var fields=['Make','Model','DateTime','DateTimeOriginal','ExposureTime','FNumber','ISO','ISOSpeedRatings','FocalLength','LensModel','Flash','WhiteBalance','GPSLatitude','GPSLongitude','GPSAltitude'];
+                    
+                    fields.forEach(function(k){
+                        if(all[k]){
+                            var v=all[k];
+                            if(typeof v==='object'){
+                                if(v.numerator!==undefined){
+                                    v=v.denominator===1?v.numerator:(v.numerator/v.denominator).toFixed(2);
+                                }else if(Array.isArray(v)){
+                                    v=v.join(', ');
+                                }else{
+                                    v=JSON.stringify(v);
+                                }
+                            }
+                            html+='<div class="exif-label">'+k+':</div><div class="exif-value">'+v+'</div>';
+                        }
+                    });
+                    
+                    if(html==='<div class="exif-data">'){
+                        html='<div style="color:#ff0;text-align:center;padding:1rem">⚠ No standard EXIF fields found</div>';
                     }
-                });
+                }
+                html+='</div>';
+                r.innerHTML=html;
+            });
+        };
+        img.src=e.target.result;
+    };
+    reader.readAsDataURL(f);
+}
+
+function uploadImage(){
+    var f=document.getElementById("uploadInput").files[0];
+    var r=document.getElementById("uploadResult");
+    var p=document.getElementById("previewImg");
+    
+    if(!f){
+        r.style.display="block";
+        r.innerHTML='<span style="color:#f33">⚠ Please select an image first</span>';
+        return;
+    }
+    
+    r.style.display="block";
+    r.innerHTML='<span style="color:#ff0">⚡ Uploading to Imgur...</span>';
+    
+    var reader=new FileReader();
+    reader.onload=function(e){
+        p.src=e.target.result;
+        p.style.display="block";
+        
+        var base64=e.target.result.split(',')[1];
+        var formData=new FormData();
+        formData.append('image',base64);
+        formData.append('type','base64');
+        
+        fetch('https://api.imgur.com/3/image',{
+            method:'POST',
+            headers:{'Authorization':'Client-ID 546c25a59c58ad7'},
+            body:formData
+        }).then(function(res){return res.json()}).then(function(data){
+            if(data.success){
+                var link=data.data.link;
+                r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem;color:#0f0;font-weight:bold">✓ Upload Successful!</div><div><span style="color:#0ff">Image URL:</span></div><div><a href="'+link+'" target="_blank" style="color:#fff;word-break:break-all;text-decoration:underline">'+link+'</a></div><div style="margin-top:1rem"><button onclick="copyToClipboard(\''+link+'\')" style="background:#003333;color:#0ff;border:2px solid #0ff;padding:0.5rem 1rem;border-radius:4px;cursor:pointer">📋 Copy Link</button></div></div>';
+            }else{
+                r.innerHTML='<span style="color:#f33">⚠ Upload failed. Please try again.</span>';
             }
-            html+='</div>';
-            r.style.display="block";r.innerHTML=html;
+        }).catch(function(e){
+            r.innerHTML='<span style="color:#f33">⚠ Upload error: '+e.message+'</span>';
         });
     };
     reader.readAsDataURL(f);
+}
+
+function copyToClipboard(text){
+    navigator.clipboard.writeText(text).then(function(){
+        alert('✓ Link copied to clipboard!');
+    }).catch(function(){
+        alert('Failed to copy. Please copy manually.');
+    });
 }
 
 function selectAmount(a){
