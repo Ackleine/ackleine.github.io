@@ -100,22 +100,22 @@
 <body>
     <canvas id="three-bg"></canvas>
     
-    <audio id="bgMusic" loop autoplay>
+    <audio id="bgMusic" loop>
         <source src="https://files.catbox.moe/y6kbmo.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="music-player">
-        <div class="song-title">♪ Now Playing</div>
+    <div class="music-player" onclick="startMusic()" style="cursor: pointer;">
+        <div class="song-title">♪ Click to Play Music</div>
         <div class="song-artist">Joji - Glimpse of Us</div>
         <div class="music-controls">
-            <button onclick="toggleMusic()">⏸ Pause</button>
-            <button onclick="restartMusic()">↻ Restart</button>
+            <button onclick="toggleMusic();event.stopPropagation()">▶ Play</button>
+            <button onclick="restartMusic();event.stopPropagation()">↻ Restart</button>
         </div>
     </div>
     
-    <div id="loading-screen">
+    <div id="loading-screen" onclick="startMusic()">
         <div id="terminal-text"><span class="loading-cursor"></span></div>
-        <div style="margin-top: 2rem; color: #00cccc; animation: glitch 3s infinite;">♪ Joji - Glimpse of Us</div>
+        <div style="margin-top: 2rem; color: #00cccc; animation: glitch 3s infinite;">♪ Joji - Glimpse of Us (Click to Play)</div>
     </div>
 
     <div id="main-content" class="hidden">
@@ -420,13 +420,24 @@ window.addEventListener('resize',function(){
     if(renderer){camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)}
 });
 
-window.onload=function(){setTimeout(typ,500);playMusic()};
+window.onload=function(){setTimeout(typ,500)};
 setTimeout(typeHeader,1000);
 
-var musicPlaying=true;
-function playMusic(){
-    var m=document.getElementById("bgMusic");
-    m.play().catch(function(e){console.log("Autoplay blocked - click to play")});
+var musicPlaying=false;
+var musicStarted=false;
+
+function startMusic(){
+    if(!musicStarted){
+        var m=document.getElementById("bgMusic");
+        m.play().then(function(){
+            musicPlaying=true;
+            musicStarted=true;
+            document.querySelector(".song-title").textContent="♪ Now Playing";
+            document.querySelector(".music-controls button").textContent="⏸ Pause";
+        }).catch(function(e){
+            console.log("Music play failed:",e);
+        });
+    }
 }
 
 function toggleMusic(){
@@ -437,24 +448,25 @@ function toggleMusic(){
         btn.textContent="▶ Play";
         musicPlaying=false;
     }else{
-        m.play();
-        btn.textContent="⏸ Pause";
-        musicPlaying=true;
+        m.play().then(function(){
+            btn.textContent="⏸ Pause";
+            musicPlaying=true;
+            musicStarted=true;
+            document.querySelector(".song-title").textContent="♪ Now Playing";
+        });
     }
 }
 
 function restartMusic(){
     var m=document.getElementById("bgMusic");
     m.currentTime=0;
-    m.play();
-    musicPlaying=true;
-    document.querySelector(".music-controls button").textContent="⏸ Pause";
+    m.play().then(function(){
+        musicPlaying=true;
+        musicStarted=true;
+        document.querySelector(".song-title").textContent="♪ Now Playing";
+        document.querySelector(".music-controls button").textContent="⏸ Pause";
+    });
 }
-
-document.addEventListener("click",function(){
-    var m=document.getElementById("bgMusic");
-    if(m.paused)m.play().catch(function(){})
-},{once:true});
 
 function lookupIP(){
     var i=document.getElementById("ipInput").value.trim(),r=document.getElementById("ipResult");
