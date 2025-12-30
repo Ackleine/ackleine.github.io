@@ -6,585 +6,112 @@
     <title>Support Jarod Mowry - Tech Professional</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        @keyframes rgbCycle {
-            0% { color: #ff0000; }
-            16.66% { color: #ff00ff; }
-            33.33% { color: #0000ff; }
-            50% { color: #00ffff; }
-            66.66% { color: #00ff00; }
-            83.33% { color: #ffff00; }
-            100% { color: #ff0000; }
-        }
-        
-        @keyframes rgbBorder {
-            0% { border-color: #ff0000; }
-            16.66% { border-color: #ff00ff; }
-            33.33% { border-color: #0000ff; }
-            50% { border-color: #00ffff; }
-            66.66% { border-color: #00ff00; }
-            83.33% { border-color: #ffff00; }
-            100% { border-color: #ff0000; }
-        }
-        
-        @keyframes rgbShadow {
-            0% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
-            16.66% { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
-            33.33% { text-shadow: 0 0 10px #0000ff, 0 0 20px #0000ff; }
-            50% { text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; }
-            66.66% { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; }
-            83.33% { text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00; }
-            100% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
-        }
-        
-        @keyframes rgbBoxShadow {
-            0% { box-shadow: 0 0 30px rgba(255,0,0,0.6); }
-            16.66% { box-shadow: 0 0 30px rgba(255,0,255,0.6); }
-            33.33% { box-shadow: 0 0 30px rgba(0,0,255,0.6); }
-            50% { box-shadow: 0 0 30px rgba(0,255,255,0.6); }
-            66.66% { box-shadow: 0 0 30px rgba(0,255,0,0.6); }
-            83.33% { box-shadow: 0 0 30px rgba(255,255,0,0.6); }
-            100% { box-shadow: 0 0 30px rgba(255,0,0,0.6); }
-        }
-        
-        body { 
-            font-family: 'Courier New', monospace; 
-            background: #000; 
-            color: #fff;
-            line-height: 1.6; 
-            overflow-x: hidden; 
-            animation: rgbCycle 6s infinite;
-        }
-        
-        #loading-screen { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: #000; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            z-index: 9999; 
-        }
-        
-        #terminal-text { 
-            font-size: 2rem; 
-            letter-spacing: 2px; 
-            animation: rgbCycle 4s infinite, rgbShadow 4s infinite;
-        }
-        
-        .loading-cursor { 
-            display: inline-block; 
-            width: 15px; 
-            height: 25px; 
-            margin-left: 5px; 
-            animation: blink 0.7s infinite, rgbCycle 4s infinite, rgbBoxShadow 4s infinite;
-        }
-        
-        @keyframes blink { 
-            0%, 49% { opacity: 1; } 
-            50%, 100% { opacity: 0; } 
-        }
-        
+        body { font-family: 'Courier New', monospace; background: #000; color: #00ffff; line-height: 1.6; overflow-x: hidden; }
+        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
+        #terminal-text { font-size: 2rem; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0, 255, 255, 0.8); color: #00ffff; }
+        .loading-cursor { display: inline-block; width: 15px; height: 25px; background: #00ffff; margin-left: 5px; animation: blink 0.7s infinite; box-shadow: 0 0 15px rgba(0, 255, 255, 1); }
+        @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
         @keyframes glitch {
-            0% { transform: translate(0); }
-            10% { transform: translate(-2px, 2px); filter: hue-rotate(0deg); }
-            20% { transform: translate(-2px, -2px); filter: hue-rotate(90deg); }
-            30% { transform: translate(2px, 2px); filter: hue-rotate(180deg); }
-            40% { transform: translate(2px, -2px); filter: hue-rotate(270deg); }
-            50% { transform: translate(0); filter: hue-rotate(0deg); }
-            60% { transform: translate(-1px, 1px); filter: hue-rotate(45deg); }
-            70% { transform: translate(1px, -1px); filter: hue-rotate(135deg); }
-            80% { transform: translate(-1px, -1px); filter: hue-rotate(225deg); }
-            90% { transform: translate(1px, 1px); filter: hue-rotate(315deg); }
-            100% { transform: translate(0); filter: hue-rotate(360deg); }
+            0% { transform: translate(0); text-shadow: 0 0 10px rgba(0,255,255,0.8); }
+            20% { transform: translate(-2px, 2px); text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; }
+            40% { transform: translate(-2px, -2px); text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; }
+            60% { transform: translate(2px, 2px); text-shadow: -2px 2px #ff00ff, 2px -2px #00ffff; }
+            80% { transform: translate(2px, -2px); text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff; }
+            100% { transform: translate(0); text-shadow: 0 0 10px rgba(0,255,255,0.8); }
         }
-        
         @keyframes glitchBox {
-            0% { transform: translate(0); filter: hue-rotate(0deg); }
-            20% { transform: translate(-1px, 1px); filter: hue-rotate(72deg); }
-            40% { transform: translate(1px, -1px); filter: hue-rotate(144deg); }
-            60% { transform: translate(-1px, -1px); filter: hue-rotate(216deg); }
-            80% { transform: translate(1px, 1px); filter: hue-rotate(288deg); }
-            100% { transform: translate(0); filter: hue-rotate(360deg); }
+            0% { transform: translate(0); box-shadow: 0 0 30px rgba(0,255,255,0.4); }
+            20% { transform: translate(-1px, 1px); box-shadow: -2px 0 10px #ff00ff, 2px 0 10px #00ffff; }
+            40% { transform: translate(1px, -1px); box-shadow: 2px 0 10px #ff00ff, -2px 0 10px #00ffff; }
+            60% { transform: translate(-1px, -1px); box-shadow: -2px -2px 10px #ff00ff, 2px 2px 10px #00ffff; }
+            80% { transform: translate(1px, 1px); box-shadow: 2px 2px 10px #ff00ff, -2px -2px 10px #00ffff; }
+            100% { transform: translate(0); box-shadow: 0 0 30px rgba(0,255,255,0.4); }
         }
-        
-        .glitch-text { animation: glitch 3s infinite, rgbCycle 6s infinite, rgbShadow 6s infinite; }
-        .glitch-box { animation: glitchBox 4s infinite, rgbBoxShadow 4s infinite, rgbBorder 6s infinite; }
+        .glitch-text { animation: glitch 3s infinite; }
+        .glitch-box { animation: glitchBox 4s infinite; }
         .hidden { display: none; }
-        
-        #three-bg { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: -1; 
-            opacity: 0.6; 
-        }
-        
-        .music-player { 
-            position: fixed; 
-            bottom: 20px; 
-            right: 20px; 
-            background: rgba(0, 0, 0, 0.7); 
-            border: 2px solid; 
-            padding: 1rem 1.5rem; 
-            border-radius: 10px; 
-            z-index: 1000; 
-            animation: rgbBorder 6s infinite, rgbBoxShadow 6s infinite;
-            backdrop-filter: blur(10px);
-        }
-        
-        .music-player .song-title { 
-            font-weight: bold; 
-            margin-bottom: 0.5rem; 
-            animation: rgbCycle 5s infinite;
-        }
-        
-        .music-player .song-artist { 
-            font-size: 0.9rem; 
-            animation: rgbCycle 7s infinite;
-        }
-        
+        #three-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; }
+        .music-player { position: fixed; bottom: 20px; right: 20px; background: rgba(0, 38, 38, 0.95); border: 2px solid #00ffff; padding: 1rem 1.5rem; border-radius: 10px; z-index: 1000; box-shadow: 0 0 30px rgba(0,255,255,0.6); animation: glitchBox 5s infinite; }
+        .music-player .song-title { color: #00ffff; font-weight: bold; margin-bottom: 0.5rem; animation: glitch 4s infinite; }
+        .music-player .song-artist { color: #00cccc; font-size: 0.9rem; }
         .music-controls { margin-top: 0.5rem; }
-        .music-controls button { 
-            background: rgba(0, 0, 0, 0.8); 
-            border: 2px solid; 
-            padding: 0.3rem 0.8rem; 
-            border-radius: 4px; 
-            cursor: pointer; 
-            margin-right: 0.5rem; 
-            font-family: 'Courier New', monospace; 
-            animation: rgbCycle 6s infinite, rgbBorder 6s infinite;
-        }
-        
-        .music-controls button:hover { 
-            animation: rgbBoxShadow 2s infinite;
-        }
-        
-        header { 
-            background: rgba(0, 0, 0, 0.3); 
-            padding: 3rem 2rem; 
-            text-align: center; 
-            border-bottom: 3px solid; 
-            position: relative; 
-            z-index: 1; 
-            animation: rgbBorder 8s infinite, rgbBoxShadow 8s infinite;
-            backdrop-filter: blur(5px);
-        }
-        
-        #header-terminal { 
-            font-size: 2.5rem; 
-            margin-bottom: 1rem; 
-            min-height: 60px; 
-            animation: glitch 3s infinite, rgbCycle 5s infinite, rgbShadow 5s infinite;
-        }
-        
-        .header-cursor { 
-            display: inline-block; 
-            width: 15px; 
-            height: 35px; 
-            margin-left: 5px; 
-            animation: blink 0.7s infinite, rgbCycle 4s infinite;
-            vertical-align: middle; 
-        }
-        
-        header p { animation: rgbCycle 7s infinite; }
-        header a { 
-            text-decoration: none; 
-            border-bottom: 2px solid; 
-            transition: all 0.3s; 
-            animation: rgbCycle 6s infinite, rgbBorder 6s infinite;
-        }
-        
-        header a:hover { 
-            animation: rgbShadow 2s infinite;
-        }
-        
-        nav { 
-            background: rgba(0, 0, 0, 0.5); 
-            padding: 1rem; 
-            text-align: center; 
-            border-bottom: 2px solid; 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-            backdrop-filter: blur(10px); 
-            animation: rgbBorder 7s infinite;
-        }
-        
-        nav a { 
-            text-decoration: none; 
-            margin: 0 1.5rem; 
-            padding: 0.5rem 1rem; 
-            border: 2px solid transparent; 
-            transition: all 0.3s; 
-            display: inline-block; 
-            animation: rgbCycle 8s infinite;
-        }
-        
-        nav a:hover, nav a.active { 
-            border: 2px solid; 
-            background: rgba(0, 0, 0, 0.5); 
-            animation: rgbBorder 3s infinite, rgbBoxShadow 3s infinite;
-        }
-        
-        .container { 
-            max-width: 900px; 
-            margin: 0 auto; 
-            padding: 2rem; 
-            position: relative; 
-            z-index: 1; 
-        }
-        
+        .music-controls button { background: linear-gradient(135deg, #003333, #004444); color: #00ffff; border: 2px solid #00ffff; padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer; margin-right: 0.5rem; font-family: 'Courier New', monospace; }
+        .music-controls button:hover { box-shadow: 0 0 15px rgba(0,255,255,0.8); }
+        header { background: linear-gradient(135deg, #001a1a, #003333); padding: 3rem 2rem; text-align: center; border-bottom: 3px solid #00ffff; box-shadow: 0 0 30px rgba(0,255,255,0.5); position: relative; z-index: 1; animation: glitchBox 6s infinite; }
+        #header-terminal { font-size: 2.5rem; margin-bottom: 1rem; min-height: 60px; animation: glitch 3s infinite; }
+        .header-cursor { display: inline-block; width: 15px; height: 35px; background: #00ffff; margin-left: 5px; animation: blink 0.7s infinite; box-shadow: 0 0 15px rgba(0, 255, 255, 1); vertical-align: middle; }
+        header p { color: #00cccc; }
+        header a { color: #00ffff; text-decoration: none; border-bottom: 2px solid #00ffff; transition: all 0.3s; }
+        header a:hover { text-shadow: 0 0 10px rgba(0,255,255,0.8); }
+        nav { background: rgba(0, 38, 38, 0.9); padding: 1rem; text-align: center; border-bottom: 2px solid #00ffff; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); animation: glitchBox 5s infinite; }
+        nav a { color: #00ffff; text-decoration: none; margin: 0 1.5rem; padding: 0.5rem 1rem; border: 2px solid transparent; transition: all 0.3s; display: inline-block; animation: glitch 4s infinite; }
+        nav a:hover, nav a.active { border: 2px solid #00ffff; background: rgba(0, 51, 51, 0.5); box-shadow: 0 0 15px rgba(0,255,255,0.5); }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
         .page { display: none; }
         .page.active { display: block; }
-        
-        .section { 
-            background: rgba(0, 0, 0, 0.2); 
-            padding: 2rem; 
-            margin: 2rem 0; 
-            border: 2px solid; 
-            border-radius: 10px; 
-            backdrop-filter: blur(8px); 
-            animation: rgbBorder 9s infinite, rgbBoxShadow 9s infinite;
-        }
-        
-        .section h2 { 
-            border-bottom: 3px solid; 
-            padding-bottom: 0.5rem; 
-            margin-bottom: 1rem; 
-            animation: rgbCycle 6s infinite, rgbShadow 6s infinite, rgbBorder 6s infinite;
-        }
-        
-        .section p { 
-            margin-bottom: 1rem; 
-            animation: rgbCycle 10s infinite;
-        }
-        
-        .tool-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 1.5rem; 
-            margin-top: 1rem; 
-        }
-        
-        .tool-box { 
-            background: rgba(0, 0, 0, 0.4); 
-            border: 3px solid; 
-            padding: 1.5rem; 
-            border-radius: 10px; 
-            transition: all 0.3s; 
-            animation: rgbBorder 7s infinite, rgbBoxShadow 7s infinite;
-            backdrop-filter: blur(5px);
-        }
-        
-        .tool-box:hover { 
-            transform: translateY(-5px); 
-            animation: rgbBoxShadow 2s infinite;
-        }
-        
-        .tool-box h3 { 
-            margin-bottom: 1rem; 
-            font-size: 1.1rem; 
-            animation: rgbCycle 5s infinite, rgbShadow 5s infinite;
-        }
-        
-        .tool-input { 
-            width: 100%; 
-            padding: 0.7rem; 
-            background: rgba(0, 0, 0, 0.8); 
-            border: 2px solid; 
-            border-radius: 4px; 
-            font-family: 'Courier New', monospace; 
-            margin-bottom: 0.7rem; 
-            animation: rgbCycle 8s infinite, rgbBorder 8s infinite;
-        }
-        
-        .tool-btn { 
-            width: 100%; 
-            padding: 0.7rem; 
-            background: rgba(0, 0, 0, 0.8); 
-            border: 2px solid; 
-            border-radius: 4px; 
-            cursor: pointer; 
-            font-family: 'Courier New', monospace; 
-            font-weight: bold; 
-            transition: all 0.3s; 
-            animation: rgbCycle 6s infinite, rgbBorder 6s infinite;
-        }
-        
-        .tool-btn:hover { 
-            animation: rgbBoxShadow 2s infinite;
-        }
-        
-        .tool-result { 
-            margin-top: 1rem; 
-            padding: 1.5rem; 
-            background: rgba(0, 0, 0, 0.7); 
-            border: 3px solid; 
-            border-radius: 8px; 
-            display: none; 
-            animation: rgbCycle 7s infinite, rgbBorder 7s infinite;
-        }
-        
-        .exif-preview { 
-            max-width: 100%; 
-            max-height: 300px; 
-            margin: 1rem 0; 
-            display: none; 
-            border: 2px solid; 
-            border-radius: 8px; 
-            animation: rgbBorder 6s infinite;
-        }
-        
-        .exif-data { 
-            display: grid; 
-            grid-template-columns: auto 1fr; 
-            gap: 0.5rem; 
-            font-size: 0.85rem; 
-        }
-        
-        .exif-label { 
-            font-weight: bold; 
-            animation: rgbCycle 6s infinite;
-        }
-        
-        .exif-value { 
-            word-break: break-word; 
-            animation: rgbCycle 8s infinite;
-        }
-        
-        .needs-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 1rem; 
-            margin: 1.5rem 0; 
-        }
-        
-        .need-card { 
-            background: rgba(0, 0, 0, 0.4); 
-            padding: 1.5rem; 
-            border: 3px solid; 
-            border-radius: 10px; 
-            text-align: center; 
-            cursor: pointer; 
-            transition: all 0.3s; 
-            animation: rgbBorder 8s infinite;
-            backdrop-filter: blur(5px);
-        }
-        
-        .need-card:hover { 
-            transform: translateY(-5px); 
-            animation: rgbBoxShadow 2s infinite;
-        }
-        
-        .need-card.selected { 
-            background: rgba(0, 0, 0, 0.7); 
-            border-width: 4px; 
-            animation: rgbBoxShadow 1s infinite;
-        }
-        
-        .need-icon { 
-            font-size: 2.5rem; 
-            margin-bottom: 0.5rem; 
-        }
-        
-        .need-amount { 
-            font-size: 1.8rem; 
-            font-weight: bold; 
-            animation: rgbCycle 5s infinite, rgbShadow 5s infinite;
-        }
-        
-        .need-title { 
-            font-weight: bold; 
-            margin: 0.5rem 0; 
-            animation: rgbCycle 6s infinite;
-        }
-        
-        .need-desc { 
-            font-size: 0.85rem; 
-            animation: rgbCycle 9s infinite;
-        }
-        
-        .custom-amount { 
-            text-align: center; 
-            margin: 2rem 0; 
-            padding: 1.5rem; 
-            background: rgba(0, 0, 0, 0.3); 
-            border: 2px solid; 
-            border-radius: 10px; 
-            animation: rgbBorder 7s infinite;
-            backdrop-filter: blur(5px);
-        }
-        
-        .custom-amount h3 { 
-            margin-bottom: 1rem; 
-            animation: rgbCycle 6s infinite;
-        }
-        
-        .custom-amount input { 
-            padding: 0.8rem; 
-            border: 2px solid; 
-            border-radius: 4px; 
-            font-size: 1.2rem; 
-            width: 180px; 
-            text-align: center; 
-            background: rgba(0, 0, 0, 0.8); 
-            font-family: 'Courier New', monospace; 
-            animation: rgbCycle 7s infinite, rgbBorder 7s infinite;
-        }
-        
-        #paypal-container { 
-            max-width: 500px; 
-            margin: 2rem auto; 
-            min-height: 100px; 
-        }
-        
-        .success { 
-            background: rgba(0, 100, 0, 0.3); 
-            border: 2px solid #00ff00; 
-            color: #00ff00; 
-            padding: 2rem; 
-            margin: 2rem 0; 
-            border-radius: 8px; 
-            display: none; 
-            text-align: center; 
-        }
-        
-        .paypal-security { 
-            text-align: center; 
-            margin: 2rem 0; 
-            padding: 2rem; 
-            background: rgba(0, 0, 0, 0.3); 
-            border: 2px solid; 
-            border-radius: 10px; 
-            animation: rgbBorder 8s infinite;
-            backdrop-filter: blur(5px);
-        }
-        
-        .paypal-security img { 
-            max-width: 150px; 
-            margin: 0.5rem 1rem; 
-            opacity: 0.9; 
-            filter: brightness(1.2); 
-        }
-        
-        .security-badges { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            flex-wrap: wrap; 
-            gap: 2rem; 
-            margin: 1rem 0; 
-        }
-        
-        .security-text { 
-            font-size: 0.9rem; 
-            margin-top: 1rem; 
-            animation: rgbCycle 10s infinite;
-        }
-        
-        .work-history { 
-            background: rgba(0, 0, 0, 0.3); 
-            padding: 1.5rem; 
-            border: 2px solid; 
-            border-radius: 8px; 
-            margin: 1rem 0; 
-            animation: rgbBorder 9s infinite;
-            backdrop-filter: blur(5px);
-        }
-        
-        .work-item { 
-            margin: 1rem 0; 
-            padding-left: 1rem; 
-            border-left: 3px solid; 
-            animation: rgbBorder 7s infinite;
-        }
-        
-        .work-item h4 { 
-            margin-bottom: 0.3rem; 
-            animation: rgbCycle 6s infinite;
-        }
-        
-        .work-item p { 
-            font-size: 0.9rem; 
-            animation: rgbCycle 8s infinite;
-        }
-        
-        .highlight-box { 
-            background: rgba(100, 0, 0, 0.2); 
-            border: 2px solid; 
-            padding: 1.5rem; 
-            border-radius: 10px; 
-            margin: 1.5rem 0; 
-            animation: rgbBorder 6s infinite;
-            backdrop-filter: blur(5px);
-        }
-        
-        .highlight-box h3 { 
-            margin-bottom: 1rem; 
-            animation: rgbCycle 5s infinite;
-        }
-        
-        footer { 
-            background: rgba(0, 0, 0, 0.3); 
-            text-align: center; 
-            padding: 2rem; 
-            margin-top: 3rem; 
-            border-top: 3px solid; 
-            position: relative; 
-            z-index: 1; 
-            animation: rgbCycle 10s infinite, rgbBorder 10s infinite;
-            backdrop-filter: blur(5px);
-        }
-        
-        ul { 
-            margin-left: 2rem; 
-            margin-top: 1rem; 
-            animation: rgbCycle 9s infinite;
-        }
-        
+        .section { background: rgba(0, 26, 26, 0.9); padding: 2rem; margin: 2rem 0; border: 2px solid #00ffff; border-radius: 10px; box-shadow: 0 0 30px rgba(0,255,255,0.4); backdrop-filter: blur(10px); animation: glitchBox 7s infinite; }
+        .section h2 { color: #00ffff; border-bottom: 3px solid #00ffff; padding-bottom: 0.5rem; margin-bottom: 1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); animation: glitch 3.5s infinite; }
+        .section p { color: #00cccc; margin-bottom: 1rem; animation: glitch 5s infinite; }
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+        .tool-box { background: rgba(0, 38, 38, 0.9); border: 3px solid #00ffff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 25px rgba(0,255,255,0.5); transition: all 0.3s; animation: glitchBox 6s infinite; }
+        .tool-box:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(0,255,255,0.8); }
+        .tool-box h3 { color: #00ffff; margin-bottom: 1rem; font-size: 1.1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); animation: glitch 4s infinite; }
+        .tool-input { width: 100%; padding: 0.7rem; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ffff; color: #00ffff; border-radius: 4px; font-family: 'Courier New', monospace; margin-bottom: 0.7rem; animation: glitchBox 5s infinite; }
+        .tool-btn { width: 100%; padding: 0.7rem; background: linear-gradient(135deg, #003333, #004444); color: #00ffff; border: 2px solid #00ffff; border-radius: 4px; cursor: pointer; font-family: 'Courier New', monospace; font-weight: bold; transition: all 0.3s; }
+        .tool-btn:hover { background: linear-gradient(135deg, #004444, #006666); box-shadow: 0 0 20px rgba(0,255,255,0.8); }
+        .tool-result { margin-top: 1rem; padding: 1.5rem; background: rgba(0, 38, 38, 0.95); border: 3px solid #00ffff; border-radius: 8px; color: #00ffff; display: none; }
+        .exif-preview { max-width: 100%; max-height: 300px; margin: 1rem 0; display: none; border: 2px solid #00ffff; border-radius: 8px; }
+        .exif-data { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem; font-size: 0.85rem; }
+        .exif-label { color: #00ffff; font-weight: bold; }
+        .exif-value { color: #00cccc; word-break: break-word; }
+        .needs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .need-card { background: linear-gradient(135deg, rgba(0, 38, 38, 0.9), rgba(0, 51, 51, 0.9)); padding: 1.5rem; border: 3px solid #00ffff; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s; }
+        .need-card:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(0,255,255,0.8); }
+        .need-card.selected { background: linear-gradient(135deg, rgba(0, 51, 51, 0.95), rgba(0, 77, 77, 0.95)); box-shadow: 0 0 50px rgba(0,255,255,1); border-width: 4px; }
+        .need-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .need-amount { font-size: 1.8rem; font-weight: bold; color: #00ffff; text-shadow: 0 0 15px rgba(0,255,255,1); }
+        .need-title { font-weight: bold; color: #00ffff; margin: 0.5rem 0; }
+        .need-desc { font-size: 0.85rem; color: #00cccc; }
+        .custom-amount { text-align: center; margin: 2rem 0; padding: 1.5rem; background: rgba(0, 38, 38, 0.8); border: 2px solid #00ffff; border-radius: 10px; }
+        .custom-amount h3 { color: #00ffff; margin-bottom: 1rem; }
+        .custom-amount input { padding: 0.8rem; border: 2px solid #00ffff; border-radius: 4px; font-size: 1.2rem; width: 180px; text-align: center; background: rgba(0, 0, 0, 0.8); color: #00ffff; font-family: 'Courier New', monospace; }
+        #paypal-container { max-width: 500px; margin: 2rem auto; min-height: 100px; }
+        .success { background: #001a00; border: 2px solid #00ff00; color: #00ff00; padding: 2rem; margin: 2rem 0; border-radius: 8px; display: none; text-align: center; }
+        .paypal-security { text-align: center; margin: 2rem 0; padding: 2rem; background: rgba(0, 38, 38, 0.7); border: 2px solid #00ffff; border-radius: 10px; }
+        .paypal-security img { max-width: 150px; margin: 0.5rem 1rem; opacity: 0.9; filter: brightness(1.2); }
+        .security-badges { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 2rem; margin: 1rem 0; }
+        .security-text { color: #00cccc; font-size: 0.9rem; margin-top: 1rem; }
+        .work-history { background: rgba(0, 38, 38, 0.7); padding: 1.5rem; border: 2px solid #00ffff; border-radius: 8px; margin: 1rem 0; }
+        .work-item { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #00ffff; }
+        .work-item h4 { color: #00ffff; margin-bottom: 0.3rem; }
+        .work-item p { color: #00cccc; font-size: 0.9rem; }
+        .highlight-box { background: rgba(255, 100, 100, 0.1); border: 2px solid #ff6666; padding: 1.5rem; border-radius: 10px; margin: 1.5rem 0; }
+        .highlight-box h3 { color: #ff6666; margin-bottom: 1rem; }
+        footer { background: rgba(0, 26, 26, 0.9); color: #00ffff; text-align: center; padding: 2rem; margin-top: 3rem; border-top: 3px solid #00ffff; position: relative; z-index: 1; }
+        ul { color: #00cccc; margin-left: 2rem; margin-top: 1rem; }
         li { margin: 0.5rem 0; }
-        
-        #map { 
-            width: 100%; 
-            height: 500px; 
-            border: 3px solid; 
-            border-radius: 10px; 
-            margin: 1rem 0; 
-            animation: rgbBorder 6s infinite;
-        }
-        
-        .location-info { 
-            background: rgba(0, 0, 0, 0.4); 
-            padding: 1.5rem; 
-            border: 2px solid; 
-            border-radius: 8px; 
-            margin: 1rem 0; 
-            animation: rgbBorder 8s infinite;
-            backdrop-filter: blur(5px);
-        }
-        
-        .location-info h3 { 
-            margin-bottom: 1rem; 
-            animation: rgbCycle 5s infinite, rgbShadow 5s infinite;
-        }
-        
-        .location-info p { 
-            margin: 0.5rem 0; 
-            animation: rgbCycle 7s infinite;
-        }
-        
         @media (max-width: 768px) { 
             #header-terminal { font-size: 1.8rem; }
             .tool-grid, .needs-grid { grid-template-columns: 1fr; }
             nav a { display: block; margin: 0.5rem 0; }
-            #map { height: 400px; }
+        }
+        /* RGB animations used by Discord popup */
+        @keyframes rgbCycle {
+            0% { color: #00ffff; }
+            25% { color: #ff00ff; }
+            50% { color: #00ff88; }
+            75% { color: #ffff00; }
+            100% { color: #00ffff; }
+        }
+        @keyframes rgbBorder {
+            0% { border-color: #00ffff; box-shadow: 0 0 20px rgba(0,255,255,0.2); }
+            50% { border-color: #ff00ff; box-shadow: 0 0 30px rgba(255,0,255,0.15); }
+            100% { border-color: #00ffff; box-shadow: 0 0 20px rgba(0,255,255,0.2); }
+        }
+        @keyframes rgbBoxShadow {
+            0% { box-shadow: 0 0 30px rgba(0,255,255,0.15); }
+            50% { box-shadow: 0 0 40px rgba(255,0,255,0.12); }
+            100% { box-shadow: 0 0 30px rgba(0,255,255,0.15); }
         }
     </style>
 </head>
@@ -597,7 +124,7 @@
 
     <div class="music-player" onclick="startMusic()" style="cursor: pointer;">
         <div class="song-title">♪ Click to Play Music</div>
-        <div class="song-artist">Joji - Glimpse of Us</div>
+        <div class="song-artist">Star People by Jane Remover</div>
         <div class="music-controls">
             <button onclick="toggleMusic();event.stopPropagation()">▶ Play</button>
             <button onclick="restartMusic();event.stopPropagation()">↻ Restart</button>
@@ -606,8 +133,25 @@
     
     <div id="loading-screen" onclick="startMusic()">
         <div id="terminal-text"><span class="loading-cursor"></span></div>
-        <div style="margin-top: 2rem; animation: glitch 3s infinite;">♪ Joji - Glimpse of Us (Click to Play)</div>
+        <div style="margin-top: 2rem; color: #00cccc; animation: glitch 3s infinite;">♪ Joji - Glimpse of Us (Click to Play)</div>
     </div>
+
+    <!-- Discord popup, overlay, YouTube container and Discord button -->
+    <div id="discord-popup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.95); border:3px solid; padding:2rem; border-radius:15px; z-index:10000; max-width:400px; text-align:center; animation:rgbBorder 4s infinite, rgbBoxShadow 4s infinite; backdrop-filter:blur(10px);">
+        <h2 style="margin-bottom:1rem; animation:rgbCycle 5s infinite;">💬 Add Me on Discord</h2>
+        <p style="margin-bottom:1.5rem; animation:rgbCycle 7s infinite;">Connect with me directly on Discord!</p>
+        <div style="background:rgba(0,0,0,0.8); padding:1rem; border:2px solid; border-radius:8px; margin-bottom:1.5rem; animation:rgbBorder 6s infinite;">
+            <div style="font-size:1.3rem; font-weight:bold; animation:rgbCycle 5s infinite; margin-bottom:0.5rem;" id="discord-username">jarodmowry</div>
+            <button onclick="copyDiscord()" style="background:rgba(88,101,242,0.8); border:2px solid #5865f2; padding:0.7rem 1.5rem; border-radius:6px; cursor:pointer; font-family:'Courier New',monospace; font-weight:bold; color:#fff; margin-top:0.5rem;">📋 Copy Username</button>
+        </div>
+        <button onclick="closeDiscordPopup()" style="background:rgba(0,0,0,0.8); border:2px solid; padding:0.7rem 2rem; border-radius:6px; cursor:pointer; font-family:'Courier New',monospace; font-weight:bold; animation:rgbCycle 6s infinite, rgbBorder 6s infinite;">Close</button>
+    </div>
+
+    <div id="discord-overlay" onclick="closeDiscordPopup()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999; backdrop-filter:blur(5px);"></div>
+
+    <div id="youtube-player"></div>
+
+    <button onclick="openDiscordPopup()" style="position:fixed; bottom:140px; right:20px; background:rgba(88,101,242,0.9); border:2px solid #5865f2; padding:1rem 1.5rem; border-radius:10px; cursor:pointer; font-family:'Courier New',monospace; font-weight:bold; color:#fff; z-index:1000; backdrop-filter:blur(10px); font-size:1.1rem;">💬 Discord</button>
 
     <div id="main-content" class="hidden">
     <header>
@@ -623,7 +167,7 @@
         <a href="#" class="nav-link active" onclick="showPage('home')">🏠 Home</a>
         <a href="#" class="nav-link" onclick="showPage('tools')">🔧 Network Tools</a>
         <a href="#" class="nav-link" onclick="showPage('upload')">📤 Photo Upload</a>
-        <a href="#" class="nav-link" onclick="showPage('location')">📍 My Location</a>
+        <a href="#" class="nav-link" onclick="showPage('location')">📍 Location</a>
     </nav>
     
     <div class="container">
@@ -640,7 +184,7 @@
                 <p>I pushed through, got into IT, and built a career despite everything. But now, disabilities have caught up with me, and I'm unable to work while waiting for disability approval. I'm currently experiencing homelessness, attending medical appointments and therapy sessions, trying to survive one day at a time.</p>
                 
                 <div class="work-history">
-                    <h3 style="margin-bottom: 1rem; animation: rgbCycle 6s infinite;">Professional Background</h3>
+                    <h3 style="color: #00cccc; margin-bottom: 1rem;">Professional Background</h3>
                     <div class="work-item">
                         <h4>🖥️ IT Support Analyst - South East Health</h4>
                         <p>Technical support and system maintenance in healthcare environment</p>
@@ -711,11 +255,11 @@
                 </div>
 
                 <div class="paypal-security">
-                    <h3 style="margin-bottom: 1rem; animation: rgbCycle 6s infinite;">🔒 Secure Payment</h3>
+                    <h3 style="color: #00ffff; margin-bottom: 1rem;">🔒 Secure Payment</h3>
                     <div class="security-badges">
                         <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal">
-                        <div style="font-size: 2rem; animation: rgbCycle 4s infinite;">🔐</div>
-                        <div style="font-size: 2rem; animation: rgbCycle 5s infinite;">✓</div>
+                        <div style="color: #00ffff; font-size: 2rem;">🔐</div>
+                        <div style="color: #00ffff; font-size: 2rem;">✓</div>
                     </div>
                     <div class="security-text">
                         <p>✓ Powered by PayPal - Your payment information is encrypted and secure</p>
@@ -741,11 +285,11 @@
             <div class="section">
                 <h2>🔗 Connect With Me</h2>
                 <p style="text-align: center;">
-                    <a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank" style="display: inline-block; background: rgba(0,0,0,0.6); padding: 1rem 2rem; border: 2px solid; border-radius: 8px; text-decoration: none; font-weight: bold; animation: rgbCycle 6s infinite, rgbBorder 6s infinite;">
+                    <a href="https://www.linkedin.com/in/jarod-mowry-280046336/" target="_blank" style="display: inline-block; background: #003333; color: #00ffff; padding: 1rem 2rem; border: 2px solid #00ffff; border-radius: 8px; text-decoration: none; font-weight: bold;">
                         Connect on LinkedIn
                     </a>
                 </p>
-                <p style="text-align: center; margin-top: 1rem;">Feel free to reach out with opportunities, advice, or support.</p>
+                <p style="text-align: center; margin-top: 1rem; color: #00cccc;">Feel free to reach out with opportunities, advice, or support.</p>
             </div>
         </div>
 
@@ -796,35 +340,26 @@
                     <input type="file" id="uploadInput" accept="image/*" class="tool-input" style="padding: 0.5rem;">
                     <button class="tool-btn" onclick="uploadImage()">UPLOAD TO IMGUR</button>
                     <div id="uploadPreview" style="margin-top: 1rem; text-align: center;">
-                        <img id="previewImg" style="max-width: 100%; max-height: 300px; display: none; border: 2px solid; border-radius: 8px; margin: 1rem 0; animation: rgbBorder 6s infinite;">
+                        <img id="previewImg" style="max-width: 100%; max-height: 300px; display: none; border: 2px solid #00ffff; border-radius: 8px; margin: 1rem 0;">
                     </div>
                     <div id="uploadResult" class="tool-result"></div>
                 </div>
             </div>
         </div>
-
         <div id="location-page" class="page">
             <div class="section">
-                <h2>📍 My Location - Helping Hands</h2>
-                <p>Helping Hands of Springfield, Illinois - Where I seek support and resources</p>
-                
-                <div class="location-info">
-                    <h3>📌 Helping Hands Springfield</h3>
-                    <p><strong>Address:</strong> 1220 S 11th St, Springfield, IL 62703</p>
-                    <p><strong>Phone:</strong> (217) 525-5900</p>
-                    <p><strong>Services:</strong> Emergency shelter, food assistance, support services</p>
-                    <p style="margin-top: 1rem;">This organization provides critical support to people experiencing homelessness in Springfield. They offer emergency shelter, meals, and connections to vital resources.</p>
+                <h2>📍 My Location</h2>
+                <p>Find "Helping Hands of Springfield" and get directions from your device.</p>
+                <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+                    <button id="showHelpingHandsBtn" class="tool-btn">Show Helping Hands</button>
+                    <button id="directionsBtn" class="tool-btn">Get Directions From My Device</button>
+                    <button id="openMapsBtn" class="tool-btn">Open Target in Google Maps</button>
                 </div>
-                
-                <div id="map"></div>
-                
-                <div class="location-info">
-                    <h3>🌟 Why This Matters</h3>
-                    <p>Organizations like Helping Hands are lifelines for people like me. They provide not just shelter and food, but hope and dignity during the most difficult times.</p>
-                    <p style="margin-top: 1rem;">If you're in the Springfield area and want to help locally, consider volunteering or donating to Helping Hands and similar organizations.</p>
-                </div>
+                <div id="helping-info" class="tool-result" style="display:block; margin-top:12px; color:#00ffff;"></div>
+                <div id="hh-map" style="height:420px; margin-top:12px; border:2px solid #00ffff; border-radius:8px;"></div>
             </div>
         </div>
+
     </div>
 
     <footer>
@@ -837,57 +372,6 @@
     <script src="https://www.paypal.com/sdk/js?client-id=AShHA7LRHXBp7nwEXq8M4l4LOGXPl2Ht9Ynrm5S_tOvtjTZHBXYrb6qaSNJqj-DuUpuQ1uAwT4syT_TQ&currency=USD"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
     <script>
-// Google Maps API Key - Replace with your own key
-const GOOGLE_MAPS_API_KEY = 'YOUR_API_KEY_HERE';
-
-// Load Google Maps
-function loadGoogleMaps() {
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap`;
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-}
-
-// Initialize map
-function initMap() {
-    const helpingHands = { lat: 39.7817, lng: -89.6501 };
-    const map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 15,
-        center: helpingHands,
-        styles: [
-            { elementType: 'geometry', stylers: [{ color: '#000000' }] },
-            { elementType: 'labels.text.stroke', stylers: [{ color: '#000000' }] },
-            { elementType: 'labels.text.fill', stylers: [{ color: '#00ffff' }] },
-            {
-                featureType: 'road',
-                elementType: 'geometry',
-                stylers: [{ color: '#1a1a1a' }]
-            },
-            {
-                featureType: 'road',
-                elementType: 'geometry.stroke',
-                stylers: [{ color: '#333333' }]
-            }
-        ]
-    });
-    
-    const marker = new google.maps.Marker({
-        position: helpingHands,
-        map: map,
-        title: 'Helping Hands Springfield',
-        animation: google.maps.Animation.DROP
-    });
-    
-    const infoWindow = new google.maps.InfoWindow({
-        content: '<div style="color: #000; padding: 10px;"><h3>Helping Hands Springfield</h3><p>1220 S 11th St<br>Springfield, IL 62703</p></div>'
-    });
-    
-    marker.addListener('click', function() {
-        infoWindow.open(map, marker);
-    });
-}
-
 var msg="Hello World",idx=0,del=false,sel=0,rdy=false,scene,camera,renderer,particles=[],grids=[];
 
 function typ(){
@@ -907,7 +391,6 @@ function typ(){
         document.getElementById("main-content").classList.remove("hidden");
         rdy=true;
         init3D();
-        loadGoogleMaps();
     }
 }
 
@@ -945,27 +428,27 @@ function init3D(){
     renderer=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:true});
     renderer.setSize(window.innerWidth,window.innerHeight);
     camera.position.z=30;
-    var pg=new THREE.BufferGeometry(),pc=1200,pos=new Float32Array(pc*3);
-    for(var i=0;i<pc*3;i+=3){pos[i]=Math.random()*120-60;pos[i+1]=Math.random()*120-60;pos[i+2]=Math.random()*120-60}
+    var pg=new THREE.BufferGeometry(),pc=800,pos=new Float32Array(pc*3);
+    for(var i=0;i<pc*3;i+=3){pos[i]=Math.random()*100-50;pos[i+1]=Math.random()*100-50;pos[i+2]=Math.random()*100-50}
     pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
-    var pm=new THREE.PointsMaterial({color:0xffffff,size:0.4,transparent:true,opacity:0.9});
+    var pm=new THREE.PointsMaterial({color:0x00ffff,size:0.3,transparent:true,opacity:0.8});
     var ps=new THREE.Points(pg,pm);
     scene.add(ps);
     particles.push(ps);
-    for(var i=0;i<12;i++){
-        var g=new THREE.GridHelper(50+i*6,12,0xffffff,0x333333);
+    for(var i=0;i<8;i++){
+        var g=new THREE.GridHelper(40+i*5,10,0x00ffff,0x003333);
         g.rotation.x=Math.PI/2;
-        g.position.z=-25-i*6;
+        g.position.z=-20-i*5;
         g.material.transparent=true;
-        g.material.opacity=0.2;
+        g.material.opacity=0.15;
         scene.add(g);
         grids.push(g);
     }
-    for(var i=0;i<30;i++){
-        var geo=new THREE.IcosahedronGeometry(Math.random()*2.5+0.5,0);
-        var mat=new THREE.MeshBasicMaterial({color:0xffffff,wireframe:true,transparent:true,opacity:0.4});
+    for(var i=0;i<20;i++){
+        var geo=new THREE.IcosahedronGeometry(Math.random()*2+0.5,0);
+        var mat=new THREE.MeshBasicMaterial({color:0x00ffff,wireframe:true,transparent:true,opacity:0.3});
         var m=new THREE.Mesh(geo,mat);
-        m.position.set(Math.random()*80-40,Math.random()*80-40,Math.random()*80-40);
+        m.position.set(Math.random()*60-30,Math.random()*60-30,Math.random()*60-30);
         scene.add(m);
         particles.push(m);
     }
@@ -974,29 +457,12 @@ function init3D(){
 
 function animate3D(){
     requestAnimationFrame(animate3D);
-    var t = Date.now() * 0.001;
-    var hue = (t * 50) % 360;
-    
     particles.forEach(function(p,i){
-        if(p.material){
-            p.material.color.setHSL((hue + i * 10) / 360, 1, 0.5);
-        }
-        if(p.geometry&&p.geometry.attributes.position){
-            p.rotation.y+=0.002;
-        }else{
-            p.rotation.x+=0.003*((i%2)?1:-1);
-            p.rotation.y+=0.004*((i%2)?-1:1);
-        }
+        if(p.geometry&&p.geometry.attributes.position){p.rotation.y+=0.001}
+        else{p.rotation.x+=0.002*((i%2)?1:-1);p.rotation.y+=0.003*((i%2)?-1:1)}
     });
-    
-    grids.forEach(function(g,i){
-        g.position.z+=0.08;
-        if(g.position.z>15)g.position.z=-80;
-        g.material.color.setHSL((hue + i * 30) / 360, 0.8, 0.5);
-    });
-    
-    camera.rotation.y=Math.sin(t*0.3)*0.15;
-    camera.rotation.x=Math.cos(t*0.2)*0.1;
+    grids.forEach(function(g){g.position.z+=0.05;if(g.position.z>10)g.position.z=-60});
+    camera.rotation.y=Math.sin(Date.now()*0.0001)*0.1;
     renderer.render(scene,camera);
 }
 
@@ -1057,7 +523,7 @@ function lookupIP(){
     if(!i){r.style.display="block";r.innerHTML='<span style="color:#f33">⚠ Enter IP</span>';return}
     r.style.display="block";r.innerHTML='<span style="color:#ff0">⚡ SCANNING...</span>';
     fetch("https://ipapi.co/"+i+"/json/").then(function(x){return x.json()}).then(function(d){
-        r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid;padding-bottom:0.5rem;margin-bottom:0.5rem"><span>✓ IP:</span> '+d.ip+'</div><div><span>• CITY:</span> '+(d.city||"N/A")+'</div><div><span>• COUNTRY:</span> '+(d.country_name||"N/A")+'</div><div><span>• ISP:</span> '+(d.org||"N/A")+'</div></div>'
+        r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ IP:</span> '+d.ip+'</div><div><span style="color:#0ff">• CITY:</span> '+(d.city||"N/A")+'</div><div><span style="color:#0ff">• COUNTRY:</span> '+(d.country_name||"N/A")+'</div><div><span style="color:#0ff">• ISP:</span> '+(d.org||"N/A")+'</div></div>'
     });
 }
 
@@ -1068,14 +534,14 @@ function lookupMAC(){
     var c=m.replace(/[:\-\s.]/g,"").toUpperCase();
     if(c.length<6){r.innerHTML='<span style="color:#f33">⚠ Invalid MAC</span>';return}
     var o=c.substring(0,6);
-    r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid;padding-bottom:0.5rem;margin-bottom:0.5rem"><span>✓ MAC:</span> '+m+'</div><div><span>• OUI:</span> '+o+'</div><div style="margin-top:1rem"><a href="https://maclookup.app/search/result?mac='+o+'" target="_blank" style="text-decoration:underline">View Full Lookup</a></div></div>';
+    r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ MAC:</span> '+m+'</div><div><span style="color:#0ff">• OUI:</span> '+o+'</div><div style="margin-top:1rem"><a href="https://maclookup.app/search/result?mac='+o+'" target="_blank" style="color:#fff;text-decoration:underline">View Full Lookup</a></div></div>';
 }
 
 function getMyIP(){
     var r=document.getElementById("myipResult");
     r.style.display="block";r.innerHTML='<span style="color:#ff0">⚡ FETCHING...</span>';
     fetch("https://ipapi.co/json/").then(function(x){return x.json()}).then(function(d){
-        r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid;padding-bottom:0.5rem;margin-bottom:0.5rem"><span>✓ YOUR IP:</span> '+d.ip+'</div><div><span>• CITY:</span> '+(d.city||"N/A")+'</div><div><span>• ISP:</span> '+(d.org||"N/A")+'</div></div>'
+        r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ YOUR IP:</span> '+d.ip+'</div><div><span style="color:#0ff">• CITY:</span> '+(d.city||"N/A")+'</div><div><span style="color:#0ff">• ISP:</span> '+(d.org||"N/A")+'</div></div>'
     });
 }
 
@@ -1086,7 +552,7 @@ function lookupDomain(){
     fetch("https://dns.google/resolve?name="+dm+"&type=A").then(function(x){return x.json()}).then(function(d){
         if(d.Answer&&d.Answer.length>0){
             var ips=d.Answer.filter(function(a){return a.type===1}).map(function(a){return a.data}).join(", ");
-            r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid;padding-bottom:0.5rem;margin-bottom:0.5rem"><span>✓ DOMAIN:</span> '+dm+'</div><div><span>• IPs:</span> '+ips+'</div></div>'
+            r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem"><span style="color:#0ff">✓ DOMAIN:</span> '+dm+'</div><div><span style="color:#0ff">• IPs:</span> '+ips+'</div></div>'
         }else{r.innerHTML='<span style="color:#f33">⚠ No records</span>'}
     });
 }
@@ -1175,7 +641,7 @@ function uploadImage(){
         }).then(function(res){return res.json()}).then(function(data){
             if(data.success){
                 var link=data.data.link;
-                r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid;padding-bottom:0.5rem;margin-bottom:0.5rem;color:#0f0;font-weight:bold">✓ Upload Successful!</div><div><span>Image URL:</span></div><div><a href="'+link+'" target="_blank" style="word-break:break-all;text-decoration:underline">'+link+'</a></div><div style="margin-top:1rem"><button onclick="copyToClipboard(\''+link+'\')" style="background:rgba(0,0,0,0.8);border:2px solid;padding:0.5rem 1rem;border-radius:4px;cursor:pointer">📋 Copy Link</button></div></div>';
+                r.innerHTML='<div style="line-height:2"><div style="border-bottom:1px solid #0ff;padding-bottom:0.5rem;margin-bottom:0.5rem;color:#0f0;font-weight:bold">✓ Upload Successful!</div><div><span style="color:#0ff">Image URL:</span></div><div><a href="'+link+'" target="_blank" style="color:#fff;word-break:break-all;text-decoration:underline">'+link+'</a></div><div style="margin-top:1rem"><button onclick="copyToClipboard(\''+link+'\')" style="background:#003333;color:#0ff;border:2px solid #0ff;padding:0.5rem 1rem;border-radius:4px;cursor:pointer">📋 Copy Link</button></div></div>';
             }else{
                 r.innerHTML='<span style="color:#f33">⚠ Upload failed. Please try again.</span>';
             }
@@ -1214,7 +680,7 @@ function handleCustomAmount(){
 function showPP(){
     var c=document.getElementById("paypal-container");
     c.innerHTML="";
-    if(sel<=0){c.innerHTML='<p style="text-align:center;padding:2rem">Select amount above</p>';return}
+    if(sel<=0){c.innerHTML='<p style="text-align:center;color:#0cc;padding:2rem">Select amount above</p>';return}
     if(typeof paypal==="undefined"){c.innerHTML='<p style="text-align:center;color:#f33">PayPal loading...</p>';return}
     paypal.Buttons({
         createOrder:function(d,a){return a.order.create({purchase_units:[{amount:{value:sel.toFixed(2)}}]})},
@@ -1222,6 +688,141 @@ function showPP(){
         onError:function(e){alert("Payment error")}
     }).render("#paypal-container");
 }
+    </script>
+
+    <!-- Helping Hands / Maps: uses Google Maps Places + Directions -->
+    <script>
+    // Edit this query to change the target place in future
+    const TARGET_PLACE_QUERY = 'Helping Hands of Springfield IL';
+    const SPRINGFIELD_CENTER = {lat:39.7817, lng:-89.6501};
+
+    var hhMap, hhPlaces, hhDirectionsService, hhDirectionsRenderer, targetMarker, hhInfoWindow;
+
+    function initHelpingHandsMap(){
+        try{
+            hhMap = new google.maps.Map(document.getElementById('hh-map'), {center: SPRINGFIELD_CENTER, zoom: 13, streetViewControl:false});
+            hhPlaces = new google.maps.places.PlacesService(hhMap);
+            hhDirectionsService = new google.maps.DirectionsService();
+            hhDirectionsRenderer = new google.maps.DirectionsRenderer({map: hhMap});
+        }catch(e){ console.error('Maps init failed', e); document.getElementById('helping-info').innerText = 'Maps failed to load.'; }
+        // wire buttons after map exists
+        document.getElementById('showHelpingHandsBtn').addEventListener('click', findHelpingHands);
+        document.getElementById('directionsBtn').addEventListener('click', getDirectionsToHelpingHands);
+        document.getElementById('openMapsBtn').addEventListener('click', openTargetInGoogleMaps);
+    }
+
+    function findHelpingHands(){
+        var info = document.getElementById('helping-info');
+        if(!hhPlaces){ info.innerHTML = '<span style="color:#f33">Maps not loaded</span>'; return; }
+        info.innerHTML = '<span style="color:#ff0">Searching for Helping Hands...</span>';
+        // Request photos and place_id so we can display an image when available.
+        hhPlaces.findPlaceFromQuery({query: TARGET_PLACE_QUERY, fields: ['name','geometry','formatted_address','photos','place_id']}, function(results, status){
+            if(status === google.maps.places.PlacesServiceStatus.OK && results && results.length){
+                var place = results[0];
+                if(targetMarker) targetMarker.setMap(null);
+                targetMarker = new google.maps.Marker({map: hhMap, position: place.geometry.location, title: place.name});
+                hhMap.panTo(place.geometry.location);
+                hhMap.setZoom(15);
+
+                var content = '<div style="line-height:1.4"><strong style="color:#0f0">'+place.name+'</strong><div style="color:#0ff">'+(place.formatted_address||'')+'</div>';
+                // Show the first photo if provided by Places
+                try{
+                    if(place.photos && place.photos.length){
+                        var photoUrl = place.photos[0].getUrl({maxWidth: 600});
+                        content += '<div style="margin-top:8px"><img src="'+photoUrl+'" alt="'+place.name+'" style="max-width:100%; border:2px solid #0ff; border-radius:6px; display:block"></div>';
+                    }
+                }catch(e){
+                    console.warn('Could not get place photo URL', e);
+                }
+                content += '</div>';
+
+                // Use an InfoWindow when available, otherwise fall back to the info panel
+                if(window.google && google.maps && google.maps.InfoWindow){
+                    if(!hhInfoWindow) hhInfoWindow = new google.maps.InfoWindow();
+                    hhInfoWindow.setContent(content);
+                    hhInfoWindow.open(hhMap, targetMarker);
+                } else {
+                    info.innerHTML = content;
+                }
+            } else {
+                info.innerHTML = '<span style="color:#f33">Could not find Helping Hands: '+status+'</span>';
+            }
+        });
+    }
+
+    function getDirectionsToHelpingHands(){
+        var info = document.getElementById('helping-info');
+        if(!navigator.geolocation){ info.innerHTML = '<span style="color:#f33">Geolocation not supported</span>'; return; }
+        if(!targetMarker){ findHelpingHands(); setTimeout(getDirectionsToHelpingHands,1200); return; }
+        info.innerHTML = '<span style="color:#ff0">Getting your location...</span>';
+        navigator.geolocation.getCurrentPosition(function(pos){
+            var origin = {lat: pos.coords.latitude, lng: pos.coords.longitude};
+            var dest = targetMarker.getPosition();
+            hhDirectionsService.route({origin: origin, destination: dest, travelMode: google.maps.TravelMode.DRIVING}, function(result, status){
+                if(status === 'OK'){
+                    hhDirectionsRenderer.setDirections(result);
+                    info.innerHTML = '<span style="color:#0f0">Directions shown on map</span>';
+                } else {
+                    info.innerHTML = '<span style="color:#f33">Directions error: '+status+'</span>';
+                }
+            });
+        }, function(err){ info.innerHTML = '<span style="color:#f33">Geolocation error: '+err.message+'</span>'; }, {timeout:10000});
+    }
+
+    function openTargetInGoogleMaps(){
+        if(!targetMarker){ findHelpingHands(); setTimeout(openTargetInGoogleMaps,900); return; }
+        var p = targetMarker.getPosition();
+        var url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.lat()+','+p.lng());
+        window.open(url, '_blank');
+    }
+    </script>
+    <!-- Google Maps API (using the key you provided). Edit TARGET_PLACE_QUERY above to change which place is located. -->
+    <script id="google-maps" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKCAe6yBEKIXKfo7PfOec3cqCXpZuk8bs&libraries=places&loading=async" async defer></script>
+    <script>
+    // Use the Maps API callback (see script `callback` param) to initialize.
+    // Avoid calling `initHelpingHandsMap` on raw script load because the
+    // API may not be fully bootstrapped yet and `google.maps.Map` can be undefined.
+
+    document.getElementById('google-maps').addEventListener('error', function(){
+        var info = document.getElementById('helping-info');
+        if(info) info.innerHTML = '<span style="color:#f33">Failed to load Google Maps script. Check network or API key.</span>';
+    });
+
+    // Global error handler to surface Billing / Places errors to the UI
+    window.addEventListener('error', function(e){
+        try{
+            var msg = (e && e.message) ? e.message : (e && e.error && e.error.message) ? e.error.message : '';
+            if(msg && msg.indexOf('BillingNotEnabledMapError') !== -1){
+                var info = document.getElementById('helping-info');
+                if(info) info.innerHTML = '<span style="color:#f33">Google Maps billing is not enabled for this API key. Enable billing in the Google Cloud Console: https://console.cloud.google.com/</span>';
+            }
+            if(msg && msg.indexOf('PlacesService') !== -1){
+                var info2 = document.getElementById('helping-info');
+                if(info2) info2.innerHTML = '<span style="color:#f33">Places library may not be available to this project. See migration guide: https://developers.google.com/maps/documentation/javascript/places-migration-overview</span>';
+            }
+        }catch(ignore){}
+    });
+
+    function openDiscordPopup(){
+        var p = document.getElementById('discord-popup');
+        var o = document.getElementById('discord-overlay');
+        if(p) p.style.display = 'block';
+        if(o) o.style.display = 'block';
+    }
+    function closeDiscordPopup(){
+        var p = document.getElementById('discord-popup');
+        var o = document.getElementById('discord-overlay');
+        if(p) p.style.display = 'none';
+        if(o) o.style.display = 'none';
+    }
+    function copyDiscord(){
+        var el = document.getElementById('discord-username');
+        if(!el) return;
+        var txt = el.textContent.trim();
+        if(navigator.clipboard && navigator.clipboard.writeText){
+            navigator.clipboard.writeText(txt).then(function(){ alert('✓ Discord username copied: ' + txt); }).catch(function(){ prompt('Copy this username', txt); });
+        } else { prompt('Copy this username', txt); }
+    }
     </script>
 </body>
 </html>
