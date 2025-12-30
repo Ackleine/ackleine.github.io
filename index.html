@@ -113,6 +113,9 @@
             50% { box-shadow: 0 0 40px rgba(255,0,255,0.12); }
             100% { box-shadow: 0 0 30px rgba(0,255,255,0.15); }
         }
+        /* Discord popup accent and shared glitch box styling */
+        .discord-box { background: rgba(0, 10, 10, 0.92); border: 3px solid #00ffff; color: #00ffff; box-shadow: 0 0 40px rgba(0,255,255,0.25); }
+        .glitch-box { animation: glitchBox 4s infinite; }
     </style>
 </head>
 <body>
@@ -122,7 +125,7 @@
         <source src="https://files.catbox.moe/y6kbmo.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="music-player" onclick="startMusic()" style="cursor: pointer;">
+    <div class="music-player glitch-box" onclick="startMusic()" style="cursor: pointer;">
         <div class="song-title">♪ Click to Play Music</div>
         <div class="song-artist">Star People by Jane Remover</div>
         <div class="music-controls">
@@ -141,7 +144,7 @@
         <h2 style="margin-bottom:1rem; animation:rgbCycle 5s infinite;">💬 Add Me on Discord</h2>
         <p style="margin-bottom:1.5rem; animation:rgbCycle 7s infinite;">Connect with me directly on Discord!</p>
         <div style="background:rgba(0,0,0,0.8); padding:1rem; border:2px solid; border-radius:8px; margin-bottom:1.5rem; animation:rgbBorder 6s infinite;">
-            <div style="font-size:1.3rem; font-weight:bold; animation:rgbCycle 5s infinite; margin-bottom:0.5rem;" id="discord-username">jarodmowry</div>
+            <div style="font-size:1.3rem; font-weight:bold; animation:rgbCycle 5s infinite; margin-bottom:0.5rem;" id="discord-username">ackleine</div>
             <button onclick="copyDiscord()" style="background:rgba(88,101,242,0.8); border:2px solid #5865f2; padding:0.7rem 1.5rem; border-radius:6px; cursor:pointer; font-family:'Courier New',monospace; font-weight:bold; color:#fff; margin-top:0.5rem;">📋 Copy Username</button>
         </div>
         <button onclick="closeDiscordPopup()" style="background:rgba(0,0,0,0.8); border:2px solid; padding:0.7rem 2rem; border-radius:6px; cursor:pointer; font-family:'Courier New',monospace; font-weight:bold; animation:rgbCycle 6s infinite, rgbBorder 6s infinite;">Close</button>
@@ -298,30 +301,30 @@
                 <h2>🔧 Network & Image Tools</h2>
                 <p>Professional IT diagnostic and forensic tools I've used throughout my career</p>
                 <div class="tool-grid">
-                    <div class="tool-box">
+                                <div class="tool-box glitch-box">
                         <h3>🌐 IP Lookup</h3>
                         <input type="text" id="ipInput" placeholder="e.g., 8.8.8.8" class="tool-input">
                         <button class="tool-btn" onclick="lookupIP()">LOOKUP IP</button>
                         <div id="ipResult" class="tool-result"></div>
                     </div>
-                    <div class="tool-box">
+                    <div class="tool-box glitch-box">
                         <h3>🔍 MAC Lookup</h3>
                         <input type="text" id="macInput" placeholder="e.g., 00:1A:2B:3C:4D:5E" class="tool-input">
                         <button class="tool-btn" onclick="lookupMAC()">LOOKUP MAC</button>
                         <div id="macResult" class="tool-result"></div>
                     </div>
-                    <div class="tool-box">
+                    <div class="tool-box glitch-box">
                         <h3>⚡ My IP Info</h3>
                         <button class="tool-btn" onclick="getMyIP()">GET MY IP</button>
                         <div id="myipResult" class="tool-result"></div>
                     </div>
-                    <div class="tool-box">
+                    <div class="tool-box glitch-box">
                         <h3>🌍 Domain Lookup</h3>
                         <input type="text" id="domainInput" placeholder="e.g., google.com" class="tool-input">
                         <button class="tool-btn" onclick="lookupDomain()">LOOKUP DOMAIN</button>
                         <div id="domainResult" class="tool-result"></div>
                     </div>
-                    <div class="tool-box">
+                    <div class="tool-box glitch-box">
                         <h3>📸 EXIF Data Viewer</h3>
                         <input type="file" id="exifInput" accept="image/*" class="tool-input" onchange="readEXIF()" style="padding: 0.5rem;">
                         <img id="exifPreview" class="exif-preview">
@@ -713,7 +716,14 @@ function showPP(){
 
     function findHelpingHands(){
         var info = document.getElementById('helping-info');
-        if(!hhPlaces){ info.innerHTML = '<span style="color:#f33">Maps not loaded</span>'; return; }
+        if(!hhPlaces){
+            // If PlacesService isn't available, fall back to opening a Google Maps search.
+            info.innerHTML = '<span style="color:#ff0">Places service unavailable — opening Google Maps search...</span>';
+            var urlFallback = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(TARGET_PLACE_QUERY + ' ' + SPRINGFIELD_CENTER.lat + ',' + SPRINGFIELD_CENTER.lng);
+            window.open(urlFallback, '_blank');
+            return;
+        }
+
         info.innerHTML = '<span style="color:#ff0">Searching for Helping Hands...</span>';
         // Request photos and place_id so we can display an image when available.
         hhPlaces.findPlaceFromQuery({query: TARGET_PLACE_QUERY, fields: ['name','geometry','formatted_address','photos','place_id']}, function(results, status){
@@ -745,7 +755,10 @@ function showPP(){
                     info.innerHTML = content;
                 }
             } else {
-                info.innerHTML = '<span style="color:#f33">Could not find Helping Hands: '+status+'</span>';
+                // If no place found, open Google Maps search as a fallback so user still reaches the place listing.
+                info.innerHTML = '<span style="color:#f33">Could not find Helping Hands via Places: '+status+' — opening Google Maps search...</span>';
+                var searchUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(TARGET_PLACE_QUERY + ' ' + SPRINGFIELD_CENTER.lat + ',' + SPRINGFIELD_CENTER.lng);
+                window.open(searchUrl, '_blank');
             }
         });
     }
@@ -770,7 +783,22 @@ function showPP(){
     }
 
     function openTargetInGoogleMaps(){
-        if(!targetMarker){ findHelpingHands(); setTimeout(openTargetInGoogleMaps,900); return; }
+        if(!targetMarker){
+            // Try to find the place first; if that fails, the findHelpingHands fallback will open Maps.
+            findHelpingHands();
+            setTimeout(function(){
+                if(targetMarker){
+                    var p = targetMarker.getPosition();
+                    var url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.lat()+','+p.lng());
+                    window.open(url, '_blank');
+                } else {
+                    // If still no targetMarker, open a general Maps search for the query
+                    var urlFallback = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(TARGET_PLACE_QUERY + ' ' + SPRINGFIELD_CENTER.lat + ',' + SPRINGFIELD_CENTER.lng);
+                    window.open(urlFallback, '_blank');
+                }
+            }, 1200);
+            return;
+        }
         var p = targetMarker.getPosition();
         var url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.lat()+','+p.lng());
         window.open(url, '_blank');
