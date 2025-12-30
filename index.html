@@ -31,35 +31,35 @@
         .glitch-box { animation: glitchBox 4s infinite; }
         .hidden { display: none; }
         #three-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; }
-        .music-player { position: fixed; bottom: 20px; right: 20px; background: rgba(0, 38, 38, 0.95); border: 2px solid #00ffff; padding: 1rem 1.5rem; border-radius: 10px; z-index: 1000; box-shadow: 0 0 30px rgba(0,255,255,0.6); animation: glitchBox 5s infinite; }
+        .music-player { position: fixed; bottom: 20px; right: 20px; background: rgba(0, 38, 38, 0.25); border: 2px solid rgba(0,255,255,0.9); padding: 1rem 1.5rem; border-radius: 10px; z-index: 1000; box-shadow: 0 0 30px rgba(0,255,255,0.35); animation: glitchBox 5s infinite; }
         .music-player .song-title { color: #00ffff; font-weight: bold; margin-bottom: 0.5rem; animation: glitch 4s infinite; }
         .music-player .song-artist { color: #00cccc; font-size: 0.9rem; }
         .music-controls { margin-top: 0.5rem; }
         .music-controls button { background: linear-gradient(135deg, #003333, #004444); color: #00ffff; border: 2px solid #00ffff; padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer; margin-right: 0.5rem; font-family: 'Courier New', monospace; }
         .music-controls button:hover { box-shadow: 0 0 15px rgba(0,255,255,0.8); }
-        header { background: linear-gradient(135deg, #001a1a, #003333); padding: 3rem 2rem; text-align: center; border-bottom: 3px solid #00ffff; box-shadow: 0 0 30px rgba(0,255,255,0.5); position: relative; z-index: 1; animation: glitchBox 6s infinite; }
+        header { background: rgba(0,26,26,0.25); padding: 3rem 2rem; text-align: center; border-bottom: 3px solid rgba(0,255,255,0.9); box-shadow: 0 0 30px rgba(0,255,255,0.35); position: relative; z-index: 1; animation: glitchBox 6s infinite; }
         #header-terminal { font-size: 2.5rem; margin-bottom: 1rem; min-height: 60px; animation: glitch 3s infinite; }
         .header-cursor { display: inline-block; width: 15px; height: 35px; background: #00ffff; margin-left: 5px; animation: blink 0.7s infinite; box-shadow: 0 0 15px rgba(0, 255, 255, 1); vertical-align: middle; }
         header p { color: #00cccc; }
         header a { color: #00ffff; text-decoration: none; border-bottom: 2px solid #00ffff; transition: all 0.3s; }
         header a:hover { text-shadow: 0 0 10px rgba(0,255,255,0.8); }
-        nav { background: rgba(0, 38, 38, 0.9); padding: 1rem; text-align: center; border-bottom: 2px solid #00ffff; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); animation: glitchBox 5s infinite; }
+        nav { background: rgba(0, 38, 38, 0.22); padding: 1rem; text-align: center; border-bottom: 2px solid rgba(0,255,255,0.9); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(6px); animation: glitchBox 5s infinite; }
         nav a { color: #00ffff; text-decoration: none; margin: 0 1.5rem; padding: 0.5rem 1rem; border: 2px solid transparent; transition: all 0.3s; display: inline-block; animation: glitch 4s infinite; }
         nav a:hover, nav a.active { border: 2px solid #00ffff; background: rgba(0, 51, 51, 0.5); box-shadow: 0 0 15px rgba(0,255,255,0.5); }
         .container { max-width: 900px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
         .page { display: none; }
         .page.active { display: block; }
-        .section { background: rgba(0, 26, 26, 0.9); padding: 2rem; margin: 2rem 0; border: 2px solid #00ffff; border-radius: 10px; box-shadow: 0 0 30px rgba(0,255,255,0.4); backdrop-filter: blur(10px); animation: glitchBox 7s infinite; }
+        .section { background: rgba(0, 26, 26, 0.25); padding: 2rem; margin: 2rem 0; border: 2px solid rgba(0,255,255,0.8); border-radius: 10px; box-shadow: 0 0 30px rgba(0,255,255,0.18); backdrop-filter: blur(6px); animation: glitchBox 7s infinite; }
         .section h2 { color: #00ffff; border-bottom: 3px solid #00ffff; padding-bottom: 0.5rem; margin-bottom: 1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); animation: glitch 3.5s infinite; }
         .section p { color: #00cccc; margin-bottom: 1rem; animation: glitch 5s infinite; }
         .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
-        .tool-box { background: rgba(0, 38, 38, 0.9); border: 3px solid #00ffff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 25px rgba(0,255,255,0.5); transition: all 0.3s; animation: glitchBox 6s infinite; }
+        .tool-box { background: rgba(0, 38, 38, 0.25); border: 3px solid rgba(0,255,255,0.8); padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 25px rgba(0,255,255,0.18); transition: all 0.3s; animation: glitchBox 6s infinite; }
         .tool-box:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(0,255,255,0.8); }
         .tool-box h3 { color: #00ffff; margin-bottom: 1rem; font-size: 1.1rem; text-shadow: 0 0 10px rgba(0,255,255,0.8); animation: glitch 4s infinite; }
-        .tool-input { width: 100%; padding: 0.7rem; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ffff; color: #00ffff; border-radius: 4px; font-family: 'Courier New', monospace; margin-bottom: 0.7rem; animation: glitchBox 5s infinite; }
+        .tool-input { width: 100%; padding: 0.7rem; background: rgba(0, 0, 0, 0.35); border: 2px solid rgba(0,255,255,0.7); color: #00ffff; border-radius: 4px; font-family: 'Courier New', monospace; margin-bottom: 0.7rem; animation: glitchBox 5s infinite; }
         .tool-btn { width: 100%; padding: 0.7rem; background: linear-gradient(135deg, #003333, #004444); color: #00ffff; border: 2px solid #00ffff; border-radius: 4px; cursor: pointer; font-family: 'Courier New', monospace; font-weight: bold; transition: all 0.3s; }
         .tool-btn:hover { background: linear-gradient(135deg, #004444, #006666); box-shadow: 0 0 20px rgba(0,255,255,0.8); }
-        .tool-result { margin-top: 1rem; padding: 1.5rem; background: rgba(0, 38, 38, 0.95); border: 3px solid #00ffff; border-radius: 8px; color: #00ffff; display: none; }
+        .tool-result { margin-top: 1rem; padding: 1.5rem; background: rgba(0, 38, 38, 0.3); border: 3px solid rgba(0,255,255,0.7); border-radius: 8px; color: #00ffff; display: none; }
         .exif-preview { max-width: 100%; max-height: 300px; margin: 1rem 0; display: none; border: 2px solid #00ffff; border-radius: 8px; }
         .exif-data { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem; font-size: 0.85rem; }
         .exif-label { color: #00ffff; font-weight: bold; }
@@ -72,16 +72,16 @@
         .need-amount { font-size: 1.8rem; font-weight: bold; color: #00ffff; text-shadow: 0 0 15px rgba(0,255,255,1); }
         .need-title { font-weight: bold; color: #00ffff; margin: 0.5rem 0; }
         .need-desc { font-size: 0.85rem; color: #00cccc; }
-        .custom-amount { text-align: center; margin: 2rem 0; padding: 1.5rem; background: rgba(0, 38, 38, 0.8); border: 2px solid #00ffff; border-radius: 10px; }
+        .custom-amount { text-align: center; margin: 2rem 0; padding: 1.5rem; background: rgba(0, 38, 38, 0.22); border: 2px solid rgba(0,255,255,0.7); border-radius: 10px; }
         .custom-amount h3 { color: #00ffff; margin-bottom: 1rem; }
         .custom-amount input { padding: 0.8rem; border: 2px solid #00ffff; border-radius: 4px; font-size: 1.2rem; width: 180px; text-align: center; background: rgba(0, 0, 0, 0.8); color: #00ffff; font-family: 'Courier New', monospace; }
         #paypal-container { max-width: 500px; margin: 2rem auto; min-height: 100px; }
         .success { background: #001a00; border: 2px solid #00ff00; color: #00ff00; padding: 2rem; margin: 2rem 0; border-radius: 8px; display: none; text-align: center; }
-        .paypal-security { text-align: center; margin: 2rem 0; padding: 2rem; background: rgba(0, 38, 38, 0.7); border: 2px solid #00ffff; border-radius: 10px; }
+        .paypal-security { text-align: center; margin: 2rem 0; padding: 2rem; background: rgba(0, 38, 38, 0.22); border: 2px solid rgba(0,255,255,0.7); border-radius: 10px; }
         .paypal-security img { max-width: 150px; margin: 0.5rem 1rem; opacity: 0.9; filter: brightness(1.2); }
         .security-badges { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 2rem; margin: 1rem 0; }
         .security-text { color: #00cccc; font-size: 0.9rem; margin-top: 1rem; }
-        .work-history { background: rgba(0, 38, 38, 0.7); padding: 1.5rem; border: 2px solid #00ffff; border-radius: 8px; margin: 1rem 0; }
+        .work-history { background: rgba(0, 38, 38, 0.22); padding: 1.5rem; border: 2px solid rgba(0,255,255,0.7); border-radius: 8px; margin: 1rem 0; }
         .work-item { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #00ffff; }
         .work-item h4 { color: #00ffff; margin-bottom: 0.3rem; }
         .work-item p { color: #00cccc; font-size: 0.9rem; }
@@ -354,12 +354,11 @@
                 <h2>📍 My Location</h2>
                 <p>Find "Helping Hands of Springfield" and get directions from your device.</p>
                 <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
-                    <button id="showHelpingHandsBtn" class="tool-btn">Show Helping Hands</button>
-                    <button id="directionsBtn" class="tool-btn">Get Directions From My Device</button>
                     <button id="openMapsBtn" class="tool-btn">Open Target in Google Maps</button>
                 </div>
                 <div id="helping-info" class="tool-result" style="display:block; margin-top:12px; color:#00ffff;"></div>
-                <div id="hh-map" style="height:420px; margin-top:12px; border:2px solid #00ffff; border-radius:8px;"></div>
+                <div id="il-art" class="glitch-box" style="height:420px; margin-top:12px; border:2px solid #00ffff; border-radius:8px; background:rgba(0,0,0,0.25); overflow:hidden;"></div>
+                <div id="hh-map" style="height:420px; margin-top:12px; border:2px solid #00ffff; border-radius:8px; display:none;"></div>
             </div>
         </div>
 
@@ -375,25 +374,92 @@
     <script src="https://www.paypal.com/sdk/js?client-id=AShHA7LRHXBp7nwEXq8M4l4LOGXPl2Ht9Ynrm5S_tOvtjTZHBXYrb6qaSNJqj-DuUpuQ1uAwT4syT_TQ&currency=USD"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
     <script>
+    // Simple bouncing ball art for #il-art
+    (function(){
+        var renderer, scene, camera, ball, wireframe, animId;
+        function initIllinoisArt(){
+            try{
+                var el = document.getElementById('il-art');
+                if(!el) return;
+                if(animId) cancelAnimationFrame(animId);
+                if(renderer && renderer.domElement && renderer.domElement.parentNode) renderer.domElement.remove();
+
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(50, el.clientWidth / el.clientHeight, 0.1, 1000);
+                renderer = new THREE.WebGLRenderer({alpha:true, antialias:true});
+                renderer.setPixelRatio(window.devicePixelRatio||1);
+                renderer.setSize(el.clientWidth, el.clientHeight);
+                el.appendChild(renderer.domElement);
+
+                var dir = new THREE.DirectionalLight(0xffffff, 0.9);
+                dir.position.set(5,10,7);
+                scene.add(dir);
+                scene.add(new THREE.AmbientLight(0x222222, 0.8));
+
+                var geom = new THREE.SphereGeometry(40, 48, 48);
+                var mat = new THREE.MeshStandardMaterial({color:0x00ffff, metalness:0.3, roughness:0.35, emissive:0x002a2a, emissiveIntensity:0.25});
+                ball = new THREE.Mesh(geom, mat);
+                ball.position.set(0,40,0);
+                scene.add(ball);
+
+                var wireGeom = new THREE.WireframeGeometry(geom);
+                wireframe = new THREE.LineSegments(wireGeom, new THREE.LineBasicMaterial({color:0xff00ff, transparent:true, opacity:0.18}));
+                scene.add(wireframe);
+
+                camera.position.set(0,120,220);
+                camera.lookAt(0,40,0);
+
+                function onResize(){
+                    if(!el) return;
+                    camera.aspect = el.clientWidth / el.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(el.clientWidth, el.clientHeight);
+                }
+                window.addEventListener('resize', onResize);
+
+                var t0 = Date.now();
+                function animate(){
+                    var t = (Date.now()-t0)/1000;
+                    var bounce = Math.abs(Math.sin(t*2))*40;
+                    ball.position.y = 20 + bounce;
+                    ball.rotation.y += 0.02;
+                    ball.rotation.x += 0.01;
+                    wireframe.rotation.copy(ball.rotation);
+                    renderer.render(scene, camera);
+                    animId = requestAnimationFrame(animate);
+                }
+                animate();
+            }catch(e){ console.error('initIllinoisArt (ball) error', e); }
+        }
+
+        window.initIllinoisArt = initIllinoisArt;
+        setTimeout(function(){ try{ initIllinoisArt(); }catch(e){} }, 700);
+    })();
 var msg="Hello World",idx=0,del=false,sel=0,rdy=false,scene,camera,renderer,particles=[],grids=[];
 
 function typ(){
-    var t=document.getElementById("terminal-text");
-    if(!del&&idx<msg.length){
-        t.innerHTML=msg.substring(0,idx+1)+'<span class="loading-cursor"></span>';
-        idx++;
-        setTimeout(typ,150);
-    }else if(!del&&idx===msg.length){
-        setTimeout(function(){del=true;typ()},1000);
-    }else if(del&&idx>0){
-        idx--;
-        t.innerHTML=msg.substring(0,idx)+'<span class="loading-cursor"></span>';
-        setTimeout(typ,100);
-    }else{
-        document.getElementById("loading-screen").style.display="none";
-        document.getElementById("main-content").classList.remove("hidden");
-        rdy=true;
-        init3D();
+    try{
+        var t=document.getElementById("terminal-text");
+        if(!t) throw new Error('terminal-text element missing');
+        if(!del&&idx<msg.length){
+            t.innerHTML=msg.substring(0,idx+1)+'<span class="loading-cursor"></span>';
+            idx++;
+            setTimeout(typ,150);
+        }else if(!del&&idx===msg.length){
+            setTimeout(function(){del=true;typ()},1000);
+        }else if(del&&idx>0){
+            idx--;
+            t.innerHTML=msg.substring(0,idx)+'<span class="loading-cursor"></span>';
+            setTimeout(typ,100);
+        }else{
+            document.getElementById("loading-screen").style.display="none";
+            document.getElementById("main-content").classList.remove("hidden");
+            rdy=true;
+            try{ init3D(); }catch(e){ console.error('init3D failed',e); }
+        }
+    }catch(e){
+        console.error('typing animation failed, showing content', e);
+        finishLoading();
     }
 }
 
@@ -420,7 +486,9 @@ function showPage(page){
     document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
     document.querySelectorAll('.nav-link').forEach(function(l){l.classList.remove('active')});
     document.getElementById(page+'-page').classList.add('active');
-    event.target.classList.add('active');
+    try{ if(event && event.target) event.target.classList.add('active'); }catch(e){}
+    // if user navigated to location page, ensure Illinois art is initialized/resized
+    if(page === 'location' && window.initIllinoisArt){ try{ window.initIllinoisArt(); }catch(e){console.error('initIllinoisArt failed',e);} }
     window.scrollTo(0,0);
 }
 
@@ -473,7 +541,24 @@ window.addEventListener('resize',function(){
     if(renderer){camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)}
 });
 
-window.onload=function(){setTimeout(typ,500)};
+function finishLoading(){
+    try{
+        var ls = document.getElementById('loading-screen');
+        if(ls) ls.style.display = 'none';
+        var mc = document.getElementById('main-content');
+        if(mc) mc.classList.remove('hidden');
+        rdy = true;
+        try{ init3D(); }catch(e){ console.error('init3D error in finishLoading', e); }
+        try{ startHeaderType(); }catch(e){}
+        try{ if(window.initIllinoisArt) window.initIllinoisArt(); }catch(e){ console.error('initIllinoisArt in finishLoading failed', e); }
+    }catch(err){ console.error('finishLoading failed', err); }
+}
+
+window.onload=function(){
+    setTimeout(function(){ try{ typ() }catch(e){ console.error(e); finishLoading(); } },500);
+    // safety fallback: if the loader hangs, force show content after 6s
+    setTimeout(function(){ if(!rdy) { console.warn('Loader timeout — forcing show'); finishLoading(); } }, 6000);
+};
 setTimeout(typeHeader,1000);
 
 var musicPlaying=false;
@@ -637,7 +722,7 @@ function uploadImage(){
         formData.append('image',base64);
         formData.append('type','base64');
         
-        fetch('https://api.imgur.com/3/image',{
+        fetch('https://api.imgur.com/3/image',{ 
             method:'POST',
             headers:{'Authorization':'Client-ID 546c25a59c58ad7'},
             body:formData
@@ -708,10 +793,9 @@ function showPP(){
             hhDirectionsService = new google.maps.DirectionsService();
             hhDirectionsRenderer = new google.maps.DirectionsRenderer({map: hhMap});
         }catch(e){ console.error('Maps init failed', e); document.getElementById('helping-info').innerText = 'Maps failed to load.'; }
-        // wire buttons after map exists
-        document.getElementById('showHelpingHandsBtn').addEventListener('click', findHelpingHands);
-        document.getElementById('directionsBtn').addEventListener('click', getDirectionsToHelpingHands);
-        document.getElementById('openMapsBtn').addEventListener('click', openTargetInGoogleMaps);
+        // wire remaining button after map exists
+        var openBtn = document.getElementById('openMapsBtn');
+        if(openBtn) openBtn.addEventListener('click', openTargetInGoogleMaps);
     }
 
     function findHelpingHands(){
@@ -739,7 +823,8 @@ function showPP(){
                 try{
                     if(place.photos && place.photos.length){
                         var photoUrl = place.photos[0].getUrl({maxWidth: 600});
-                        content += '<div style="margin-top:8px"><img src="'+photoUrl+'" alt="'+place.name+'" style="max-width:100%; border:2px solid #0ff; border-radius:6px; display:block"></div>';
+                        // include an onerror handler so a broken photo doesn't break the UI
+                        content += '<div style="margin-top:8px"><img src="'+photoUrl+'" alt="'+place.name+'" style="max-width:100%; border:2px solid #0ff; border-radius:6px; display:block" onerror="this.style.display=\'none\';"></div>';
                     }
                 }catch(e){
                     console.warn('Could not get place photo URL', e);
@@ -779,7 +864,15 @@ function showPP(){
                     info.innerHTML = '<span style="color:#f33">Directions error: '+status+'</span>';
                 }
             });
-        }, function(err){ info.innerHTML = '<span style="color:#f33">Geolocation error: '+err.message+'</span>'; }, {timeout:10000});
+        }, function(err){
+            var msg = 'Geolocation error: ' + (err && err.message ? err.message : 'unknown');
+            // common cause: permission denied or insecure origin (file://). Give guidance.
+            if(err && err.code === 1){ msg += ' — permission denied. Please allow location access.' }
+            if(err && err.code === 2){ msg += ' — position unavailable.' }
+            if(err && err.code === 3){ msg += ' — timeout.' }
+            msg += ' Note: Geolocation requires HTTPS (or localhost) in most browsers.';
+            info.innerHTML = '<span style="color:#f33">'+msg+'</span>';
+        }, {timeout:10000});
     }
 
     function openTargetInGoogleMaps(){
@@ -805,7 +898,7 @@ function showPP(){
     }
     </script>
     <!-- Google Maps API (using the key you provided). Edit TARGET_PLACE_QUERY above to change which place is located. -->
-    <script id="google-maps" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKCAe6yBEKIXKfo7PfOec3cqCXpZuk8bs&libraries=places&loading=async" async defer></script>
+    <script id="google-maps" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKCAe6yBEKIXKfo7PfOec3cqCXpZuk8bs&libraries=places&callback=initHelpingHandsMap&loading=async" async defer></script>
     <script>
     // Use the Maps API callback (see script `callback` param) to initialize.
     // Avoid calling `initHelpingHandsMap` on raw script load because the
