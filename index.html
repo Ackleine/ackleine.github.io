@@ -7,7 +7,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Courier New', monospace; background: #000; color: #00ffff; line-height: 1.6; overflow-x: hidden; }
-        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
+        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10050; }
         #terminal-text { font-size: 2rem; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0, 255, 255, 0.8); color: #00ffff; }
         .loading-cursor { display: inline-block; width: 15px; height: 25px; background: #00ffff; margin-left: 5px; animation: blink 0.7s infinite; box-shadow: 0 0 15px rgba(0, 255, 255, 1); }
         @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
@@ -29,14 +29,26 @@
         }
         .glitch-text { animation: glitch 3s infinite; }
         .glitch-box { animation: glitchBox 4s infinite; }
+        /* Discord logo inside popup matches neon aesthetic */
+        .discord-logo svg { filter: drop-shadow(0 0 8px rgba(0,255,255,0.35)); }
+        /* neon tint the image to match site color and add subtle glow */
+        .discord-logo img.discord-img { width:36px;height:36px; filter: brightness(0) saturate(100%) invert(72%) sepia(100%) saturate(600%) hue-rotate(150deg) brightness(1); drop-shadow:0 0 10px rgba(0,255,255,0.25); }
+        /* slide/glitch animation for the logo */
+        @keyframes discordFloat { 0% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 100% { transform: translateX(-6px); } }
+        .discord-glitch { animation: discordFloat 3.2s ease-in-out infinite; }
+        /* popup 3D canvas styling */
+        .popup-ball { width: 56px; height: 56px; display: block; border-radius: 12px; }
+        /* fixed Discord button styling (neon aesthetic) */
+        .discord-button { position: fixed; bottom: 140px; right: 20px; z-index: 1000; font-family: 'Courier New', monospace; font-weight: bold; border-radius: 10px; padding: 0.9rem 1.25rem; cursor: pointer; background: linear-gradient(135deg,#5865f2,#003344); border: 2px solid #5865f2; color: #fff; box-shadow: 0 0 30px rgba(0,255,255,0.06); display: inline-flex; align-items: center; gap: 10px; backdrop-filter: blur(10px); font-size: 1.05rem; }
+        .discord-button .mini-logo { width: 36px; height: 36px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg,#5865f2,#00ffff); box-shadow: 0 0 20px rgba(0,255,255,0.12); }
+        /* tint and animate the mini logo inside the fixed button (supports inline SVG fallback) */
+        .discord-button .mini-logo img, .discord-button .mini-logo svg { width:20px; height:20px; filter: brightness(0) saturate(100%) invert(72%) sepia(100%) saturate(600%) hue-rotate(150deg) brightness(1); -webkit-filter: brightness(0) saturate(100%) invert(72%) sepia(100%) saturate(600%) hue-rotate(150deg) brightness(1); box-shadow:0 0 8px rgba(0,255,255,0.18); animation: discordFloat 3.2s ease-in-out infinite; }
+        .discord-button span { color: #00ffff; text-shadow: 0 0 10px rgba(0,255,255,0.6); }
+        .discord-button:hover { box-shadow: 0 0 50px rgba(0,255,255,0.22); transform: translateY(-2px); }
+        /* Background Hello World removed per user request */
         .hidden { display: none; }
         #three-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; }
-        .music-player { position: fixed; bottom: 20px; right: 20px; background: rgba(0, 38, 38, 0.25); border: 2px solid rgba(0,255,255,0.9); padding: 1rem 1.5rem; border-radius: 10px; z-index: 1000; box-shadow: 0 0 30px rgba(0,255,255,0.35); animation: glitchBox 5s infinite; }
-        .music-player .song-title { color: #00ffff; font-weight: bold; margin-bottom: 0.5rem; animation: glitch 4s infinite; }
-        .music-player .song-artist { color: #00cccc; font-size: 0.9rem; }
-        .music-controls { margin-top: 0.5rem; }
-        .music-controls button { background: linear-gradient(135deg, #003333, #004444); color: #00ffff; border: 2px solid #00ffff; padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer; margin-right: 0.5rem; font-family: 'Courier New', monospace; }
-        .music-controls button:hover { box-shadow: 0 0 15px rgba(0,255,255,0.8); }
+        /* music UI removed */
         header { background: rgba(0,26,26,0.25); padding: 3rem 2rem; text-align: center; border-bottom: 3px solid rgba(0,255,255,0.9); box-shadow: 0 0 30px rgba(0,255,255,0.35); position: relative; z-index: 1; animation: glitchBox 6s infinite; }
         #header-terminal { font-size: 2.5rem; margin-bottom: 1rem; min-height: 60px; animation: glitch 3s infinite; }
         .header-cursor { display: inline-block; width: 15px; height: 35px; background: #00ffff; margin-left: 5px; animation: blink 0.7s infinite; box-shadow: 0 0 15px rgba(0, 255, 255, 1); vertical-align: middle; }
@@ -117,44 +129,53 @@
         .discord-box { background: rgba(0, 10, 10, 0.92); border: 3px solid #00ffff; color: #00ffff; box-shadow: 0 0 40px rgba(0,255,255,0.25); }
         .glitch-box { animation: glitchBox 4s infinite; }
     </style>
+    <!-- Dynamic favicon placeholder (will be updated by script to an animated spinning globe) -->
+    <link id="dynamic-favicon" rel="icon" href="">
 </head>
 <body>
     <canvas id="three-bg"></canvas>
     
-    <audio id="bgMusic" loop>
-        <source src="https://files.catbox.moe/y6kbmo.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="music-player glitch-box" onclick="startMusic()" style="cursor: pointer;">
-        <div class="song-title">♪ Click to Play Music</div>
-        <div class="song-artist">Star People by Jane Remover</div>
-        <div class="music-controls">
-            <button onclick="toggleMusic();event.stopPropagation()">▶ Play</button>
-            <button onclick="restartMusic();event.stopPropagation()">↻ Restart</button>
-        </div>
-    </div>
-    
-    <div id="loading-screen" onclick="startMusic()">
+    <div id="loading-screen">
         <div id="terminal-text"><span class="loading-cursor"></span></div>
-        <div style="margin-top: 2rem; color: #00cccc; animation: glitch 3s infinite;">♪ Joji - Glimpse of Us (Click to Play)</div>
     </div>
 
     <!-- Discord popup, overlay, YouTube container and Discord button -->
     <div id="discord-popup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.95); border:3px solid; padding:2rem; border-radius:15px; z-index:10000; max-width:400px; text-align:center; animation:rgbBorder 4s infinite, rgbBoxShadow 4s infinite; backdrop-filter:blur(10px);">
-        <h2 style="margin-bottom:1rem; animation:rgbCycle 5s infinite;">💬 Add Me on Discord</h2>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px;">
+            <div class="discord-logo" aria-hidden="true" style="width:56px;height:56px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#5865f2,#00ffff);box-shadow:0 0 30px rgba(0,255,255,0.12);">
+                <canvas id="popup-ball" class="popup-ball" width="56" height="56" aria-hidden="true"></canvas>
+            </div>
+            <h2 style="margin:0; font-size:1.25rem; animation:rgbCycle 5s infinite; color:#00ffff;">Add Me on Discord</h2>
+        </div>
         <p style="margin-bottom:1.5rem; animation:rgbCycle 7s infinite;">Connect with me directly on Discord!</p>
         <div style="background:rgba(0,0,0,0.8); padding:1rem; border:2px solid; border-radius:8px; margin-bottom:1.5rem; animation:rgbBorder 6s infinite;">
             <div style="font-size:1.3rem; font-weight:bold; animation:rgbCycle 5s infinite; margin-bottom:0.5rem;" id="discord-username">ackleine</div>
-            <button onclick="copyDiscord()" style="background:rgba(88,101,242,0.8); border:2px solid #5865f2; padding:0.7rem 1.5rem; border-radius:6px; cursor:pointer; font-family:'Courier New',monospace; font-weight:bold; color:#fff; margin-top:0.5rem;">📋 Copy Username</button>
+            <div style="display:flex; gap:8px; justify-content:center; align-items:center; margin-top:0.5rem;">
+                <button onclick="copyDiscord()" style="background:rgba(88,101,242,0.8); border:2px solid #5865f2; padding:0.5rem 1rem; border-radius:6px; cursor:pointer; font-family:'Courier New',monospace; font-weight:bold; color:#fff;">📋 Copy</button>
+                <button id="discord-more-btn" onclick="toggleDiscordSubmenu();event.stopPropagation()" style="background:rgba(0,38,38,0.9); border:2px solid #00ffff; padding:0.5rem 1rem; border-radius:6px; cursor:pointer; font-family:'Courier New',monospace; font-weight:bold; color:#00ffff;">⋯ More</button>
+            </div>
+            <div id="discord-submenu" style="display:none; margin-top:0.6rem;">
+                <button onclick="openDiscordApp();event.stopPropagation()" style="display:block; width:100%; background:rgba(0,51,51,0.9); border:2px solid #00ffff; padding:0.6rem 0; border-radius:6px; cursor:pointer; font-family:'Courier New',monospace; font-weight:bold; color:#00ffff; margin-bottom:0.5rem;">Open Discord App</button>
+                <button onclick="window.open('https://discord.com/app','_blank');event.stopPropagation()" style="display:block; width:100%; background:rgba(0,26,26,0.9); border:2px solid #00ffff; padding:0.6rem 0; border-radius:6px; cursor:pointer; font-family:'Courier New',monospace; font-weight:bold; color:#00ffff;">Open Discord Web</button>
+            </div>
         </div>
         <button onclick="closeDiscordPopup()" style="background:rgba(0,0,0,0.8); border:2px solid; padding:0.7rem 2rem; border-radius:6px; cursor:pointer; font-family:'Courier New',monospace; font-weight:bold; animation:rgbCycle 6s infinite, rgbBorder 6s infinite;">Close</button>
     </div>
 
     <div id="discord-overlay" onclick="closeDiscordPopup()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999; backdrop-filter:blur(5px);"></div>
 
-    <div id="youtube-player"></div>
+    <!-- youtube-player removed -->
 
-    <button onclick="openDiscordPopup()" style="position:fixed; bottom:140px; right:20px; background:rgba(88,101,242,0.9); border:2px solid #5865f2; padding:1rem 1.5rem; border-radius:10px; cursor:pointer; font-family:'Courier New',monospace; font-weight:bold; color:#fff; z-index:1000; backdrop-filter:blur(10px); font-size:1.1rem;">💬 Discord</button>
+    <button class="discord-button" onclick="openDiscordPopup();event.stopPropagation()">
+        <span class="mini-logo" aria-hidden="true">
+            <!-- Inline Discord SVG to avoid external loading/CORS and ensure filters apply reliably -->
+            <svg viewBox="0 0 71 55" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <path fill="#ffffff" d="M60.104 4.552A58.64 58.64 0 0 0 46.983.5a41.777 41.777 0 0 0-1.98 4.085 55.28 55.28 0 0 0-13.992 0A41.777 41.777 0 0 0 28.03.5 58.642 58.642 0 0 0 15.93 4.552C6.584 20.02 2.94 34.12 4.474 47.967c12.08 8.994 23.552 8.058 33.62 5.83 1.996-3.08 3.82-6.344 5.44-9.776 6.87.29 13.058.066 18.73-1.55-2.08-15.08-6.66-28.55-10.16-37.91zM23.31 37.65c-3.1 0-5.62-2.94-5.62-6.56 0-3.62 2.52-6.56 5.62-6.56 3.1 0 5.62 2.94 5.62 6.56 0 3.62-2.52 6.56-5.62 6.56zm24.38 0c-3.1 0-5.62-2.94-5.62-6.56 0-3.62 2.52-6.56 5.62-6.56 3.1 0 5.62 2.94 5.62 6.56 0 3.62-2.52 6.56-5.62 6.56z"/>
+            </svg>
+        </span>
+        <span style="color:#00ffff;">Discord</span>
+    </button>
+    
 
     <div id="main-content" class="hidden">
     <header>
@@ -170,7 +191,7 @@
         <a href="#" class="nav-link active" onclick="showPage('home')">🏠 Home</a>
         <a href="#" class="nav-link" onclick="showPage('tools')">🔧 Network Tools</a>
         <a href="#" class="nav-link" onclick="showPage('upload')">📤 Photo Upload</a>
-        <a href="#" class="nav-link" onclick="showPage('location')">📍 Location</a>
+        <a href="#" class="nav-link" onclick="showPage('location')">📍 my location</a>
     </nav>
     
     <div class="container">
@@ -376,7 +397,7 @@
     <script>
     // Simple bouncing ball art for #il-art
     (function(){
-        var renderer, scene, camera, ball, wireframe, animId;
+        var renderer, scene, camera, ball, shadowLines, animId;
         function initIllinoisArt(){
             try{
                 var el = document.getElementById('il-art');
@@ -397,14 +418,17 @@
                 scene.add(new THREE.AmbientLight(0x222222, 0.8));
 
                 var geom = new THREE.SphereGeometry(40, 48, 48);
-                var mat = new THREE.MeshStandardMaterial({color:0x00ffff, metalness:0.3, roughness:0.35, emissive:0x002a2a, emissiveIntensity:0.25});
-                ball = new THREE.Mesh(geom, mat);
+                // Render the ball as wireframe line segments so it matches the shadow styling
+                var wireGeom = new THREE.WireframeGeometry(geom);
+                ball = new THREE.LineSegments(wireGeom, new THREE.LineBasicMaterial({color:0x00ffff, transparent:true, opacity:0.95}));
                 ball.position.set(0,40,0);
                 scene.add(ball);
 
-                var wireGeom = new THREE.WireframeGeometry(geom);
-                wireframe = new THREE.LineSegments(wireGeom, new THREE.LineBasicMaterial({color:0xff00ff, transparent:true, opacity:0.18}));
-                scene.add(wireframe);
+                // Add a faint lower wireframe duplicate to act like the current "shadow"
+                shadowLines = new THREE.LineSegments(wireGeom, new THREE.LineBasicMaterial({color:0xff00ff, transparent:true, opacity:0.18}));
+                shadowLines.position.set(0,8,0);
+                shadowLines.scale.set(0.98,0.5,0.98);
+                scene.add(shadowLines);
 
                 camera.position.set(0,120,220);
                 camera.lookAt(0,40,0);
@@ -424,7 +448,11 @@
                     ball.position.y = 20 + bounce;
                     ball.rotation.y += 0.02;
                     ball.rotation.x += 0.01;
-                    wireframe.rotation.copy(ball.rotation);
+                    if(shadowLines){
+                        shadowLines.rotation.copy(ball.rotation);
+                        // keep the shadow lower/fixed while following rotation
+                        shadowLines.position.y = 8;
+                    }
                     renderer.render(scene, camera);
                     animId = requestAnimationFrame(animate);
                 }
@@ -435,7 +463,24 @@
         window.initIllinoisArt = initIllinoisArt;
         setTimeout(function(){ try{ initIllinoisArt(); }catch(e){} }, 700);
     })();
-var msg="Hello World",idx=0,del=false,sel=0,rdy=false,scene,camera,renderer,particles=[],grids=[];
+var msg="Hello World",idx=0,del=false,sel=0,rdy=false,scene,camera,renderer,particles=[],grids=[],globe=null,bgStars=null,bgShapes=[],ball3D=null,ballWire=null;
+// popup mini-ball renderer state
+var popupRenderer=null,popupScene=null,popupCamera=null,popupAnimId=null,popupMesh=null;
+
+function setDiscordUIEnabled(enabled){
+    try{
+        var dp = document.getElementById('discord-popup');
+        var dover = document.getElementById('discord-overlay');
+        var dbtn = document.querySelector('.discord-button');
+        if(!enabled){
+            if(dp) dp.style.display = 'none';
+            if(dover) dover.style.display = 'none';
+            if(dbtn){ dbtn.style.pointerEvents = 'none'; dbtn.style.opacity = '0.85'; }
+        }else{
+            if(dbtn){ dbtn.style.pointerEvents = ''; dbtn.style.opacity = '1'; }
+        }
+    }catch(e){ /* ignore */ }
+}
 
 function typ(){
     try{
@@ -455,6 +500,7 @@ function typ(){
             document.getElementById("loading-screen").style.display="none";
             document.getElementById("main-content").classList.remove("hidden");
             rdy=true;
+            try{ setDiscordUIEnabled(true); }catch(e){}
             try{ init3D(); }catch(e){ console.error('init3D failed',e); }
         }
     }catch(e){
@@ -493,47 +539,81 @@ function showPage(page){
 }
 
 function init3D(){
+    if(typeof renderer !== 'undefined' && renderer) return; // already initialized
     var c=document.getElementById("three-bg");
     scene=new THREE.Scene();
-    camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+    camera=new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,0.1,1000);
     renderer=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:true});
     renderer.setSize(window.innerWidth,window.innerHeight);
-    camera.position.z=30;
-    var pg=new THREE.BufferGeometry(),pc=800,pos=new Float32Array(pc*3);
-    for(var i=0;i<pc*3;i+=3){pos[i]=Math.random()*100-50;pos[i+1]=Math.random()*100-50;pos[i+2]=Math.random()*100-50}
-    pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
-    var pm=new THREE.PointsMaterial({color:0x00ffff,size:0.3,transparent:true,opacity:0.8});
-    var ps=new THREE.Points(pg,pm);
-    scene.add(ps);
-    particles.push(ps);
-    for(var i=0;i<8;i++){
-        var g=new THREE.GridHelper(40+i*5,10,0x00ffff,0x003333);
-        g.rotation.x=Math.PI/2;
-        g.position.z=-20-i*5;
-        g.material.transparent=true;
-        g.material.opacity=0.15;
-        scene.add(g);
-        grids.push(g);
-    }
-    for(var i=0;i<20;i++){
-        var geo=new THREE.IcosahedronGeometry(Math.random()*2+0.5,0);
-        var mat=new THREE.MeshBasicMaterial({color:0x00ffff,wireframe:true,transparent:true,opacity:0.3});
-        var m=new THREE.Mesh(geo,mat);
-        m.position.set(Math.random()*60-30,Math.random()*60-30,Math.random()*60-30);
-        scene.add(m);
-        particles.push(m);
-    }
+    camera.position.z=90;
+
+    // lighting
+    var dir = new THREE.DirectionalLight(0xffffff, 0.9);
+    dir.position.set(10,20,10);
+    scene.add(dir);
+    scene.add(new THREE.AmbientLight(0x111111, 0.9));
+
+    // larger neon-tinted globe
+    try{
+        var loader = new THREE.TextureLoader();
+        loader.crossOrigin = '';
+        loader.load('https://threejs.org/examples/textures/land_ocean_ice_cloud_2048.jpg', function(tex){
+            var ggeo = new THREE.SphereGeometry(20, 64, 64);
+            var gmat = new THREE.MeshStandardMaterial({map: tex, color:0x003333, emissive:0x00ffff, emissiveIntensity:0.5, roughness:0.7, metalness:0.05});
+            globe = new THREE.Mesh(ggeo, gmat);
+            globe.position.set(0, -6, -40);
+            globe.scale.set(2.2,2.2,2.2);
+            scene.add(globe);
+        }, undefined, function(err){ console.warn('globe texture load failed', err); });
+    }catch(e){ console.warn('globe init failed', e); }
+
+    // stars (points)
+    try{
+        var starGeo = new THREE.BufferGeometry();
+        var starCount = 600;
+        var starPos = new Float32Array(starCount * 3);
+        for(var i=0;i<starCount;i++){
+            var r = 200;
+            starPos[i*3] = (Math.random()-0.5)*r;
+            starPos[i*3+1] = (Math.random()-0.5)*r*0.6;
+            starPos[i*3+2] = (Math.random()-0.5)*r;
+        }
+        starGeo.setAttribute('position', new THREE.BufferAttribute(starPos,3));
+        bgStars = new THREE.Points(starGeo, new THREE.PointsMaterial({color:0x00ffff,size:0.6,transparent:true,opacity:0.9}));
+        scene.add(bgStars);
+    }catch(e){ console.warn('stars init failed', e); }
+
+    // geometric shapes (wireframe) — lower poly for performance
+    try{
+        for(var i=0;i<12;i++){
+            var sgeo = new THREE.IcosahedronGeometry( (Math.random()*1.8)+0.6, 0 );
+            var smat = new THREE.MeshBasicMaterial({color:0x00ffff, wireframe:true, transparent:true, opacity:0.25});
+            var s = new THREE.Mesh(sgeo, smat);
+            s.position.set(Math.random()*80-40, Math.random()*40-10, Math.random()*120-60);
+            s.rotation.set(Math.random()*2, Math.random()*2, Math.random()*2);
+            s.scale.setScalar((Math.random()*0.9)+0.6);
+            scene.add(s);
+            bgShapes.push(s);
+        }
+    }catch(e){ console.warn('shapes init failed', e); }
+
     animate3D();
 }
 
 function animate3D(){
     requestAnimationFrame(animate3D);
-    particles.forEach(function(p,i){
-        if(p.geometry&&p.geometry.attributes.position){p.rotation.y+=0.001}
-        else{p.rotation.x+=0.002*((i%2)?1:-1);p.rotation.y+=0.003*((i%2)?-1:1)}
-    });
-    grids.forEach(function(g){g.position.z+=0.05;if(g.position.z>10)g.position.z=-60});
-    camera.rotation.y=Math.sin(Date.now()*0.0001)*0.1;
+    var t = Date.now()*0.001;
+    if(globe) globe.rotation.y = t * 0.12;
+    if(bgStars) bgStars.rotation.y = t * 0.01;
+    if(bgShapes && bgShapes.length){
+        for(var i=0;i<bgShapes.length;i++){
+            var s = bgShapes[i];
+            s.rotation.x += 0.002 + (i%3)*0.0005;
+            s.rotation.y += 0.003 + (i%2)*0.0007;
+            s.position.y += Math.sin(t*0.5 + i) * 0.0005; // tiny drift
+        }
+    }
+    camera.rotation.y = Math.sin(Date.now()*0.00008) * 0.02;
     renderer.render(scene,camera);
 }
 
@@ -548,6 +628,8 @@ function finishLoading(){
         var mc = document.getElementById('main-content');
         if(mc) mc.classList.remove('hidden');
         rdy = true;
+        // re-enable the discord UI once loading/hello-world finished
+        try{ setDiscordUIEnabled(true); }catch(e){}
         try{ init3D(); }catch(e){ console.error('init3D error in finishLoading', e); }
         try{ startHeaderType(); }catch(e){}
         try{ if(window.initIllinoisArt) window.initIllinoisArt(); }catch(e){ console.error('initIllinoisArt in finishLoading failed', e); }
@@ -555,56 +637,15 @@ function finishLoading(){
 }
 
 window.onload=function(){
+    try{ init3D(); }catch(e){ console.warn('init3D early init failed', e); }
+    try{ setDiscordUIEnabled(false); }catch(e){}
     setTimeout(function(){ try{ typ() }catch(e){ console.error(e); finishLoading(); } },500);
     // safety fallback: if the loader hangs, force show content after 6s
     setTimeout(function(){ if(!rdy) { console.warn('Loader timeout — forcing show'); finishLoading(); } }, 6000);
 };
 setTimeout(typeHeader,1000);
 
-var musicPlaying=false;
-var musicStarted=false;
-
-function startMusic(){
-    if(!musicStarted){
-        var m=document.getElementById("bgMusic");
-        m.play().then(function(){
-            musicPlaying=true;
-            musicStarted=true;
-            document.querySelector(".song-title").textContent="♪ Now Playing";
-            document.querySelector(".music-controls button").textContent="⏸ Pause";
-        }).catch(function(e){
-            console.log("Music play failed:",e);
-        });
-    }
-}
-
-function toggleMusic(){
-    var m=document.getElementById("bgMusic");
-    var btn=event.target;
-    if(musicPlaying){
-        m.pause();
-        btn.textContent="▶ Play";
-        musicPlaying=false;
-    }else{
-        m.play().then(function(){
-            btn.textContent="⏸ Pause";
-            musicPlaying=true;
-            musicStarted=true;
-            document.querySelector(".song-title").textContent="♪ Now Playing";
-        });
-    }
-}
-
-function restartMusic(){
-    var m=document.getElementById("bgMusic");
-    m.currentTime=0;
-    m.play().then(function(){
-        musicPlaying=true;
-        musicStarted=true;
-        document.querySelector(".song-title").textContent="♪ Now Playing";
-        document.querySelector(".music-controls button").textContent="⏸ Pause";
-    });
-}
+// music controls removed
 
 function lookupIP(){
     var i=document.getElementById("ipInput").value.trim(),r=document.getElementById("ipResult");
@@ -925,16 +966,79 @@ function showPP(){
     });
 
     function openDiscordPopup(){
+        // do not open the popup while loader / "Hello World" is active
+        if(!rdy) return;
         var p = document.getElementById('discord-popup');
         var o = document.getElementById('discord-overlay');
         if(p) p.style.display = 'block';
         if(o) o.style.display = 'block';
     }
+    // Popup mini-ball: initialize/start renderer when popup opens, stop when closed
+    function startPopupBall(){
+        try{
+            if(popupRenderer) return;
+            var canvas = document.getElementById('popup-ball');
+            if(!canvas) return;
+            popupScene = new THREE.Scene();
+            popupCamera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+            popupRenderer = new THREE.WebGLRenderer({canvas: canvas, alpha: true, antialias: true});
+            popupRenderer.setPixelRatio(window.devicePixelRatio || 1);
+            popupRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            popupCamera.position.z = 70;
+
+            var dl = new THREE.DirectionalLight(0xffffff, 0.9);
+            dl.position.set(5,10,7);
+            popupScene.add(dl);
+            popupScene.add(new THREE.AmbientLight(0x222222, 0.6));
+
+            var geom = new THREE.SphereGeometry(16, 32, 32);
+            var mat = new THREE.MeshStandardMaterial({color:0x00ffff, emissive:0x0088ff, emissiveIntensity:0.6, roughness:0.6, metalness:0.2});
+            popupMesh = new THREE.Mesh(geom, mat);
+            popupScene.add(popupMesh);
+
+            var wire = new THREE.LineSegments(new THREE.WireframeGeometry(geom), new THREE.LineBasicMaterial({color:0x00ffff, transparent:true, opacity:0.9}));
+            popupMesh.add(wire);
+
+            function popAnimate(){
+                popupAnimId = requestAnimationFrame(popAnimate);
+                var t = Date.now() * 0.002;
+                popupMesh.rotation.y = t * 0.6;
+                popupMesh.rotation.x = Math.sin(t * 0.7) * 0.15;
+                popupRenderer.render(popupScene, popupCamera);
+            }
+            popAnimate();
+        }catch(e){ console.warn('startPopupBall failed', e); }
+    }
+
+    function stopPopupBall(){
+        try{
+            if(popupAnimId) cancelAnimationFrame(popupAnimId);
+            popupAnimId = null;
+            if(popupRenderer){
+                // dispose materials/geometry in scene
+                try{ popupScene.traverse(function(o){ if(o.geometry) o.geometry.dispose(); if(o.material){ if(Array.isArray(o.material)){ o.material.forEach(function(m){ m.dispose&&m.dispose(); }); } else { o.material.dispose&&o.material.dispose(); } } }); }catch(e){}
+                try{ popupRenderer.dispose(); }catch(e){}
+                popupRenderer = null;
+            }
+            popupScene = null; popupCamera = null; popupMesh = null;
+        }catch(e){ console.warn('stopPopupBall failed', e); }
+    }
+
+    function openDiscordPopup(){
+        if(!rdy) return;
+        var p = document.getElementById('discord-popup');
+        var o = document.getElementById('discord-overlay');
+        if(p) p.style.display = 'block';
+        if(o) o.style.display = 'block';
+        try{ startPopupBall(); }catch(e){}
+    }
+
     function closeDiscordPopup(){
         var p = document.getElementById('discord-popup');
         var o = document.getElementById('discord-overlay');
         if(p) p.style.display = 'none';
         if(o) o.style.display = 'none';
+        try{ stopPopupBall(); }catch(e){}
     }
     function copyDiscord(){
         var el = document.getElementById('discord-username');
@@ -944,6 +1048,82 @@ function showPP(){
             navigator.clipboard.writeText(txt).then(function(){ alert('✓ Discord username copied: ' + txt); }).catch(function(){ prompt('Copy this username', txt); });
         } else { prompt('Copy this username', txt); }
     }
+
+    // Attempts to open the Discord native app; falls back to the web app if the scheme fails.
+    function openDiscordApp(){
+        try{
+            // Try deep link to open the native app
+            window.location.href = 'discord://';
+            // Fallback to web app after a short delay
+            setTimeout(function(){ window.open('https://discord.com/app', '_blank'); }, 600);
+        }catch(e){ window.open('https://discord.com/app', '_blank'); }
+    }
+    
+    function toggleDiscordSubmenu(){
+        try{
+            var s = document.getElementById('discord-submenu');
+            if(!s) return;
+            s.style.display = (s.style.display === 'block') ? 'none' : 'block';
+        }catch(e){console.error(e)}
+    }
+    </script>
+    <script>
+    // Animated favicon: spinning globe rendered into a small canvas and set as the page favicon.
+    (function(){
+        var canvas = document.createElement('canvas');
+        var size = 64;
+        canvas.width = size; canvas.height = size;
+        var ctx = canvas.getContext('2d');
+        var link = document.getElementById('dynamic-favicon');
+        if(!link){ link = document.createElement('link'); link.id='dynamic-favicon'; link.rel='icon'; document.head.appendChild(link); }
+
+        var img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.src = 'https://threejs.org/examples/textures/land_ocean_ice_cloud_2048.jpg';
+
+        var angle = 0;
+        var rafId = null;
+
+        function drawFrame(){
+            ctx.clearRect(0,0,size,size);
+            // circular clip
+            ctx.save();
+            ctx.beginPath(); ctx.arc(size/2, size/2, (size/2)-2, 0, Math.PI*2); ctx.closePath(); ctx.clip();
+            ctx.translate(size/2, size/2);
+            ctx.rotate(angle);
+            if(img.complete && img.naturalWidth){
+                // scale image to cover canvas
+                var scale = (size*1.2) / Math.min(img.width, img.height);
+                var iw = img.width * scale, ih = img.height * scale;
+                ctx.drawImage(img, -iw/2, -ih/2, iw, ih);
+            } else {
+                // fallback gradient
+                var g = ctx.createLinearGradient(-size/2,-size/2,size/2,size/2);
+                g.addColorStop(0,'#001a2a'); g.addColorStop(1,'#002233');
+                ctx.fillStyle = g; ctx.fillRect(-size/2,-size/2,size,size);
+            }
+            ctx.restore();
+            // outer ring
+            ctx.beginPath(); ctx.arc(size/2, size/2, (size/2)-2, 0, Math.PI*2);
+            ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(0,255,255,0.12)'; ctx.stroke();
+
+            // update favicon
+            try{ link.href = canvas.toDataURL('image/png'); }catch(e){}
+
+            angle += 0.02;
+        }
+
+        function animate(){ drawFrame(); rafId = requestAnimationFrame(animate); }
+
+        function start(){ if(rafId) return; animate(); }
+        function stop(){ if(rafId) cancelAnimationFrame(rafId); rafId=null; }
+
+        // Start once the page is visible; if cross-origin image blocks toDataURL, fallback still shows a nice gradient.
+        if(document.readyState === 'complete'){ start(); } else { window.addEventListener('load', start); }
+
+        // expose control for debugging
+        window.startFaviconSpin = start; window.stopFaviconSpin = stop;
+    })();
     </script>
 </body>
 </html>
